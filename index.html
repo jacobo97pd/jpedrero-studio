@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>J. Pedrero Studio</title>
+  <meta name="description" content="Obra original contemporánea. Series seleccionadas, piezas únicas y encargos bajo propuesta.">
+  <meta name="theme-color" content="#F6F1E8" />
+
+  <!-- Fonts -->
+  <link rel="icon" type="image/png" href="assets/img/site/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <!-- Top bar -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <img src="assets/img/site/jpedrerostudio.png" alt="J. Pedrero Studio">
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-label="Navegación principal">
+        <a href="works/index.html">Obras</a>
+        <a href="collections/index.html">Colecciones</a>
+        <a href="about/index.html">Sobre</a>
+        <a href="commissions/index.html">Encargos</a>
+        <a class="nav-cta" href="contact/index.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Portfolio</p>
+          <h1>Obra original contemporánea, pensada para espacios con carácter.</h1>
+          <p class="lead">
+            Series seleccionadas y piezas únicas. Disponibilidad y precios, bajo consulta.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="works/index.html">Ver obras</a>
+            <a class="btn btn-ghost" href="contact/index.html">Solicitar catálogo</a>
+          </div>
+
+          <dl class="hero-metrics">
+            <div>
+              <dt>Técnicas</dt>
+              <dd>Pastel · Óleo · Mixta</dd>
+            </div>
+            <div>
+              <dt>Disponibilidad</dt>
+              <dd>Originales · Encargo</dd>
+            </div>
+            <div>
+              <dt>Entrega</dt>
+              <dd>España · Internacional</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="hero-art">
+          <img src="assets/img/hero.jpeg" alt="Obra destacada de J. Pedrero Studio" loading="eager">
+          <figcaption>
+            <span class="art-title">Obra destacada</span>
+            <span class="art-meta">2026 · Técnica mixta · 80×60 cm</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Featured works -->
+    <section class="section">
+      <div class="container section-head">
+        <h2>Obras destacadas</h2>
+        <p>Selección curada. Sin ruido. Como en una galería, pero sin el guardia mirando.</p>
+      </div>
+
+      <div class="container grid works-grid" id="featuredWorks"></div>
+
+
+      <div class="container section-foot">
+        <a class="link" href="works/index.html">Ver galería completa →</a>
+      </div>
+    </section>
+<!--
+    <section class="section section-alt">
+      <div class="container section-head">
+        <h2>Colecciones</h2>
+        <p>Series con narrativa propia. Piezas pensadas para convivir.</p>
+      </div>
+
+      <div class="container grid collections-grid">
+        <a class="tile" href="collections/index.html#coleccion-1">
+          <img src="assets/img/collections/c1.jpg" alt="Colección 1" loading="lazy">
+          <div class="tile-overlay">
+            <span class="tile-title">Serie Norte</span>
+            <span class="tile-sub">Contraste · atmósfera · estructura</span>
+          </div>
+        </a>
+        <a class="tile" href="collections/index.html#coleccion-2">
+          <img src="assets/img/collections/c2.jpg" alt="Colección 2" loading="lazy">
+          <div class="tile-overlay">
+            <span class="tile-title">Luz y Materia</span>
+            <span class="tile-sub">Textura · calma · gesto</span>
+          </div>
+        </a>
+        <a class="tile" href="collections/index.html#coleccion-3">
+          <img src="assets/img/collections/c3.jpg" alt="Colección 3" loading="lazy">
+          <div class="tile-overlay">
+            <span class="tile-title">Umbrales</span>
+            <span class="tile-sub">Espacio · presencia · silencio</span>
+          </div>
+        </a>
+      </div>
+    </section>
+-->
+    <!-- About teaser -->
+    <section class="section">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <h2>Sobre Mi</h2>
+          <p>
+            Mi trabajo explora la tensión entre estructura y emoción: capas, luz y
+            materia como lenguaje. Produzco series limitadas y acepto encargos
+            seleccionados bajo propuesta.
+          </p>
+          <div class="bio-expand" id="bioExpand">
+            <div class="bio-content">
+                <div class="bio-text">
+                <p>
+                Soy desarrollador de software y, desde siempre, he vivido entre dos mundos:
+                la precisión de la ingeniería y la necesidad de expresar lo que no cabe en
+                una hoja de cálculo. Programar me enseña a ordenar el caos; pintar me permite
+                darle sentido.
+                </p>
+
+                <p>
+                Mi trabajo busca transmitir emociones de forma directa, sin artificio.
+                Me interesa la tensión entre estructura y gesto: capas, luz y materia como
+                lenguaje. A veces la obra nace de una historia concreta; otras, de una sensación
+                que aparece sin avisar y pide quedarse.
+                </p>
+
+                <p>
+                Trabajo principalmente con pastel, óleo y técnica mixta. Cada pieza es original
+                y forma parte de series limitadas donde exploro color, atmósfera y carácter.
+                Acepto encargos seleccionados bajo propuesta, cuidando que la obra encaje con
+                el espacio y con la intención de quien la recibe.
+                </p>
+
+                <p>
+                Si quieres conocer disponibilidad, precios o proponer un encargo, escríbeme con
+                la referencia de la obra o una idea general. Respondo en 24–48h laborables.
+                </p>
+                </div>
+
+                <div class="bio-image">
+                <img src="assets/img/site/jacobo.png" alt="Jacobo Pedrero">
+                </div>
+            </div>
+            </div>
+          <div class="about-actions">
+            <button class="btn btn-ghost" id="toggleBio">Leer más</button>
+            
+            <a class="link" href="commissions/index.html">Encargos →</a>
+          </div>
+          <br><br>
+        <!--<aside class="about-panel">
+          <div class="panel">
+            <h3>Solicitar disponibilidad</h3>
+            <p>Envíame la referencia de la obra y te respondo con estado, opciones y plazos.</p>
+            <a class="btn btn-small" href="contact/index.html">Contactar</a>
+            <p class="fineprint">Respuesta habitual: 24–48h laborables.</p>
+          </div>
+        </aside>-->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand-footer">J. PEDRERO <span>Studio</span></div>
+          <p class="fineprint">Obra original · Encargos bajo propuesta · Envíos nacionales e internacionales</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="works/index.html">Obras</a>
+          <a href="collections/index.html">Colecciones</a>
+          <a href="about/index.html">Sobre</a>
+          <a href="contact/index.html">Contacto</a>
+        </div>
+
+        <div class="footer-links">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="mailto:tuemail@dominio.com">tuemail@dominio.com</a>
+          <a href="legal/privacy.html">Privacidad</a>
+          <a href="legal/cookies.html">Cookies</a>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span class="fineprint">© <span id="year"></span> J. Pedrero Studio</span>
+        <a class="link fineprint" href="#top">Volver arriba ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    (async function(){
+    const wrap = document.getElementById('featuredWorks');
+    if(!wrap) return;
+
+    const res = await fetch('data/works.json');
+    const works = await res.json();
+
+    const featured = works.filter(w => w.featured).slice(0, 6);
+
+    wrap.innerHTML = featured.map(w => `
+        <a class="card" href="/works/obra.html?id=${encodeURIComponent(w.id)}">
+        <img src="${w.image}" alt="${w.title}" loading="lazy">
+        <div class="card-meta">
+            <span class="card-title">${w.title}</span>
+            <span class="card-sub">${w.year} · ${w.size} · ${w.status}</span>
+        </div>
+        </a>
+    `).join('');
+    })();
+</script>
+<script>
+document.getElementById("toggleBio").addEventListener("click", function(){
+  const bio = document.getElementById("bioExpand");
+  const grid = document.querySelector(".about-grid");
+
+  bio.classList.toggle("open");
+  grid.classList.toggle("bio-open", bio.classList.contains("open"));
+
+  this.textContent = bio.classList.contains("open") ? "Cerrar" : "Leer más";
+});
+</script>
+</body>
+</html>
