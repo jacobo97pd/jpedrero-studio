@@ -1,32 +1,42 @@
 [
   {
-    "id": "w1",
-    "title": "Retrato I",
-    "year": 2026,
-    "technique": "Técnica mixta",
-    "size": "80×60 cm",
-    "status": "Disponible",
-    "image": "assets/img/works/w1.jpeg",
-    "featured": true
-  },
-  {
-    "id": "w2",
-    "title": "Obra II",
+    "id": "cuadro1",
+    "title": "Retrato en carmin",
     "year": 2025,
     "technique": "Pastel",
-    "size": "50×70 cm",
+    "size": "50x70 cm",
     "status": "Disponible",
-    "image": "assets/img/works/w2.jpeg",
+    "image": "assets/img/works/Cuadro1.png",
     "featured": true
   },
   {
-    "id": "w3",
-    "title": "Obra III",
+    "id": "cuadro2",
+    "title": "Barco azul",
     "year": 2024,
-    "technique": "Óleo",
-    "size": "60×60 cm",
+    "technique": "Tecnica mixta",
+    "size": "60x60 cm",
     "status": "Disponible",
-    "image": "assets/img/works/w3.jpeg",
+    "image": "assets/img/works/Cuadro3.png",
+    "featured": true
+  },
+  {
+    "id": "cuadro3",
+    "title": "Orilla al atardecer",
+    "year": 2025,
+    "technique": "Pastel",
+    "size": "70x100 cm",
+    "status": "Disponible",
+    "image": "assets/img/works/Cuadro2.png",
+    "featured": true
+  },
+  {
+    "id": "cuadro4",
+    "title": "London Eye",
+    "year": 2026,
+    "technique": "Tecnica mixta",
+    "size": "80x60 cm",
+    "status": "Disponible",
+    "image": "assets/img/works/Cuadro4.png",
     "featured": true
   }
 ]

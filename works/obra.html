@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Obra | J. Pedrero Studio</title>
+  <meta name="theme-color" content="#f6f6f4" />
+  <link rel="icon" type="image/png" href="../assets/img/site/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Inicio">
+        <span class="brand-main">J. PEDRERO</span>
+        <span class="brand-sub">Studio</span>
+      </a>
+      <a class="nav-cta" href="index.html">Volver a obras</a>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="container page-grid">
+      <figure class="hero-art" id="workImageBox">
+        <img id="workImage" src="../assets/img/works/Cuadro1.png" alt="Obra" />
+      </figure>
+
+      <article class="page-box" id="workInfo">
+        <p class="kicker">Ficha</p>
+        <h2 id="workTitle">Obra</h2>
+        <p id="workMeta">Tecnica &middot; Medidas &middot; Estado</p>
+        <p class="meta" id="workYear">2026</p>
+        <p>Para disponibilidad y precio, solicita informacion por contacto directo.</p>
+        <a class="btn" href="../contact/index.html">Solicitar informacion</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <span class="fineprint">&copy; <span id="year"></span> J. Pedrero Studio</span>
+      <a class="link fineprint" href="../index.html">Inicio</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (async function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const res = await fetch('../data/works.json');
+      const works = await res.json();
+      const work = works.find(w => w.id === id) || works[0];
+      if (!work) return;
+
+      document.getElementById('workTitle').textContent = work.title;
+      document.getElementById('workMeta').textContent = `${work.technique} - ${work.size} - ${work.status}`;
+      document.getElementById('workYear').textContent = String(work.year);
+
+      const img = document.getElementById('workImage');
+      img.src = `../${work.image}`;
+      img.alt = work.title;
+    })();
+  </script>
+</body>
+</html>

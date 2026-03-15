@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contacto | J. Pedrero Studio</title>
+  <meta name="theme-color" content="#f6f6f4" />
+  <link rel="icon" type="image/png" href="../assets/img/site/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Inicio">
+        <span class="brand-main">J. PEDRERO</span>
+        <span class="brand-sub">Studio</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-label="Navegacion principal">
+        <a href="../works/index.html">Obras</a>
+        <a href="../collections/index.html">Colecciones</a>
+        <a href="../about/index.html">Sobre</a>
+        <a href="../commissions/index.html">Encargos</a>
+        <a class="nav-cta" href="index.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="container page-hero">
+      <p class="kicker">Contacto</p>
+      <h1>Hablemos</h1>
+      <p>Cuentame que necesitas y te respondo con disponibilidad, opciones y siguiente paso.</p>
+    </section>
+
+    <section class="container contact-layout">
+      <article class="page-box">
+        <h2>Formulario</h2>
+        <form class="contact-form" action="https://formsubmit.co/jpedrero.studio.art@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nuevo contacto desde jpedrero.studio" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="form-row two-cols">
+            <label class="form-field">
+              <span>Nombre</span>
+              <input type="text" name="nombre" required />
+            </label>
+            <label class="form-field">
+              <span>Apellidos</span>
+              <input type="text" name="apellidos" required />
+            </label>
+          </div>
+
+          <div class="form-row two-cols">
+            <label class="form-field">
+              <span>Email</span>
+              <input type="email" name="email" required />
+            </label>
+            <label class="form-field">
+              <span>Telefono (opcional)</span>
+              <input type="tel" name="telefono" />
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="form-field">
+              <span>Descripcion de lo que quieres</span>
+              <textarea name="descripcion" rows="6" required></textarea>
+            </label>
+          </div>
+
+          <button class="btn" type="submit">Enviar</button>
+          <p class="fineprint" id="contactHint">Al enviar, el formulario se manda directamente a jpedrero.studio.art@gmail.com.</p>
+        </form>
+      </article>
+
+      <aside class="page-box">
+        <h2>Contacto directo</h2>
+        <p><a class="link" href="mailto:jpedrero.studio.art@gmail.com">jpedrero.studio.art@gmail.com</a></p>
+        <p><a class="link" href="https://www.instagram.com/jpedrero.studio?igsh=emQyeGtuYnpsY2Yw&utm_source=qr" target="_blank" rel="noopener noreferrer">@jpedrero.studio</a></p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <span class="fineprint">&copy; <span id="year"></span> J. Pedrero Studio</span>
+      <a class="link fineprint" href="../index.html">Inicio</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
