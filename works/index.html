@@ -54,6 +54,25 @@
   <script src="../assets/js/main.js"></script>
   <script>
     (async function () {
+      const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
+      const titleMap = {
+        cuadro1: { es: 'Retrato en carmin', en: 'Crimson Portrait' },
+        cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
+        cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
+        cuadro4: { es: 'London Eye', en: 'London Eye' }
+      };
+      const techniqueMap = {
+        'Pastel': { es: 'Pastel', en: 'Pastel' },
+        'Tecnica mixta': { es: 'Tecnica mixta', en: 'Mixed media' }
+      };
+      const statusMap = {
+        'Disponible': { es: 'Disponible', en: 'Available' }
+      };
+
+      function tValue(map, key) {
+        return (map[key] && map[key][lang]) || key;
+      }
+
       const wrap = document.getElementById('worksGrid');
       if (!wrap) return;
 
@@ -62,10 +81,10 @@
 
       wrap.innerHTML = works.map(w => `
         <a class="card" href="obra.html?id=${encodeURIComponent(w.id)}">
-          <img src="../${w.image}" alt="${w.title}" loading="lazy" />
+          <img src="../${w.image}" alt="${tValue(titleMap, w.id)}" loading="lazy" />
           <div class="card-meta">
-            <span class="card-title">${w.title}</span>
-            <span class="card-sub">${w.year} &middot; ${w.technique} &middot; ${w.size} &middot; ${w.status}</span>
+            <span class="card-title">${tValue(titleMap, w.id)}</span>
+            <span class="card-sub">${w.year} &middot; ${tValue(techniqueMap, w.technique)} &middot; ${w.size} &middot; ${tValue(statusMap, w.status)}</span>
           </div>
         </a>
       `).join('');

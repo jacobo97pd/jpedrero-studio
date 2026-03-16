@@ -35,41 +35,48 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="kicker">Portfolio</p>
-          <h1>Obra contemporanea para interiores serenos.</h1>
-          <p class="lead">Piezas originales, series limitadas y encargos seleccionados para espacios con caracter y calma visual.</p>
-
-          <div class="hero-actions">
-            <a class="btn" href="works/index.html">Ver obras</a>
-            <a class="btn btn-ghost" href="contact/index.html">Solicitar catalogo</a>
+    <section class="book-hero section">
+      <div class="container">
+        <div class="book-hero-head">
+          <div>
+            <p class="kicker">Experiencia</p>
+            <h1>Cuaderno de obra</h1>
           </div>
-
-          <dl class="hero-metrics">
-            <div>
-              <dt>Tecnicas</dt>
-              <dd>Pastel &middot; Oleo &middot; Mixta</dd>
-            </div>
-            <div>
-              <dt>Disponibilidad</dt>
-              <dd>Originales &middot; Encargo</dd>
-            </div>
-            <div>
-              <dt>Entrega</dt>
-              <dd>Espana &middot; Internacional</dd>
-            </div>
-          </dl>
+          <p class="lead">Apertura automatica al cargar y paso de paginas elegante. Puedes avanzar o retroceder de forma manual.</p>
         </div>
 
-        <figure class="hero-art">
-          <img src="assets/img/works/Cuadro4.png" alt="Obra destacada de J. Pedrero Studio" loading="eager" />
-          <figcaption>
-            <span class="art-title">London Eye</span>
-            <span class="art-meta">2026 &middot; Tecnica mixta &middot; 80x60 cm</span>
-          </figcaption>
-        </figure>
+        <div class="book-stage" id="bookStage">
+          <section class="art-book-section" aria-label="Cuaderno de obra">
+            <div class="art-book-shell">
+              <div class="art-book-stage">
+                <div class="art-book-spread" id="artBookSpread">
+                  <article class="art-page art-page-left" id="artPageLeft">
+                    <div class="art-page-content" id="artLeftContent"></div>
+                  </article>
+
+                  <article class="art-page art-page-right" id="artPageRight">
+                    <div class="art-page-content" id="artRightContent"></div>
+                  </article>
+
+                  <div class="art-page-flip-layer" id="artPageFlipLayer" aria-hidden="true">
+                    <div class="art-flip-sheet" id="artFlipSheet">
+                      <div class="art-flip-face art-flip-front" id="artFlipFront"></div>
+                      <div class="art-flip-face art-flip-back" id="artFlipBack"></div>
+                    </div>
+                  </div>
+
+                  <div class="art-book-gutter" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <div class="art-book-controls">
+                <button class="btn btn-ghost" type="button" id="prevArtworkBtn">Pagina anterior</button>
+                <div class="art-book-pagination" id="artBookPagination">1 / 4</div>
+                <button class="btn" type="button" id="nextArtworkBtn">Pagina siguiente</button>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
 
@@ -185,16 +192,6 @@
   </main>
 
   <script src="assets/js/main.js"></script>
-  <script>
-    const toggle = document.getElementById('toggleBio');
-    if (toggle) {
-      toggle.addEventListener('click', function(){
-        const bio = document.getElementById('bioExpand');
-        if (!bio) return;
-        bio.classList.toggle('open');
-        this.textContent = bio.classList.contains('open') ? 'Cerrar' : 'Leer mas';
-      });
-    }
-  </script>
 </body>
 </html>
+
