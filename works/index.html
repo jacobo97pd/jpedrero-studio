@@ -51,15 +51,68 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/main.js?v=20260326-4"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
+      const fallbackWorks = [
+        {
+          id: 'cuadro1',
+          title: 'Retrato en carmin',
+          year: 2025,
+          technique: 'Pastel',
+          size: '50x70 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro1.png',
+          featured: true
+        },
+        {
+          id: 'cuadro2',
+          title: 'Barco azul',
+          year: 2024,
+          technique: 'Tecnica mixta',
+          size: '60x60 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro3.png',
+          featured: true
+        },
+        {
+          id: 'cuadro3',
+          title: 'Orilla al atardecer',
+          year: 2025,
+          technique: 'Pastel',
+          size: '70x100 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro2.png',
+          featured: true
+        },
+        {
+          id: 'cuadro4',
+          title: 'London Eye',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: '80x60 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro4.png',
+          featured: true
+        },
+        {
+          id: 'cuadro5',
+          title: 'Caballos',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: '60x80 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/cuadro5.png',
+          featured: true
+        }
+      ];
       const titleMap = {
         cuadro1: { es: 'Retrato en carmin', en: 'Crimson Portrait' },
         cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
-        cuadro4: { es: 'London Eye', en: 'London Eye' }
+        cuadro4: { es: 'London Eye', en: 'London Eye' },
+        cuadro5: { es: 'Caballos', en: 'Horses' }
       };
       const techniqueMap = {
         'Pastel': { es: 'Pastel', en: 'Pastel' },
@@ -73,11 +126,27 @@
         return (map[key] && map[key][lang]) || key;
       }
 
+      async function loadWorks() {
+        if (window.location.protocol === 'file:') {
+          return fallbackWorks;
+        }
+
+        try {
+          const res = await fetch('../data/works.json', { cache: 'no-store' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          if (Array.isArray(data) && data.length) return data;
+        } catch (error) {
+          console.warn('[Works] No se pudo cargar works.json, uso fallback local.', error);
+        }
+
+        return fallbackWorks;
+      }
+
       const wrap = document.getElementById('worksGrid');
       if (!wrap) return;
 
-      const res = await fetch('../data/works.json');
-      const works = await res.json();
+      const works = await loadWorks();
 
       wrap.innerHTML = works.map(w => `
         <a class="card" href="obra.html?id=${encodeURIComponent(w.id)}">

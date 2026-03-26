@@ -62,7 +62,7 @@
       title: "Cuaderno de obra",
       lead: "Apertura automatica al cargar y paso de paginas elegante. Puedes avanzar o retroceder de forma manual.",
       featuredTitle: "Obras destacadas",
-      featuredLead: "Cuatro piezas clave, presentadas con una composicion limpia y contemporanea.",
+      featuredLead: "Cinco piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
       aboutTitle: "Sobre el artista",
       aboutLead: "Mi trabajo investiga la tension entre estructura y emocion. Cada pieza se construye con una mirada contemporanea para dialogar con la luz, el espacio y el tiempo.",
@@ -72,7 +72,7 @@
       catalogTitle: "Catalogo privado",
       catalogLead: "Acceso a obras disponibles, medidas y condiciones de entrega.",
       catalogCta: "Solicitar ahora",
-      featuredCards: ["Retrato en carmin", "Barco azul", "Orilla al atardecer", "London Eye"]
+      featuredCards: ["Retrato en carmin", "Barco azul", "Orilla al atardecer", "London Eye", "Caballos"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
     work: { back: "Volver a obras", kicker: "Ficha", info: "Para disponibilidad y precio, solicita informacion por contacto directo.", cta: "Solicitar informacion" },
@@ -90,7 +90,7 @@
       title: "Studio notebook",
       lead: "Automatic opening on load and elegant page turns. You can move forward or backward manually.",
       featuredTitle: "Featured works",
-      featuredLead: "Four key pieces presented with a clean, contemporary composition.",
+      featuredLead: "Five key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
       aboutTitle: "About the artist",
       aboutLead: "My work explores the tension between structure and emotion. Each piece is built with a contemporary gaze to dialogue with light, space and time.",
@@ -100,7 +100,7 @@
       catalogTitle: "Private catalog",
       catalogLead: "Access to available works, dimensions and delivery conditions.",
       catalogCta: "Request now",
-      featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye"]
+      featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye", "Horses"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
     work: { back: "Back to works", kicker: "Sheet", info: "For availability and pricing, request information through direct contact.", cta: "Request information" },
@@ -538,7 +538,8 @@
         technique: { es: "Tecnica mixta", en: "Mixed media" },
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
-        image: "assets/img/works/Cuadro1.png"
+        image: "assets/img/works/Cuadro1.png",
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1"
       },
       {
         title: { es: "Barco azul", en: "Blue Ship" },
@@ -553,7 +554,8 @@
         technique: { es: "Tecnica mixta", en: "Mixed media" },
         support: { es: "Papel artistico", en: "Fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
-        image: "assets/img/works/Cuadro3.png"
+        image: "assets/img/works/Cuadro3.png",
+        model: "assets/blenders/cuadro_barco_3d.glb?v=1"
       },
       {
         title: { es: "Orilla al atardecer", en: "Shore at Dusk" },
@@ -568,7 +570,8 @@
         technique: { es: "Pastel y oleo", en: "Pastel and oil" },
         support: { es: "Papel artistico de algodon", en: "Cotton fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
-        image: "assets/img/works/Cuadro2.png"
+        image: "assets/img/works/Cuadro2.png",
+        model: "assets/blenders/cuadro_atardecer_3d.glb?v=1"
       },
       {
         title: { es: "London Eye", en: "London Eye" },
@@ -583,7 +586,24 @@
         technique: { es: "Tecnica mixta", en: "Mixed media" },
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Serie limitada", en: "Limited series" },
-        image: "assets/img/works/Cuadro4.png"
+        image: "assets/img/works/Cuadro4.png",
+        model: "assets/blenders/cuadro_london_eye_3d.glb?v=1"
+      },
+      {
+        title: { es: "Caballos", en: "Horses" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Composicion figurativa con tres caballos en movimiento. La obra combina contraste de luces y materia suelta para enfatizar energia, ritmo y profundidad, manteniendo una lectura elegante del conjunto dentro del marco.",
+          en: "Figurative composition with three horses in motion. The work combines light contrast and loose material to emphasize energy, rhythm and depth, while keeping an elegant reading of the framed piece."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "60x80 cm",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/cuadro5.png",
+        model: "assets/blenders/cuadro_caballos_3d_front.glb?v=1"
       }
     ];
 
@@ -645,6 +665,10 @@
     function buildRightPageHTML(artwork) {
       const title = localize(artwork?.title) || "Artwork";
       const src = artwork?.image;
+      const modelSrc = artwork?.model || "";
+      const modelCameraOrbit = artwork?.modelCameraOrbit || "210deg 82deg 125%";
+      const modelMinCameraOrbit = artwork?.modelMinCameraOrbit || "auto 65deg 80%";
+      const modelMaxCameraOrbit = artwork?.modelMaxCameraOrbit || "auto 95deg 220%";
       if (!src) {
         console.warn("[ArtBook] missing image for artwork=", title);
         return `
@@ -659,7 +683,15 @@
       return `
         <div class="art-artwork-panel">
           <div class="art-artwork-frame">
-            <img class="art-artwork-image" src="${src}" alt="${title}" loading="eager" />
+            <img
+              class="art-artwork-image"
+              src="${src}"
+              alt="${title}"
+              loading="eager"
+              data-model-src="${modelSrc}"
+              data-model-camera-orbit="${modelCameraOrbit}"
+              data-model-min-camera-orbit="${modelMinCameraOrbit}"
+              data-model-max-camera-orbit="${modelMaxCameraOrbit}" />
             <div class="art-artwork-placeholder" hidden>${tr("common.imageUnavailable")}</div>
           </div>
         </div>
@@ -845,8 +877,39 @@
 
   // Zoom de cuadros en popup oscuro
   const zoomSelector = ".featured-card img, .works-grid .card img, .hero-art img, .art-artwork-image, #workImage";
+  const artBookModelByImage = {
+    "assets/img/works/Cuadro1.png": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "assets/img/works/Cuadro3.png": "assets/blenders/cuadro_barco_3d.glb?v=1",
+    "assets/img/works/Cuadro2.png": "assets/blenders/cuadro_atardecer_3d.glb?v=1",
+    "assets/img/works/Cuadro4.png": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+    "assets/img/works/cuadro5.png": "assets/blenders/cuadro_caballos_3d_front.glb?v=1"
+  };
   let lightbox = null;
   let lightboxImg = null;
+  let lightboxModel = null;
+  let lightboxError = null;
+  let lightboxMode = "image";
+
+  function normalizeAssetPath(path = "") {
+    if (!path) return "";
+    try {
+      const url = new URL(path, window.location.href);
+      return url.pathname.replace(/^\/+/, "");
+    } catch (error) {
+      return String(path).replace(/^\/+/, "");
+    }
+  }
+
+  function resolveModelSrcForImage(img, fallbackSrc = "", allowMapFallback = false) {
+    const explicitModel = img?.dataset?.modelSrc || "";
+    if (explicitModel) return explicitModel;
+
+    if (!allowMapFallback) return "";
+
+    const src = fallbackSrc || img?.getAttribute("src") || img?.currentSrc || "";
+    const normalizedSrc = normalizeAssetPath(src);
+    return artBookModelByImage[normalizedSrc] || "";
+  }
 
   function ensureLightbox() {
     if (lightbox) return;
@@ -856,11 +919,36 @@
     lightbox.innerHTML = `
       <div class="image-lightbox-stage">
         <button type="button" class="image-lightbox-close" aria-label="Cerrar">&times;</button>
-        <img src="" alt="" />
+        <img class="image-lightbox-image" src="" alt="" />
+        <model-viewer
+          class="image-lightbox-model"
+          hidden
+          camera-controls
+          loading="eager"
+          shadow-intensity="0"
+          exposure="1"
+          interaction-prompt="none"
+          ar="false">
+        </model-viewer>
+        <p class="image-lightbox-error" hidden>No se pudo cargar el modelo 3D.</p>
       </div>
     `;
     document.body.appendChild(lightbox);
-    lightboxImg = lightbox.querySelector("img");
+    lightboxImg = lightbox.querySelector(".image-lightbox-image");
+    lightboxModel = lightbox.querySelector(".image-lightbox-model");
+    lightboxError = lightbox.querySelector(".image-lightbox-error");
+    if (lightboxModel) {
+      lightboxModel.addEventListener("load", () => {
+        if (lightboxMode !== "model") return;
+        lightboxModel.hidden = false;
+        if (lightboxError) lightboxError.hidden = true;
+      });
+      lightboxModel.addEventListener("error", () => {
+        if (lightboxMode !== "model") return;
+        lightboxModel.hidden = true;
+        if (lightboxError) lightboxError.hidden = false;
+      });
+    }
 
     const closeBtn = lightbox.querySelector(".image-lightbox-close");
     closeBtn.addEventListener("click", closeLightbox);
@@ -869,19 +957,78 @@
     });
   }
 
-  function openLightbox(src, alt) {
-    ensureLightbox();
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || "Imagen ampliada";
+  function setLightboxMode(mode) {
+    lightboxMode = mode;
+    const showModel = mode === "model";
+    lightbox.classList.toggle("is-model", showModel);
+    if (lightboxImg) lightboxImg.hidden = showModel;
+    if (lightboxModel) lightboxModel.hidden = !showModel;
+    if (!showModel && lightboxError) lightboxError.hidden = true;
+  }
+
+  function showLightbox() {
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.classList.add("lightbox-open");
+  }
+
+  function openLightbox(src, alt) {
+    if (!src) return;
+    ensureLightbox();
+    setLightboxMode("image");
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || "Imagen ampliada";
+    if (lightboxModel) {
+      lightboxModel.removeAttribute("src");
+      lightboxModel.removeAttribute("poster");
+    }
+    if (lightboxError) lightboxError.hidden = true;
+    showLightbox();
+  }
+
+  function openModelLightbox(options = {}) {
+    const {
+      modelSrc,
+      posterSrc,
+      alt,
+      cameraOrbit = "210deg 82deg 125%",
+      minCameraOrbit = "auto 65deg 80%",
+      maxCameraOrbit = "auto 95deg 220%"
+    } = options;
+
+    if (!modelSrc) {
+      openLightbox(posterSrc, alt);
+      return;
+    }
+
+    ensureLightbox();
+    setLightboxMode("model");
+    if (lightboxError) lightboxError.hidden = true;
+    if (lightboxModel) lightboxModel.hidden = false;
+    lightboxModel.setAttribute("src", modelSrc);
+    lightboxModel.setAttribute("alt", alt ? `${alt} 3D` : "Obra 3D");
+    lightboxModel.setAttribute("camera-orbit", cameraOrbit);
+    lightboxModel.setAttribute("min-camera-orbit", minCameraOrbit);
+    lightboxModel.setAttribute("max-camera-orbit", maxCameraOrbit);
+    if (posterSrc) {
+      lightboxModel.setAttribute("poster", posterSrc);
+    } else {
+      lightboxModel.removeAttribute("poster");
+    }
+    showLightbox();
   }
 
   function closeLightbox() {
     if (!lightbox) return;
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
+    setLightboxMode("image");
+    if (lightboxImg) lightboxImg.removeAttribute("src");
+    if (lightboxModel) {
+      lightboxModel.removeAttribute("src");
+      lightboxModel.removeAttribute("poster");
+    }
+    if (lightboxError) lightboxError.hidden = true;
     document.body.classList.remove("lightbox-open");
   }
 
@@ -897,9 +1044,11 @@
     host.classList.add("zoom-host");
     if (!host.querySelector(".zoom-btn")) {
       const button = document.createElement("button");
+      const isBookArtwork = img.classList.contains("art-artwork-image") || Boolean(img.closest(".art-artwork-frame"));
+      const hasModel = Boolean(resolveModelSrcForImage(img, "", isBookArtwork));
       button.type = "button";
       button.className = "zoom-btn";
-      button.setAttribute("aria-label", "Ampliar imagen");
+      button.setAttribute("aria-label", hasModel ? "Ver obra en 3D" : "Ampliar imagen");
       button.innerHTML = `
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="6"></circle>
@@ -913,6 +1062,19 @@
         event.preventDefault();
         event.stopPropagation();
         const src = img.currentSrc || img.src;
+        const isBookArtwork = img.classList.contains("art-artwork-image") || Boolean(img.closest(".art-artwork-frame"));
+        const modelSrc = resolveModelSrcForImage(img, src, isBookArtwork);
+        if (modelSrc) {
+          openModelLightbox({
+            modelSrc,
+            posterSrc: src,
+            alt: img.alt,
+            cameraOrbit: img.dataset.modelCameraOrbit,
+            minCameraOrbit: img.dataset.modelMinCameraOrbit,
+            maxCameraOrbit: img.dataset.modelMaxCameraOrbit
+          });
+          return;
+        }
         openLightbox(src, img.alt);
       });
 

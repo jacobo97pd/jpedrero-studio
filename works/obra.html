@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script type="module" src="../assets/js/vendor/model-viewer.min.js"></script>
   <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
 <body>
@@ -26,6 +27,20 @@
     <section class="container page-grid">
       <figure class="hero-art" id="workImageBox">
         <img id="workImage" src="../assets/img/works/Cuadro1.png" alt="Obra" />
+        <div class="work-model-wrap" id="workModelWrap" hidden>
+          <model-viewer
+            id="workModel"
+            camera-controls
+            loading="eager"
+            camera-orbit="210deg 82deg 125%"
+            min-camera-orbit="auto 65deg 80%"
+            max-camera-orbit="auto 95deg 220%"
+            shadow-intensity="0"
+            exposure="1"
+            ar="false"
+            interaction-prompt="none">
+          </model-viewer>
+        </div>
       </figure>
 
       <article class="page-box" id="workInfo">
@@ -46,15 +61,85 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/main.js?v=20260326-4"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
+      const fallbackWorks = [
+        {
+          id: 'cuadro1',
+          title: 'Retrato en carmin',
+          year: 2025,
+          technique: 'Pastel',
+          size: '50x70 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro1.png',
+          featured: true
+        },
+        {
+          id: 'cuadro2',
+          title: 'Barco azul',
+          year: 2024,
+          technique: 'Tecnica mixta',
+          size: '60x60 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro3.png',
+          featured: true
+        },
+        {
+          id: 'cuadro3',
+          title: 'Orilla al atardecer',
+          year: 2025,
+          technique: 'Pastel',
+          size: '70x100 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro2.png',
+          featured: true
+        },
+        {
+          id: 'cuadro4',
+          title: 'London Eye',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: '80x60 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro4.png',
+          featured: true
+        },
+        {
+          id: 'cuadro5',
+          title: 'Caballos',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: '60x80 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/cuadro5.png',
+          featured: true
+        }
+      ];
       const titleMap = {
         cuadro1: { es: 'Retrato en carmin', en: 'Crimson Portrait' },
         cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
-        cuadro4: { es: 'London Eye', en: 'London Eye' }
+        cuadro4: { es: 'London Eye', en: 'London Eye' },
+        cuadro5: { es: 'Caballos', en: 'Horses' }
+      };
+      const modelMap = {
+        cuadro1: {
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1'
+        },
+        cuadro2: {
+          model: '../assets/blenders/cuadro_barco_3d.glb?v=1'
+        },
+        cuadro3: {
+          model: '../assets/blenders/cuadro_atardecer_3d.glb?v=1'
+        },
+        cuadro4: {
+          model: '../assets/blenders/cuadro_london_eye_3d.glb?v=1'
+        },
+        cuadro5: {
+          model: '../assets/blenders/cuadro_caballos_3d_front.glb?v=1'
+        }
       };
       const techniqueMap = {
         'Pastel': { es: 'Pastel', en: 'Pastel' },
@@ -67,10 +152,26 @@
         return (map[key] && map[key][lang]) || key;
       }
 
+      async function loadWorks() {
+        if (window.location.protocol === 'file:') {
+          return fallbackWorks;
+        }
+
+        try {
+          const res = await fetch('../data/works.json', { cache: 'no-store' });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          if (Array.isArray(data) && data.length) return data;
+        } catch (error) {
+          console.warn('[Work] No se pudo cargar works.json, uso fallback local.', error);
+        }
+
+        return fallbackWorks;
+      }
+
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
-      const res = await fetch('../data/works.json');
-      const works = await res.json();
+      const works = await loadWorks();
       const work = works.find(w => w.id === id) || works[0];
       if (!work) return;
 
@@ -83,8 +184,38 @@
       document.getElementById('workYear').textContent = String(work.year);
 
       const img = document.getElementById('workImage');
+      const modelWrap = document.getElementById('workModelWrap');
+      const modelViewer = document.getElementById('workModel');
       img.src = `../${work.image}`;
       img.alt = localizedTitle;
+
+      const modelConfig = modelMap[work.id];
+      if (modelConfig && modelWrap && modelViewer) {
+        const figure = document.getElementById('workImageBox');
+        const fallbackToImage = () => {
+          modelWrap.hidden = true;
+          img.style.removeProperty('display');
+        };
+        const onModelLoaded = () => {
+          modelWrap.hidden = false;
+          img.style.display = 'none';
+        };
+        const enableModelViewer = () => {
+          modelViewer.addEventListener('load', onModelLoaded, { once: true });
+          modelViewer.addEventListener('error', fallbackToImage, { once: true });
+          modelWrap.hidden = false;
+          img.style.display = 'none';
+          modelViewer.setAttribute('src', modelConfig.model);
+          modelViewer.setAttribute('poster', img.src);
+          modelViewer.setAttribute('alt', `${localizedTitle} 3D`);
+          if (figure) {
+            figure.classList.remove('zoom-host');
+            const zoomBtn = figure.querySelector('.zoom-btn');
+            if (zoomBtn) zoomBtn.remove();
+          }
+        };
+        enableModelViewer();
+      }
     })();
   </script>
 </body>

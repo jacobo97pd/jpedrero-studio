@@ -38,5 +38,15 @@
     "status": "Disponible",
     "image": "assets/img/works/Cuadro4.png",
     "featured": true
+  },
+  {
+    "id": "cuadro5",
+    "title": "Caballos",
+    "year": 2026,
+    "technique": "Tecnica mixta",
+    "size": "60x80 cm",
+    "status": "Disponible",
+    "image": "assets/img/works/cuadro5.png",
+    "featured": true
   }
 ]

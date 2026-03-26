@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cuadro 3D</title>
+  <script type="module" src="../js/vendor/model-viewer.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      background: transparent;
+      height: 100%;
+    }
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    src="cuadro_caballos_3d.glb?v=4"
+    camera-controls
+    camera-orbit="180deg 85deg auto"
+    min-camera-orbit="auto 65deg 80%"
+    max-camera-orbit="auto 95deg 220%"
+    shadow-intensity="0"
+    exposure="1"
+    ar="false">
+  </model-viewer>
+</body>
+</html>
+
