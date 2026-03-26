@@ -61,7 +61,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260326-4"></script>
+  <script src="../assets/js/main.js?v=20260326-6"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
@@ -115,6 +115,16 @@
           status: 'Disponible',
           image: 'assets/img/works/cuadro5.png',
           featured: true
+        },
+        {
+          id: 'cuadro6',
+          title: 'El Padrino',
+          year: 2026,
+          technique: 'Pastel',
+          size: '50x70 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/cuadro6.png',
+          featured: true
         }
       ];
       const titleMap = {
@@ -122,7 +132,8 @@
         cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
         cuadro4: { es: 'London Eye', en: 'London Eye' },
-        cuadro5: { es: 'Caballos', en: 'Horses' }
+        cuadro5: { es: 'Caballos', en: 'Horses' },
+        cuadro6: { es: 'El Padrino', en: 'The Godfather' }
       };
       const modelMap = {
         cuadro1: {
@@ -139,6 +150,10 @@
         },
         cuadro5: {
           model: '../assets/blenders/cuadro_caballos_3d_front.glb?v=1'
+        },
+        cuadro6: {
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
+          texture: '../assets/blenders/cuadro6.png'
         }
       };
       const techniqueMap = {
@@ -192,11 +207,26 @@
       const modelConfig = modelMap[work.id];
       if (modelConfig && modelWrap && modelViewer) {
         const figure = document.getElementById('workImageBox');
+        const applyModelTexture = async (textureSrc) => {
+          if (!textureSrc || typeof modelViewer.createTexture !== 'function' || !modelViewer.model || !Array.isArray(modelViewer.model.materials) || !modelViewer.model.materials.length) return;
+          try {
+            const texture = await modelViewer.createTexture(textureSrc);
+            const material = modelViewer.model.materials[0];
+            if (material && material.pbrMetallicRoughness && material.pbrMetallicRoughness.baseColorTexture) {
+              material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+            }
+          } catch (error) {
+            console.warn('[Work] No se pudo aplicar textura 3D personalizada.', error);
+          }
+        };
         const fallbackToImage = () => {
           modelWrap.hidden = true;
           img.style.removeProperty('display');
         };
-        const onModelLoaded = () => {
+        const onModelLoaded = async () => {
+          if (modelConfig.texture) {
+            await applyModelTexture(modelConfig.texture);
+          }
           modelWrap.hidden = false;
           img.style.display = 'none';
         };

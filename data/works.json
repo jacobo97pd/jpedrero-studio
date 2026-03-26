@@ -48,5 +48,15 @@
     "status": "Disponible",
     "image": "assets/img/works/cuadro5.png",
     "featured": true
+  },
+  {
+    "id": "cuadro6",
+    "title": "El Padrino",
+    "year": 2026,
+    "technique": "Pastel",
+    "size": "50x70 cm",
+    "status": "Disponible",
+    "image": "assets/img/works/cuadro6.png",
+    "featured": true
   }
 ]

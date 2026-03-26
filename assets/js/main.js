@@ -62,7 +62,7 @@
       title: "Cuaderno de obra",
       lead: "Apertura automatica al cargar y paso de paginas elegante. Puedes avanzar o retroceder de forma manual.",
       featuredTitle: "Obras destacadas",
-      featuredLead: "Cinco piezas clave, presentadas con una composicion limpia y contemporanea.",
+      featuredLead: "Seis piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
       aboutTitle: "Sobre el artista",
       aboutLead: "Mi trabajo investiga la tension entre estructura y emocion. Cada pieza se construye con una mirada contemporanea para dialogar con la luz, el espacio y el tiempo.",
@@ -72,7 +72,7 @@
       catalogTitle: "Catalogo privado",
       catalogLead: "Acceso a obras disponibles, medidas y condiciones de entrega.",
       catalogCta: "Solicitar ahora",
-      featuredCards: ["Retrato en carmin", "Barco azul", "Orilla al atardecer", "London Eye", "Caballos"]
+      featuredCards: ["Retrato en carmin", "Barco azul", "Orilla al atardecer", "London Eye", "Caballos", "El Padrino"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
     work: { back: "Volver a obras", kicker: "Ficha", info: "Para disponibilidad y precio, solicita informacion por contacto directo.", cta: "Solicitar informacion" },
@@ -90,7 +90,7 @@
       title: "Studio notebook",
       lead: "Automatic opening on load and elegant page turns. You can move forward or backward manually.",
       featuredTitle: "Featured works",
-      featuredLead: "Five key pieces presented with a clean, contemporary composition.",
+      featuredLead: "Six key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
       aboutTitle: "About the artist",
       aboutLead: "My work explores the tension between structure and emotion. Each piece is built with a contemporary gaze to dialogue with light, space and time.",
@@ -100,7 +100,7 @@
       catalogTitle: "Private catalog",
       catalogLead: "Access to available works, dimensions and delivery conditions.",
       catalogCta: "Request now",
-      featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye", "Horses"]
+      featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye", "Horses", "The Godfather"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
     work: { back: "Back to works", kicker: "Sheet", info: "For availability and pricing, request information through direct contact.", cta: "Request information" },
@@ -604,6 +604,23 @@
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/cuadro5.png",
         model: "assets/blenders/cuadro_caballos_3d_front.glb?v=1"
+      },
+      {
+        title: { es: "El Padrino", en: "The Godfather" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Retrato expresivo inspirado en una iconografia cinematografica clasica. El trabajo enfatiza gesto, mirada y contraste tonal con una factura matizada que combina materia seca y transiciones suaves para potenciar caracter y presencia.",
+          en: "Expressive portrait inspired by classic cinematic iconography. The work emphasizes gesture, gaze and tonal contrast, with nuanced mark-making that combines dry texture and soft transitions to enhance character and presence."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "50x70 cm",
+        technique: { es: "Pastel", en: "Pastel" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/cuadro6.png",
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/cuadro6.png"
       }
     ];
 
@@ -666,6 +683,7 @@
       const title = localize(artwork?.title) || "Artwork";
       const src = artwork?.image;
       const modelSrc = artwork?.model || "";
+      const modelTexture = artwork?.modelTexture || "";
       const modelCameraOrbit = artwork?.modelCameraOrbit || "210deg 82deg 125%";
       const modelMinCameraOrbit = artwork?.modelMinCameraOrbit || "auto 65deg 80%";
       const modelMaxCameraOrbit = artwork?.modelMaxCameraOrbit || "auto 95deg 220%";
@@ -689,6 +707,7 @@
               alt="${title}"
               loading="eager"
               data-model-src="${modelSrc}"
+              data-model-texture="${modelTexture}"
               data-model-camera-orbit="${modelCameraOrbit}"
               data-model-min-camera-orbit="${modelMinCameraOrbit}"
               data-model-max-camera-orbit="${modelMaxCameraOrbit}" />
@@ -882,13 +901,15 @@
     "assets/img/works/Cuadro3.png": "assets/blenders/cuadro_barco_3d.glb?v=1",
     "assets/img/works/Cuadro2.png": "assets/blenders/cuadro_atardecer_3d.glb?v=1",
     "assets/img/works/Cuadro4.png": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
-    "assets/img/works/cuadro5.png": "assets/blenders/cuadro_caballos_3d_front.glb?v=1"
+    "assets/img/works/cuadro5.png": "assets/blenders/cuadro_caballos_3d_front.glb?v=1",
+    "assets/img/works/cuadro6.png": "assets/blenders/cuadro_retrato_3d.glb?v=1"
   };
   let lightbox = null;
   let lightboxImg = null;
   let lightboxModel = null;
   let lightboxError = null;
   let lightboxMode = "image";
+  let lightboxModelTexture = "";
 
   function normalizeAssetPath(path = "") {
     if (!path) return "";
@@ -909,6 +930,19 @@
     const src = fallbackSrc || img?.getAttribute("src") || img?.currentSrc || "";
     const normalizedSrc = normalizeAssetPath(src);
     return artBookModelByImage[normalizedSrc] || "";
+  }
+
+  async function applyModelTextureToViewer(viewer, textureSrc) {
+    if (!viewer || !textureSrc || typeof viewer.createTexture !== "function" || !viewer.model || !Array.isArray(viewer.model.materials) || !viewer.model.materials.length) return;
+    try {
+      const texture = await viewer.createTexture(textureSrc);
+      const material = viewer.model.materials[0];
+      if (material && material.pbrMetallicRoughness && material.pbrMetallicRoughness.baseColorTexture) {
+        material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
+      }
+    } catch (error) {
+      console.warn("[Lightbox] No se pudo aplicar textura 3D personalizada.", error);
+    }
   }
 
   function ensureLightbox() {
@@ -938,8 +972,11 @@
     lightboxModel = lightbox.querySelector(".image-lightbox-model");
     lightboxError = lightbox.querySelector(".image-lightbox-error");
     if (lightboxModel) {
-      lightboxModel.addEventListener("load", () => {
+      lightboxModel.addEventListener("load", async () => {
         if (lightboxMode !== "model") return;
+        if (lightboxModelTexture) {
+          await applyModelTextureToViewer(lightboxModel, lightboxModelTexture);
+        }
         lightboxModel.hidden = false;
         if (lightboxError) lightboxError.hidden = true;
       });
@@ -982,6 +1019,7 @@
       lightboxModel.removeAttribute("src");
       lightboxModel.removeAttribute("poster");
     }
+    lightboxModelTexture = "";
     if (lightboxError) lightboxError.hidden = true;
     showLightbox();
   }
@@ -989,6 +1027,7 @@
   function openModelLightbox(options = {}) {
     const {
       modelSrc,
+      modelTexture = "",
       posterSrc,
       alt,
       cameraOrbit = "210deg 82deg 125%",
@@ -1003,6 +1042,7 @@
 
     ensureLightbox();
     setLightboxMode("model");
+    lightboxModelTexture = modelTexture || "";
     if (lightboxError) lightboxError.hidden = true;
     if (lightboxModel) lightboxModel.hidden = false;
     lightboxModel.setAttribute("src", modelSrc);
@@ -1028,6 +1068,7 @@
       lightboxModel.removeAttribute("src");
       lightboxModel.removeAttribute("poster");
     }
+    lightboxModelTexture = "";
     if (lightboxError) lightboxError.hidden = true;
     document.body.classList.remove("lightbox-open");
   }
@@ -1067,6 +1108,7 @@
         if (modelSrc) {
           openModelLightbox({
             modelSrc,
+            modelTexture: img.dataset.modelTexture,
             posterSrc: src,
             alt: img.alt,
             cameraOrbit: img.dataset.modelCameraOrbit,
