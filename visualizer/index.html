@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Visualizador | J. Pedrero Studio</title>
+  <meta name="description" content="Sube una foto y prueba como quedaria una obra en tu propio espacio." />
+  <meta name="theme-color" content="#f6f6f4" />
+  <link rel="icon" type="image/png" href="../assets/img/site/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Inicio">
+        <span class="brand-main">J. PEDRERO</span>
+        <span class="brand-sub">Studio</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-label="Navegacion principal">
+        <a href="../works/index.html">Obras</a>
+        <a href="index.html">Visualizador</a>
+        <a href="../collections/index.html">Colecciones</a>
+        <a href="../about/index.html">Sobre</a>
+        <a href="../commissions/index.html">Encargos</a>
+        <a class="nav-cta" href="../contact/index.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="container page-hero">
+      <p class="kicker">Herramienta</p>
+      <h1>Visualizador de obra</h1>
+      <p>Sube una foto de tu espacio, elige un cuadro y colocalo sobre la pared para ver una simulacion realista.</p>
+    </section>
+
+    <section class="container visualizer-layout" id="visualizerApp">
+      <article class="page-box visualizer-controls">
+        <h2>Controles</h2>
+
+        <label class="form-field">
+          <span>Foto del espacio</span>
+          <input type="file" id="vizRoomInput" accept="image/*" />
+        </label>
+
+        <label class="form-field">
+          <span>Cuadro</span>
+          <select id="vizArtworkSelect"></select>
+        </label>
+
+        <div class="visualizer-range-row">
+          <div class="visualizer-range-head">
+            <span>Tamano</span>
+            <strong id="vizSizeValue">34%</strong>
+          </div>
+          <input type="range" id="vizSize" min="12" max="75" value="34" />
+        </div>
+
+        <div class="visualizer-range-row">
+          <div class="visualizer-range-head">
+            <span>Rotacion</span>
+            <strong id="vizRotationValue">0°</strong>
+          </div>
+          <input type="range" id="vizRotation" min="-30" max="30" value="0" />
+        </div>
+
+        <div class="visualizer-range-row">
+          <div class="visualizer-range-head">
+            <span>Perspectiva</span>
+            <strong id="vizSkewValue">0°</strong>
+          </div>
+          <input type="range" id="vizSkew" min="-22" max="22" value="0" />
+        </div>
+
+        <div class="visualizer-range-row">
+          <div class="visualizer-range-head">
+            <span>Opacidad</span>
+            <strong id="vizOpacityValue">100%</strong>
+          </div>
+          <input type="range" id="vizOpacity" min="35" max="100" value="100" />
+        </div>
+
+        <div class="visualizer-range-row">
+          <div class="visualizer-range-head">
+            <span>Sombra</span>
+            <strong id="vizShadowValue">20</strong>
+          </div>
+          <input type="range" id="vizShadow" min="0" max="60" value="20" />
+        </div>
+
+        <div class="visualizer-actions">
+          <button class="btn btn-ghost" id="vizResetBtn" type="button">Recentrar cuadro</button>
+          <button class="btn" id="vizDownloadBtn" type="button">Descargar simulacion</button>
+        </div>
+
+        <p class="fineprint visualizer-note">
+          Consejo: arrastra el cuadro directamente sobre la imagen para colocarlo donde quieras.
+        </p>
+      </article>
+
+      <article class="page-box visualizer-stage-card">
+        <div class="visualizer-stage-wrap">
+          <div class="visualizer-stage" id="vizStage">
+            <img class="viz-room-image" id="vizRoomImage" alt="Foto del espacio" hidden />
+            <img class="viz-painting" id="vizPaintingImage" alt="Simulacion del cuadro" hidden />
+            <div class="viz-placeholder" id="vizPlaceholder">Sube una foto para empezar la simulacion.</div>
+          </div>
+        </div>
+        <p class="fineprint visualizer-note">
+          Puedes mover, girar y ajustar el tamano antes de descargar el resultado final.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <span class="fineprint">&copy; <span id="year"></span> J. Pedrero Studio</span>
+      <a class="link fineprint" href="../index.html">Inicio</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=20260327-1"></script>
+  <script src="../assets/js/visualizer.js?v=20260327-3"></script>
+</body>
+</html>

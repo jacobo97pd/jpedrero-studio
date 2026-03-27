@@ -5,7 +5,7 @@
         homeAria: "Inicio",
         openMenu: "Abrir menu",
         navAria: "Navegacion principal",
-        nav: { works: "Obras", collections: "Colecciones", about: "Sobre", commissions: "Encargos", contact: "Contacto" },
+        nav: { works: "Obras", visualizer: "Visualizador", collections: "Colecciones", about: "Sobre", commissions: "Encargos", contact: "Contacto" },
         footerHome: "Inicio",
         footerBackTop: "Volver arriba",
         footerTagline: "Obra original · Encargos por propuesta · Envio nacional e internacional",
@@ -32,7 +32,7 @@
         homeAria: "Home",
         openMenu: "Open menu",
         navAria: "Main navigation",
-        nav: { works: "Works", collections: "Collections", about: "About", commissions: "Commissions", contact: "Contact" },
+        nav: { works: "Works", visualizer: "Visualizer", collections: "Collections", about: "About", commissions: "Commissions", contact: "Contact" },
         footerHome: "Home",
         footerBackTop: "Back to top",
         footerTagline: "Original artwork · Commissions by proposal · National and international shipping",
@@ -179,6 +179,7 @@
     document.querySelectorAll(".site-nav a").forEach((a) => {
       const href = a.getAttribute("href") || "";
       if (href.includes("works/index.html")) a.textContent = tr("common.nav.works");
+      if (href.includes("visualizer/index.html")) a.textContent = tr("common.nav.visualizer");
       if (href.includes("collections/index.html")) a.textContent = tr("common.nav.collections");
       if (href.includes("about/index.html")) a.textContent = tr("common.nav.about");
       if (href.includes("commissions/index.html")) a.textContent = tr("common.nav.commissions");
