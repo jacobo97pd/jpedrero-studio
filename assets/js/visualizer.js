@@ -430,8 +430,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function loadImageFromDataUrl(dataUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("No se pudo cargar el data URL de captura."));
+      img.src = dataUrl;
+    });
+  }
+
   async function getModelSnapshotImage() {
-    if (!state.modelEnabled || paintingModel.hidden || typeof paintingModel.toBlob !== "function") {
+    if (!state.modelEnabled || paintingModel.hidden) {
       return null;
     }
 
@@ -443,16 +452,21 @@ document.addEventListener("DOMContentLoaded", () => {
       // Wait one paint frame to capture exactly what the user sees at click time.
       await new Promise((resolve) => requestAnimationFrame(resolve));
 
-      const aspect = artworkLayer.offsetWidth > 0 && artworkLayer.offsetHeight > 0
-        ? artworkLayer.offsetWidth / artworkLayer.offsetHeight
-        : undefined;
-      const blob = await paintingModel.toBlob({
-        mimeType: "image/png",
-        idealAspect: aspect
-      });
+      // Prefer the currently displayed canvas frame to keep exact framing.
+      if (typeof paintingModel.toDataURL === "function") {
+        const dataUrl = paintingModel.toDataURL("image/png");
+        if (typeof dataUrl === "string" && dataUrl.startsWith("data:image/")) {
+          return await loadImageFromDataUrl(dataUrl);
+        }
+      }
 
-      if (!blob) return null;
-      return await loadImageFromBlob(blob);
+      // Fallback for older builds without toDataURL.
+      if (typeof paintingModel.toBlob === "function") {
+        const blob = await paintingModel.toBlob({ mimeType: "image/png" });
+        if (blob) return await loadImageFromBlob(blob);
+      }
+
+      return null;
     } catch (error) {
       console.warn("[Visualizer] No se pudo capturar el frame actual del modelo 3D.", error);
       return null;
