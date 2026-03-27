@@ -860,12 +860,11 @@
   }
   // Consentimiento de cookies
   const consentKey = "jps_cookie_consent_v1";
+  const savedConsent = localStorage.getItem(consentKey);
+  const isHomePage = Boolean(document.getElementById("artBookSpread"));
   const existingCookieBanner = document.querySelector(".cookie-consent");
-  if (!existingCookieBanner) {
-    const path = window.location.pathname.replace(/\\/g, "/");
-    const isLegalPage = path.includes("/legal/");
-    const isSubPage = /\/(works|about|collections|commissions|contact)\//.test(path);
-    const cookiesPolicyHref = isLegalPage ? "cookies.html" : (isSubPage ? "../legal/cookies.html" : "legal/cookies.html");
+  if (!existingCookieBanner && isHomePage && !savedConsent) {
+    const cookiesPolicyHref = "legal/cookies.html";
     const banner = document.createElement("div");
     banner.className = "cookie-consent";
     banner.innerHTML = `

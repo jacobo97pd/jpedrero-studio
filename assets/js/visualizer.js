@@ -414,13 +414,54 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
   }
 
-  function exportComposition() {
+  function loadImageFromBlob(blob) {
+    return new Promise((resolve, reject) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(blobUrl);
+        resolve(img);
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(blobUrl);
+        reject(new Error("No se pudo cargar el blob de captura."));
+      };
+      img.src = blobUrl;
+    });
+  }
+
+  async function getModelSnapshotImage() {
+    if (!state.modelEnabled || paintingModel.hidden || typeof paintingModel.toBlob !== "function") {
+      return null;
+    }
+
+    try {
+      if (paintingModel.updateComplete && typeof paintingModel.updateComplete.then === "function") {
+        await paintingModel.updateComplete;
+      }
+
+      // Wait one paint frame to capture exactly what the user sees at click time.
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+
+      const aspect = artworkLayer.offsetWidth > 0 && artworkLayer.offsetHeight > 0
+        ? artworkLayer.offsetWidth / artworkLayer.offsetHeight
+        : undefined;
+      const blob = await paintingModel.toBlob({
+        mimeType: "image/png",
+        idealAspect: aspect
+      });
+
+      if (!blob) return null;
+      return await loadImageFromBlob(blob);
+    } catch (error) {
+      console.warn("[Visualizer] No se pudo capturar el frame actual del modelo 3D.", error);
+      return null;
+    }
+  }
+
+  async function exportComposition() {
     if (!roomImage.complete || roomImage.naturalWidth === 0) {
       window.alert("Sube primero una foto del espacio.");
-      return;
-    }
-    if (!paintingImage.complete || paintingImage.naturalWidth === 0) {
-      window.alert("No se pudo preparar una imagen de referencia del cuadro para descargar.");
       return;
     }
 
@@ -433,13 +474,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = outputCanvas.getContext("2d");
     if (!ctx) return;
 
+    const modelSnapshot = await getModelSnapshotImage();
+    const exportArtworkImage = modelSnapshot || (paintingImage.complete && paintingImage.naturalWidth > 0 ? paintingImage : null);
+    if (!exportArtworkImage) {
+      window.alert("No se pudo capturar el cuadro actual para descargar.");
+      return;
+    }
+
     ctx.drawImage(roomImage, 0, 0, outputCanvas.width, outputCanvas.height);
+
+    const baseWidthPx = artworkLayer.offsetWidth || stageRect.width * (state.size / 100);
+    const fallbackRatio = exportArtworkImage.naturalWidth > 0
+      ? exportArtworkImage.naturalHeight / exportArtworkImage.naturalWidth
+      : 4 / 3;
+    const baseHeightPx = artworkLayer.offsetHeight || baseWidthPx * fallbackRatio;
 
     const centerX = state.x * outputCanvas.width;
     const centerY = state.y * outputCanvas.height;
     const scaleX = outputCanvas.width / stageRect.width;
-    const frameWidth = stageRect.width * (state.size / 100) * scaleX;
-    const frameHeight = frameWidth * (paintingImage.naturalHeight / paintingImage.naturalWidth);
+    const scaleY = outputCanvas.height / stageRect.height;
+    const frameWidth = baseWidthPx * scaleX;
+    const frameHeight = baseHeightPx * scaleY;
 
     ctx.save();
     ctx.translate(centerX, centerY);
@@ -451,7 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.shadowBlur = state.shadow * scaleX * 0.8;
       ctx.shadowOffsetY = state.shadow * scaleX * 0.25;
     }
-    ctx.drawImage(paintingImage, -frameWidth / 2, -frameHeight / 2, frameWidth, frameHeight);
+    ctx.drawImage(exportArtworkImage, -frameWidth / 2, -frameHeight / 2, frameWidth, frameHeight);
     ctx.restore();
 
     outputCanvas.toBlob((blob) => {
