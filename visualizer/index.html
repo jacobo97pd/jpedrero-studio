@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script type="module" src="../assets/js/vendor/model-viewer.min.js"></script>
   <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
 <body>
@@ -67,7 +68,7 @@
         <div class="visualizer-range-row">
           <div class="visualizer-range-head">
             <span>Rotacion</span>
-            <strong id="vizRotationValue">0°</strong>
+            <strong id="vizRotationValue">0deg</strong>
           </div>
           <input type="range" id="vizRotation" min="-30" max="30" value="0" />
         </div>
@@ -75,7 +76,7 @@
         <div class="visualizer-range-row">
           <div class="visualizer-range-head">
             <span>Perspectiva</span>
-            <strong id="vizSkewValue">0°</strong>
+            <strong id="vizSkewValue">0deg</strong>
           </div>
           <input type="range" id="vizSkew" min="-22" max="22" value="0" />
         </div>
@@ -101,8 +102,13 @@
           <button class="btn" id="vizDownloadBtn" type="button">Descargar simulacion</button>
         </div>
 
+        <div class="visualizer-mode" role="group" aria-label="Modo de interaccion">
+          <button class="visualizer-mode-btn is-active" id="vizModeMove" type="button">Mover en pared</button>
+          <button class="visualizer-mode-btn" id="vizModeModel" type="button">Ajustar 3D</button>
+        </div>
+
         <p class="fineprint visualizer-note">
-          Consejo: arrastra el cuadro directamente sobre la imagen para colocarlo donde quieras.
+          Consejo: usa "Mover en pared" para colocar el cuadro y "Ajustar 3D" para rotarlo con el raton o el dedo.
         </p>
       </article>
 
@@ -110,12 +116,27 @@
         <div class="visualizer-stage-wrap">
           <div class="visualizer-stage" id="vizStage">
             <img class="viz-room-image" id="vizRoomImage" alt="Foto del espacio" hidden />
-            <img class="viz-painting" id="vizPaintingImage" alt="Simulacion del cuadro" hidden />
+            <div class="viz-artwork-layer" id="vizArtworkLayer" hidden>
+              <model-viewer
+                class="viz-painting-model"
+                id="vizPaintingModel"
+                camera-controls
+                loading="eager"
+                camera-orbit="210deg 82deg 125%"
+                min-camera-orbit="auto 65deg 80%"
+                max-camera-orbit="auto 95deg 220%"
+                shadow-intensity="0"
+                exposure="1"
+                ar="false"
+                interaction-prompt="none">
+              </model-viewer>
+              <img class="viz-painting-fallback" id="vizPaintingImage" alt="Simulacion del cuadro" hidden />
+            </div>
             <div class="viz-placeholder" id="vizPlaceholder">Sube una foto para empezar la simulacion.</div>
           </div>
         </div>
         <p class="fineprint visualizer-note">
-          Puedes mover, girar y ajustar el tamano antes de descargar el resultado final.
+          Puedes mover, ajustar y previsualizar en 3D antes de descargar el resultado final.
         </p>
       </article>
     </section>
@@ -129,6 +150,6 @@
   </footer>
 
   <script src="../assets/js/main.js?v=20260327-1"></script>
-  <script src="../assets/js/visualizer.js?v=20260327-3"></script>
+  <script src="../assets/js/visualizer.js?v=20260327-5"></script>
 </body>
 </html>
