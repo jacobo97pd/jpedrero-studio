@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     opacity: 100,
     shadow: 20,
     dragging: false,
+    activePointerId: null,
     dragOffsetX: 0,
     dragOffsetY: 0,
     artworkLoadToken: 0,
@@ -494,27 +495,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
   artworkLayer.addEventListener("pointerdown", (event) => {
     if (state.interactionMode !== "move") return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     const point = getStagePoint(event);
     state.dragging = true;
+    state.activePointerId = event.pointerId;
     state.dragOffsetX = point.x - state.x * point.width;
     state.dragOffsetY = point.y - state.y * point.height;
     artworkLayer.classList.add("is-dragging");
-    artworkLayer.setPointerCapture(event.pointerId);
-    event.preventDefault();
+    if (typeof artworkLayer.setPointerCapture === "function") {
+      artworkLayer.setPointerCapture(event.pointerId);
+    }
+    if (event.cancelable) event.preventDefault();
   });
 
   window.addEventListener("pointermove", (event) => {
     if (!state.dragging) return;
+    if (state.activePointerId !== null && event.pointerId !== state.activePointerId) return;
     const point = getStagePoint(event);
     state.x = clamp((point.x - state.dragOffsetX) / point.width, 0.02, 0.98);
     state.y = clamp((point.y - state.dragOffsetY) / point.height, 0.02, 0.98);
     renderArtworkLayer();
+    if (event.cancelable) event.preventDefault();
   });
 
-  window.addEventListener("pointerup", () => {
+  const stopDragging = () => {
     state.dragging = false;
+    state.activePointerId = null;
     artworkLayer.classList.remove("is-dragging");
-  });
+  };
+
+  window.addEventListener("pointerup", stopDragging);
+  window.addEventListener("pointercancel", stopDragging);
+  artworkLayer.addEventListener("lostpointercapture", stopDragging);
 
   roomInput.addEventListener("change", () => {
     const file = roomInput.files && roomInput.files[0];
