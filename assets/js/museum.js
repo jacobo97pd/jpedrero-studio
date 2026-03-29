@@ -646,8 +646,13 @@
     var infoMeta = document.getElementById("museumInfoMeta");
     var infoText = document.getElementById("museumInfoText");
     var infoLink = document.getElementById("museumInfoLink");
+    var joystick = document.getElementById("museumJoystick");
+    var joystickThumb = document.getElementById("museumJoystickThumb");
+    var joystickLabel = document.getElementById("museumJoystickLabel");
 
     if (!viewport || !hud) return;
+
+    var isCoarsePointer = Boolean(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
 
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -683,7 +688,13 @@
     var pickableMeshes = [];
 
     if (hudText) {
-      hudText.textContent = "WASD o flechas para moverte · Arrastra para mirar · Click en una placa para ver la ficha";
+      hudText.textContent = isCoarsePointer
+        ? "Joystick para moverte · Arrastra para mirar · Toca una placa para ver la ficha"
+        : "WASD o flechas para moverte · Arrastra para mirar · Click en una placa para ver la ficha";
+    }
+
+    if (joystickLabel) {
+      joystickLabel.textContent = "Mover";
     }
 
     loadWorks().then(function (works) {
@@ -719,6 +730,13 @@
       moved: false
     };
 
+    var joystickState = {
+      active: false,
+      pointerId: null,
+      x: 0,
+      y: 0
+    };
+
     var raycaster = new THREE.Raycaster();
     var pointer = new THREE.Vector2();
 
@@ -742,6 +760,41 @@
       infoPanel.hidden = true;
     }
 
+    function setJoystickVisual(dx, dy) {
+      if (!joystickThumb) return;
+      joystickThumb.style.transform = "translate3d(" + dx.toFixed(2) + "px, " + dy.toFixed(2) + "px, 0)";
+    }
+
+    function resetJoystick() {
+      joystickState.active = false;
+      joystickState.pointerId = null;
+      joystickState.x = 0;
+      joystickState.y = 0;
+      setJoystickVisual(0, 0);
+      if (joystick) joystick.classList.remove("is-active");
+    }
+
+    function updateJoystickFromPointer(clientX, clientY) {
+      if (!joystick) return;
+      var rect = joystick.getBoundingClientRect();
+      var centerX = rect.left + rect.width / 2;
+      var centerY = rect.top + rect.height / 2;
+      var radius = rect.width * 0.34;
+
+      var dx = clientX - centerX;
+      var dy = clientY - centerY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > radius && dist > 0.0001) {
+        var ratio = radius / dist;
+        dx *= ratio;
+        dy *= ratio;
+      }
+
+      joystickState.x = clampValue(dx / radius, -1, 1);
+      joystickState.y = clampValue(dy / radius, -1, 1);
+      setJoystickVisual(dx, dy);
+    }
+
     function setInteractionActive(active) {
       interaction.active = !!active;
       hud.classList.toggle("is-active", interaction.active);
@@ -754,6 +807,7 @@
         moveState.boost = false;
         interaction.dragLook = false;
         viewport.classList.remove("is-dragging");
+        resetJoystick();
       }
     }
 
@@ -836,6 +890,42 @@
 
     document.addEventListener("keydown", function (event) { onKeyEvent(event, true); });
     document.addEventListener("keyup", function (event) { onKeyEvent(event, false); });
+
+    if (joystick) {
+      joystick.addEventListener("pointerdown", function (event) {
+        if (!interaction.active) return;
+        joystickState.active = true;
+        joystickState.pointerId = event.pointerId;
+        joystick.classList.add("is-active");
+        if (joystick.setPointerCapture) joystick.setPointerCapture(event.pointerId);
+        updateJoystickFromPointer(event.clientX, event.clientY);
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      joystick.addEventListener("pointermove", function (event) {
+        if (!joystickState.active || joystickState.pointerId !== event.pointerId) return;
+        updateJoystickFromPointer(event.clientX, event.clientY);
+        event.preventDefault();
+        event.stopPropagation();
+      });
+
+      var endJoystick = function (event) {
+        if (!joystickState.active) return;
+        if (event && joystickState.pointerId !== null && event.pointerId !== joystickState.pointerId) return;
+        resetJoystick();
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      };
+
+      joystick.addEventListener("pointerup", endJoystick);
+      joystick.addEventListener("pointercancel", endJoystick);
+      joystick.addEventListener("lostpointercapture", function () {
+        resetJoystick();
+      });
+    }
 
     viewport.addEventListener("pointerdown", function (event) {
       pointerState.downX = event.clientX;
@@ -951,21 +1041,21 @@
         velocity.x -= velocity.x * WALK.damping * delta;
         velocity.z -= velocity.z * WALK.damping * delta;
 
+        var analogX = joystickState.x;
+        var analogZ = -joystickState.y;
+
         direction.set(
-          Number(moveState.right) - Number(moveState.left),
+          (Number(moveState.right) - Number(moveState.left)) + analogX,
           0,
-          Number(moveState.forward) - Number(moveState.backward)
+          (Number(moveState.forward) - Number(moveState.backward)) + analogZ
         );
 
         if (direction.lengthSq() > 0) direction.normalize();
 
         var speedFactor = moveState.boost ? 1.65 : 1;
 
-        if (moveState.forward || moveState.backward) {
+        if (direction.lengthSq() > 0) {
           velocity.z -= direction.z * WALK.acceleration * speedFactor * delta;
-        }
-
-        if (moveState.left || moveState.right) {
           velocity.x -= direction.x * WALK.acceleration * speedFactor * delta;
         }
 
