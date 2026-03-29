@@ -1,9 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Encargos | J. Pedrero Studio</title>
+  <title>Museo | J. Pedrero Studio</title>
+  <meta name="description" content="Recorre una sala virtual y visualiza las obras en formato museo." />
   <meta name="theme-color" content="#f6f6f4" />
   <link rel="icon" type="image/svg+xml" href="../assets/img/site/icon-jp.svg?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,34 +27,32 @@
       <nav class="site-nav" id="siteNav" aria-label="Navegacion principal">
         <a href="../works/index.html">Obras</a>
         <a href="../visualizer/index.html">Visualizador</a>
-        <a href="../museum/index.html">Museo</a>
+        <a href="index.html">Museo</a>
         <a href="../collections/index.html">Colecciones</a>
         <a href="../about/index.html">Sobre</a>
-        <a href="index.html">Encargos</a>
+        <a href="../commissions/index.html">Encargos</a>
         <a class="nav-cta" href="../contact/index.html">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <main class="page-main">
-    <section class="container page-hero">
-      <p class="kicker">Comision</p>
-      <h1>Encargos</h1>
-      <p>Desarrollo obra bajo propuesta personalizada, respetando el caracter del espacio y la intencion del cliente.</p>
-    </section>
+  <main class="museum-main">
+    <section class="museum-full museum-layout">
+      <article class="museum-stage-card">
+        <div class="museum-viewport" id="museumViewport" aria-label="Museo 3D"></div>
 
-    <section class="container page-grid">
-      <article class="page-box">
-        <h2>Proceso</h2>
-        <p>1. Brief inicial.</p>
-        <p>2. Propuesta visual.</p>
-        <p>3. Produccion y entrega.</p>
-      </article>
+        <div class="museum-hud is-active" id="museumHud">
+          <p id="museumHudText">WASD o flechas para moverte · Arrastra con raton o dedo para mirar · ESC para salir</p>
+        </div>
 
-      <article class="page-box">
-        <h2>Plazos</h2>
-        <p>Rango habitual de 3 a 8 semanas, segun tecnica y formato.</p>
-        <a class="btn" href="../contact/index.html">Iniciar encargo</a>
+        <aside class="museum-info" id="museumInfo" hidden>
+          <button class="museum-info-close" id="museumInfoClose" aria-label="Cerrar ficha">&times;</button>
+          <p class="museum-info-kicker">Ficha</p>
+          <h3 class="museum-info-title" id="museumInfoTitle">Obra</h3>
+          <p class="museum-info-meta" id="museumInfoMeta"></p>
+          <p class="museum-info-text" id="museumInfoText"></p>
+          <a class="museum-info-link" id="museumInfoLink" href="../works/obra.html" target="_self">Ver ficha completa</a>
+        </aside>
       </article>
     </section>
   </main>
@@ -66,8 +65,8 @@
   </footer>
 
   <script src="../assets/js/main.js?v=20260329-2"></script>
+  <script src="../assets/js/vendor/three.min.js?v=20260329-1"></script>
+  <script src="../assets/js/museum-inline-images.js?v=20260329-1"></script>
+  <script src="../assets/js/museum.js?v=20260329-20"></script>
 </body>
 </html>
-
-
-

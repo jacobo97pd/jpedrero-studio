@@ -1065,6 +1065,153 @@ a { color: inherit; text-decoration: none; }
   margin: 0;
 }
 
+.museum-main {
+  padding-top: 0;
+}
+
+.museum-full {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.museum-layout {
+  display: block;
+}
+
+.museum-stage-card {
+  position: relative;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.museum-viewport {
+  width: 100vw;
+  height: calc(100vh - 84px);
+  min-height: 560px;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 22%, #ece8e1 0%, #dcd6cd 100%);
+}
+
+.museum-viewport.is-interacting {
+  cursor: grab;
+}
+
+.museum-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.museum-viewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.museum-hud {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(17, 17, 17, 0.76);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
+}
+
+.museum-hud p {
+  margin: 0;
+}
+
+.museum-hud.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.museum-info {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  width: min(340px, calc(100vw - 44px));
+  border: 1px solid rgba(210, 202, 190, 0.92);
+  border-radius: 14px;
+  background: rgba(250, 247, 242, 0.96);
+  box-shadow: 0 20px 36px rgba(25, 23, 18, 0.18);
+  padding: 14px 14px 12px;
+  backdrop-filter: blur(6px);
+}
+
+.museum-info[hidden] {
+  display: none !important;
+}
+
+.museum-info-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d6ccbe;
+  border-radius: 999px;
+  background: #fff;
+  color: #312d28;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.museum-info-kicker {
+  margin: 0 0 2px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7d756a;
+}
+
+.museum-info-title {
+  margin: 0 22px 6px 0;
+  font-family: var(--serif);
+  font-size: 36px;
+  line-height: 0.92;
+  font-weight: 500;
+  color: #252321;
+}
+
+.museum-info-meta {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #5f584f;
+}
+
+.museum-info-text {
+  margin: 0 0 10px;
+  color: #5f584f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.museum-info-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #22211f;
+  border-radius: 999px;
+  background: #22211f;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .meta {
   font-size: 12px;
   text-transform: uppercase;
@@ -1366,6 +1513,34 @@ body.cookie-open {
 
   .brand-main { font-size: 36px; }
   .brand-sub { font-size: 10px; }
+
+  .museum-viewport {
+    min-height: 420px;
+    height: calc(100vh - 72px);
+  }
+
+  .museum-hud {
+    left: 14px;
+    right: 14px;
+    top: 12px;
+    border-radius: 12px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .museum-info {
+    top: auto;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    width: auto;
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .museum-info-title {
+    font-size: 30px;
+  }
 
   .nav-toggle { display: block; }
 

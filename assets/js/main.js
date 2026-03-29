@@ -5,7 +5,7 @@
         homeAria: "Inicio",
         openMenu: "Abrir menu",
         navAria: "Navegacion principal",
-        nav: { works: "Obras", visualizer: "Visualizador", collections: "Colecciones", about: "Sobre", commissions: "Encargos", contact: "Contacto" },
+        nav: { works: "Obras", visualizer: "Visualizador", museum: "Museo", collections: "Colecciones", about: "Sobre", commissions: "Encargos", contact: "Contacto" },
         footerHome: "Inicio",
         footerBackTop: "Volver arriba",
         footerTagline: "Obra original · Encargos por propuesta · Envio nacional e internacional",
@@ -32,7 +32,7 @@
         homeAria: "Home",
         openMenu: "Open menu",
         navAria: "Main navigation",
-        nav: { works: "Works", visualizer: "Visualizer", collections: "Collections", about: "About", commissions: "Commissions", contact: "Contact" },
+        nav: { works: "Works", visualizer: "Visualizer", museum: "Museum", collections: "Collections", about: "About", commissions: "Commissions", contact: "Contact" },
         footerHome: "Home",
         footerBackTop: "Back to top",
         footerTagline: "Original artwork · Commissions by proposal · National and international shipping",
@@ -75,6 +75,15 @@
       featuredCards: ["Retrato en carmin", "Barco azul", "Orilla al atardecer", "London Eye", "Caballos", "El Padrino"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
+    museum: {
+      kicker: "Experiencia 3D",
+      title: "Museo virtual",
+      lead: "Recorre una sala 3D con tus cuadros como si fuera una exposicion real.",
+      overlayTitle: "Entrar en modo recorrido",
+      overlayText: "Pulsa para activar el recorrido. Usa teclado y raton para moverte y mirar.",
+      enter: "Entrar al museo",
+      hud: "WASD o flechas para moverte · Arrastra con raton o dedo para mirar · ESC para salir"
+    },
     work: { back: "Volver a obras", kicker: "Ficha", info: "Para disponibilidad y precio, solicita informacion por contacto directo.", cta: "Solicitar informacion" },
     about: { kicker: "Artista", title: "Sobre mi", lead: "Mi practica artistica nace entre ingenieria y expresion visual: una combinacion de estructura, gesto y materia para crear obra contemporanea de atmosfera serena.", t1: "Enfoque", p1: "Trabajo en series limitadas y en encargos seleccionados. Cada pieza se plantea como un dialogo entre composicion, luz y presencia espacial.", t2: "Tecnica", p2: "Pastel, oleo y tecnica mixta sobre soportes de alta calidad, con especial cuidado en acabados y conservacion." },
     collections: { kicker: "Series", title: "Colecciones", lead: "Series en desarrollo con narrativa propia, pensadas para instalarse como conjunto o individualmente.", t1: "Curaduria", p1: "Proximamente disponible dossier de cada serie con concepto, tecnicas, medidas y disponibilidad.", t2: "Acceso anticipado", p2: "Solicita catalogo privado para ver obras antes de publicacion abierta.", cta: "Solicitar catalogo" },
@@ -103,6 +112,15 @@
       featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye", "Horses", "The Godfather"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
+    museum: {
+      kicker: "3D Experience",
+      title: "Virtual museum",
+      lead: "Walk through a 3D gallery with your artworks displayed like a real exhibition.",
+      overlayTitle: "Enter walkthrough mode",
+      overlayText: "Click to activate walkthrough mode. Use keyboard and mouse to move and look.",
+      enter: "Enter museum",
+      hud: "WASD or arrows to move · Drag with mouse or touch to look around · ESC to exit"
+    },
     work: { back: "Back to works", kicker: "Sheet", info: "For availability and pricing, request information through direct contact.", cta: "Request information" },
     about: { kicker: "Artist", title: "About me", lead: "My artistic practice emerges between engineering and visual expression: a combination of structure, gesture and material to create contemporary work with a serene atmosphere.", t1: "Approach", p1: "I work in limited series and selected commissions. Each piece is conceived as a dialogue between composition, light and spatial presence.", t2: "Technique", p2: "Pastel, oil and mixed media on high-quality supports, with special care in finishes and conservation." },
     collections: { kicker: "Series", title: "Collections", lead: "Series in development with their own narrative, designed to be installed as a set or individually.", t1: "Curation", p1: "A dossier for each series with concept, techniques, sizes and availability will be available soon.", t2: "Early access", p2: "Request the private catalog to view works before public release.", cta: "Request catalog" },
@@ -180,6 +198,7 @@
       const href = a.getAttribute("href") || "";
       if (href.includes("works/index.html")) a.textContent = tr("common.nav.works");
       if (href.includes("visualizer/index.html")) a.textContent = tr("common.nav.visualizer");
+      if (href.includes("museum/index.html")) a.textContent = tr("common.nav.museum");
       if (href.includes("collections/index.html")) a.textContent = tr("common.nav.collections");
       if (href.includes("about/index.html")) a.textContent = tr("common.nav.about");
       if (href.includes("commissions/index.html")) a.textContent = tr("common.nav.commissions");
@@ -236,6 +255,18 @@
       setText(".page-hero .kicker", page.kicker);
       setText(".page-hero h1", page.title);
       setText(".page-hero p", page.lead);
+    }
+
+    if (window.location.pathname.includes("/museum/")) {
+      const page = pageTexts.museum;
+      document.title = currentLang === "en" ? "Museum | J. Pedrero Studio" : "Museo | J. Pedrero Studio";
+      setText("#museumKicker", page.kicker);
+      setText("#museumTitle", page.title);
+      setText("#museumLead", page.lead);
+      setText("#museumOverlayTitle", page.overlayTitle);
+      setText("#museumOverlayText", page.overlayText);
+      setText("#museumEnterBtn", page.enter);
+      setText("#museumHudText", page.hud);
     }
 
     if (document.getElementById("workInfo")) {
