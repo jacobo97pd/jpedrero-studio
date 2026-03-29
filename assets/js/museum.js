@@ -31,7 +31,7 @@
       size: "50x70 cm",
       status: "Disponible",
       description: "Retrato expresivo con contraste calido y fondo atmosferico.",
-      image: "assets/img/works/Cuadro1.png"
+      image: "assets/blenders/retrato.jpeg"
     },
     {
       id: "cuadro2",
@@ -41,7 +41,7 @@
       size: "60x60 cm",
       status: "Disponible",
       description: "Escena marina con velero y reflejos azules sobre agua en calma.",
-      image: "assets/img/works/Cuadro3.png"
+      image: "assets/blenders/barco.jpeg"
     },
     {
       id: "cuadro3",
@@ -51,7 +51,7 @@
       size: "70x100 cm",
       status: "Disponible",
       description: "Paisaje de orilla al atardecer con luz suave y atmosfera serena.",
-      image: "assets/img/works/Cuadro2.png"
+      image: "assets/blenders/atardecer.jpeg"
     },
     {
       id: "cuadro4",
@@ -61,7 +61,7 @@
       size: "80x60 cm",
       status: "Disponible",
       description: "Interpretacion urbana nocturna con acentos luminosos.",
-      image: "assets/img/works/Cuadro4.png"
+      image: "assets/blenders/londoeye.jpeg"
     },
     {
       id: "cuadro5",
@@ -71,7 +71,7 @@
       size: "60x80 cm",
       status: "Disponible",
       description: "Composicion figurativa con caballos en movimiento.",
-      image: "assets/img/works/cuadro5.png"
+      image: "assets/blenders/caballo.jpeg"
     },
     {
       id: "cuadro6",
@@ -81,7 +81,7 @@
       size: "50x70 cm",
       status: "Disponible",
       description: "Retrato dramatico de gesto sobrio y paleta contenida.",
-      image: "assets/img/works/cuadro6.png"
+      image: "assets/blenders/cuadro6.png"
     }
   ];
 
@@ -122,13 +122,14 @@
   function resolveArtworkCandidates(work) {
     if (!work) return [];
     var inlineMap = window.MUSEUM_INLINE_IMAGES || {};
-    var inlineImage = window.location.protocol === "file:" ? inlineMap[work.id] : "";
+    var inlineImage = inlineMap[work.id] || "";
+    var blenderImage = fallbackRenderById[work.id] || "";
     return uniquePaths([
       inlineImage,
+      blenderImage,
       work.render,
       work.renderImage,
-      work.image,
-      fallbackRenderById[work.id]
+      work.image
     ]);
   }
 
@@ -408,9 +409,9 @@
     var outerH = artHeight + 2 * (matPadding + frameBorder);
 
     var frameMaterial = new THREE.MeshStandardMaterial({
-      color: 0xb58f60,
-      roughness: 0.42,
-      metalness: 0.26
+      color: 0x1f1f1f,
+      roughness: 0.55,
+      metalness: 0.08
     });
 
     var frame = new THREE.Mesh(new THREE.BoxGeometry(outerW, outerH, frameDepth), frameMaterial);
