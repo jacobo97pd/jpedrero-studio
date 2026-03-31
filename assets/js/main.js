@@ -61,6 +61,12 @@
       kicker: "Experiencia",
       title: "Cuaderno de obra",
       lead: "Apertura automatica al cargar y paso de paginas elegante. Puedes avanzar o retroceder de forma manual.",
+      shelfKicker: "Coleccion",
+      shelfTitle: "Estanteria de obra",
+      shelfLead: "Selecciona una pieza desde esta vista apilada para ver su ficha y acceder rapidamente.",
+      shelfHint: "Pasa el raton sobre cada obra para desplazarla con suavidad hacia la derecha.",
+      shelfDetailKicker: "Obra seleccionada",
+      shelfCta: "Ver ficha de obra",
       featuredTitle: "Obras destacadas",
       featuredLead: "Seis piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
@@ -98,6 +104,12 @@
       kicker: "Experience",
       title: "Studio notebook",
       lead: "Automatic opening on load and elegant page turns. You can move forward or backward manually.",
+      shelfKicker: "Collection",
+      shelfTitle: "Artwork shelf",
+      shelfLead: "Pick a piece from this stacked view to preview details and jump to its artwork sheet.",
+      shelfHint: "Hover each artwork for a subtle right-side motion, then click to select it.",
+      shelfDetailKicker: "Selected artwork",
+      shelfCta: "Open artwork sheet",
       featuredTitle: "Featured works",
       featuredLead: "Six key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
@@ -219,12 +231,18 @@
       a.textContent = currentLang === "en" ? "Cookies" : "Cookies";
     });
 
-    if (document.getElementById("artBookSpread")) {
+    if (document.getElementById("homeShelfPreview")) {
       const page = pageTexts.home;
       document.title = currentLang === "en" ? "J. Pedrero Studio" : "J. Pedrero Studio";
       setText(".book-hero-head .kicker", page.kicker);
       setText(".book-hero-head h1", page.title);
       setText(".book-hero-head .lead", page.lead);
+      setText("#shelfStackKicker", page.shelfKicker);
+      setText("#shelfStackTitle", page.shelfTitle);
+      setText("#shelfStackLead", page.shelfLead);
+      setText("#shelfStackHint", page.shelfHint);
+      setText("#homeShelfDetailKicker", page.shelfDetailKicker);
+      setText("#homeShelfLink", page.shelfCta);
       setText(".section-head h2", page.featuredTitle);
       setText(".section-head p", page.featuredLead);
       setText(".section-foot .link", page.featuredLink);
@@ -571,6 +589,7 @@
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/Cuadro1.png",
+        shelfImage: "assets/blenders/retrato.jpeg",
         model: "assets/blenders/cuadro_retrato_3d.glb?v=1"
       },
       {
@@ -587,6 +606,7 @@
         support: { es: "Papel artistico", en: "Fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/Cuadro3.png",
+        shelfImage: "assets/blenders/barco.jpeg",
         model: "assets/blenders/cuadro_barco_3d.glb?v=1"
       },
       {
@@ -603,6 +623,7 @@
         support: { es: "Papel artistico de algodon", en: "Cotton fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/Cuadro2.png",
+        shelfImage: "assets/blenders/atardecer.jpeg",
         model: "assets/blenders/cuadro_atardecer_3d.glb?v=1"
       },
       {
@@ -619,6 +640,7 @@
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Serie limitada", en: "Limited series" },
         image: "assets/img/works/Cuadro4.png",
+        shelfImage: "assets/blenders/londoeye.jpeg",
         model: "assets/blenders/cuadro_london_eye_3d.glb?v=1"
       },
       {
@@ -635,6 +657,7 @@
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/cuadro5.png",
+        shelfImage: "assets/blenders/caballo.jpeg",
         model: "assets/blenders/cuadro_caballos_3d_front.glb?v=1"
       },
       {
@@ -651,10 +674,113 @@
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/cuadro6.png",
+        shelfImage: "assets/blenders/cuadro6.png",
         model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
         modelTexture: "assets/blenders/cuadro6.png"
       }
     ];
+
+  function initHomeShelf() {
+    const shelf = document.getElementById("homeShelfStack");
+    const detailTitle = document.getElementById("homeShelfTitle");
+    const detailMeta = document.getElementById("homeShelfMeta");
+    const detailDescription = document.getElementById("homeShelfDescription");
+    const detailLink = document.getElementById("homeShelfLink");
+    if (!shelf || !artworks.length) return;
+    const hasDetail = Boolean(detailTitle && detailMeta && detailDescription && detailLink);
+
+    const homeTexts = i18n[currentLang]?.pages?.home || i18n.es.pages.home;
+    const entries = artworks.map((artwork, index) => ({
+      artwork,
+      href: `works/obra.html?id=cuadro${index + 1}`,
+      image: artwork.shelfImage || artwork.image
+    }));
+
+    shelf.innerHTML = "";
+    shelf.style.setProperty("--card-count", String(entries.length));
+    entries.forEach((entry, index) => {
+      const title = localize(entry.artwork.title) || `Obra ${index + 1}`;
+      const tilt = (index % 2 === 0 ? -1 : 1) * (2 + (index % 3));
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "shelf-card";
+      card.dataset.index = String(index);
+      card.style.setProperty("--i", String(index));
+      card.style.setProperty("--z", String(index + 1));
+      card.style.setProperty("--tilt", `${tilt}deg`);
+      card.setAttribute("aria-label", title);
+      card.setAttribute("aria-pressed", "false");
+      card.innerHTML = `<img src="${entry.image}" alt="${title}" loading="${index < 3 ? "eager" : "lazy"}" />`;
+      shelf.appendChild(card);
+    });
+
+    const cards = Array.from(shelf.querySelectorAll(".shelf-card"));
+    if (!cards.length) return;
+    let activeIndex = 0;
+
+    function setActive(index, smooth = false) {
+      activeIndex = Math.max(0, Math.min(index, entries.length - 1));
+      const selected = entries[activeIndex];
+      const selectedArtwork = selected.artwork;
+
+      cards.forEach((card, cardIndex) => {
+        const isActive = cardIndex === activeIndex;
+        card.classList.toggle("is-active", isActive);
+        card.style.setProperty("--z", String(isActive ? entries.length + 10 : cardIndex + 1));
+        card.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      if (hasDetail) {
+        detailTitle.textContent = localize(selectedArtwork.title) || `Obra ${activeIndex + 1}`;
+        detailMeta.textContent = [
+          selectedArtwork.year || "",
+          selectedArtwork.size || "",
+          localize(selectedArtwork.technique) || ""
+        ].filter(Boolean).join(" · ");
+        detailDescription.textContent = localize(selectedArtwork.description) || "";
+        detailLink.href = selected.href;
+        detailLink.textContent = homeTexts.shelfCta || (currentLang === "en" ? "Open artwork sheet" : "Ver ficha de obra");
+      }
+
+      if (smooth && window.matchMedia("(max-width: 720px)").matches) {
+        cards[activeIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
+    }
+
+    cards.forEach((card, index) => {
+      card.addEventListener("mouseenter", () => setActive(index));
+      card.addEventListener("focus", () => setActive(index));
+      card.addEventListener("click", () => {
+        setActive(index, true);
+        window.location.href = entries[index].href;
+      });
+    });
+
+    const collapseShelf = () => shelf.classList.remove("is-expanded");
+    const expandShelf = () => shelf.classList.add("is-expanded");
+    shelf.addEventListener("mouseenter", expandShelf);
+    shelf.addEventListener("focusin", expandShelf);
+    shelf.addEventListener("mouseleave", collapseShelf);
+    shelf.addEventListener("focusout", () => {
+      const active = document.activeElement;
+      if (!active || !shelf.contains(active)) collapseShelf();
+    });
+
+    shelf.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setActive(Math.min(activeIndex + 1, cards.length - 1), true);
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setActive(Math.max(activeIndex - 1, 0), true);
+      }
+    });
+
+    setActive(0);
+  }
+
+  initHomeShelf();
 
   if (
     artBookSpread && artPageLeft && artPageRight && artLeftContent && artRightContent &&
@@ -892,7 +1018,7 @@
   // Consentimiento de cookies
   const consentKey = "jps_cookie_consent_v1";
   const savedConsent = localStorage.getItem(consentKey);
-  const isHomePage = Boolean(document.getElementById("artBookSpread"));
+  const isHomePage = Boolean(document.getElementById("homeShelfPreview"));
   const existingCookieBanner = document.querySelector(".cookie-consent");
   if (!existingCookieBanner && isHomePage && !savedConsent) {
     const cookiesPolicyHref = "legal/cookies.html";
@@ -941,6 +1067,7 @@
   let lightboxError = null;
   let lightboxMode = "image";
   let lightboxModelTexture = "";
+  let lightboxModelLoadTimer = null;
 
   function normalizeAssetPath(path = "") {
     if (!path) return "";
@@ -1005,6 +1132,10 @@
     if (lightboxModel) {
       lightboxModel.addEventListener("load", async () => {
         if (lightboxMode !== "model") return;
+        if (lightboxModelLoadTimer) {
+          window.clearTimeout(lightboxModelLoadTimer);
+          lightboxModelLoadTimer = null;
+        }
         if (lightboxModelTexture) {
           await applyModelTextureToViewer(lightboxModel, lightboxModelTexture);
         }
@@ -1013,6 +1144,20 @@
       });
       lightboxModel.addEventListener("error", () => {
         if (lightboxMode !== "model") return;
+        if (lightboxModelLoadTimer) {
+          window.clearTimeout(lightboxModelLoadTimer);
+          lightboxModelLoadTimer = null;
+        }
+        const poster = lightboxModel.getAttribute("poster") || "";
+        if (poster) {
+          setLightboxMode("image");
+          if (lightboxImg) {
+            lightboxImg.src = poster;
+            lightboxImg.alt = lightboxModel.getAttribute("alt") || "Imagen ampliada";
+          }
+          if (lightboxError) lightboxError.hidden = true;
+          return;
+        }
         lightboxModel.hidden = true;
         if (lightboxError) lightboxError.hidden = false;
       });
@@ -1086,6 +1231,21 @@
     } else {
       lightboxModel.removeAttribute("poster");
     }
+    if (lightboxModelLoadTimer) {
+      window.clearTimeout(lightboxModelLoadTimer);
+      lightboxModelLoadTimer = null;
+    }
+    lightboxModelLoadTimer = window.setTimeout(() => {
+      if (lightboxMode !== "model") return;
+      const poster = lightboxModel.getAttribute("poster") || posterSrc || "";
+      if (!poster) return;
+      setLightboxMode("image");
+      if (lightboxImg) {
+        lightboxImg.src = poster;
+        lightboxImg.alt = alt || "Imagen ampliada";
+      }
+      if (lightboxError) lightboxError.hidden = true;
+    }, 5000);
     showLightbox();
   }
 
@@ -1098,6 +1258,10 @@
     if (lightboxModel) {
       lightboxModel.removeAttribute("src");
       lightboxModel.removeAttribute("poster");
+    }
+    if (lightboxModelLoadTimer) {
+      window.clearTimeout(lightboxModelLoadTimer);
+      lightboxModelLoadTimer = null;
     }
     lightboxModelTexture = "";
     if (lightboxError) lightboxError.hidden = true;
@@ -1116,8 +1280,10 @@
     host.classList.add("zoom-host");
     if (!host.querySelector(".zoom-btn")) {
       const button = document.createElement("button");
-      const isBookArtwork = img.classList.contains("art-artwork-image") || Boolean(img.closest(".art-artwork-frame"));
-      const hasModel = Boolean(resolveModelSrcForImage(img, "", isBookArtwork));
+      const isModelArtwork = img.classList.contains("art-artwork-image")
+        || Boolean(img.closest(".art-artwork-frame"))
+        || img.id === "workImage";
+      const hasModel = Boolean(resolveModelSrcForImage(img, "", isModelArtwork));
       button.type = "button";
       button.className = "zoom-btn";
       button.setAttribute("aria-label", hasModel ? "Ver obra en 3D" : "Ampliar imagen");
@@ -1134,8 +1300,10 @@
         event.preventDefault();
         event.stopPropagation();
         const src = img.currentSrc || img.src;
-        const isBookArtwork = img.classList.contains("art-artwork-image") || Boolean(img.closest(".art-artwork-frame"));
-        const modelSrc = resolveModelSrcForImage(img, src, isBookArtwork);
+        const isModelArtwork = img.classList.contains("art-artwork-image")
+          || Boolean(img.closest(".art-artwork-frame"))
+          || img.id === "workImage";
+        const modelSrc = resolveModelSrcForImage(img, src, isModelArtwork);
         if (modelSrc) {
           openModelLightbox({
             modelSrc,

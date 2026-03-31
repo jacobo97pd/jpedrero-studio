@@ -61,7 +61,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260329-2"></script>
+  <script src="../assets/js/main.js?v=20260331-6"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
@@ -205,47 +205,21 @@
       img.alt = localizedTitle;
 
       const modelConfig = modelMap[work.id];
-      if (modelConfig && modelWrap && modelViewer) {
-        const figure = document.getElementById('workImageBox');
-        const applyModelTexture = async (textureSrc) => {
-          if (!textureSrc || typeof modelViewer.createTexture !== 'function' || !modelViewer.model || !Array.isArray(modelViewer.model.materials) || !modelViewer.model.materials.length) return;
-          try {
-            const texture = await modelViewer.createTexture(textureSrc);
-            const material = modelViewer.model.materials[0];
-            if (material && material.pbrMetallicRoughness && material.pbrMetallicRoughness.baseColorTexture) {
-              material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
-            }
-          } catch (error) {
-            console.warn('[Work] No se pudo aplicar textura 3D personalizada.', error);
-          }
-        };
-        const fallbackToImage = () => {
-          modelWrap.hidden = true;
-          img.style.removeProperty('display');
-        };
-        const onModelLoaded = async () => {
-          if (modelConfig.texture) {
-            await applyModelTexture(modelConfig.texture);
-          }
-          modelWrap.hidden = false;
-          img.style.display = 'none';
-        };
-        const enableModelViewer = () => {
-          modelViewer.addEventListener('load', onModelLoaded, { once: true });
-          modelViewer.addEventListener('error', fallbackToImage, { once: true });
-          modelWrap.hidden = false;
-          img.style.display = 'none';
-          modelViewer.setAttribute('src', modelConfig.model);
-          modelViewer.setAttribute('poster', img.src);
-          modelViewer.setAttribute('alt', `${localizedTitle} 3D`);
-          if (figure) {
-            figure.classList.remove('zoom-host');
-            const zoomBtn = figure.querySelector('.zoom-btn');
-            if (zoomBtn) zoomBtn.remove();
-          }
-        };
-        enableModelViewer();
+      if (modelConfig && img) {
+        // Mantiene la imagen visible en la ficha y deja el 3D para la lupa.
+        img.dataset.modelSrc = modelConfig.model;
+        if (modelConfig.texture) img.dataset.modelTexture = modelConfig.texture;
+        img.dataset.modelCameraOrbit = '210deg 82deg 125%';
+        img.dataset.modelMinCameraOrbit = 'auto 65deg 80%';
+        img.dataset.modelMaxCameraOrbit = 'auto 95deg 220%';
       }
+
+      if (modelWrap) modelWrap.hidden = true;
+      if (modelViewer) {
+        modelViewer.removeAttribute('src');
+        modelViewer.removeAttribute('poster');
+      }
+      img.style.removeProperty('display');
     })();
   </script>
 </body>
