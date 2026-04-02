@@ -630,6 +630,275 @@
     return chain.then(function () { return placedCount; });
   }
 
+  function createSignTexture(title, subtitle, helper) {
+    var canvas = document.createElement("canvas");
+    canvas.width = 1024;
+    canvas.height = 512;
+    var ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#f1eadf";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "rgba(103,88,64,0.6)";
+    ctx.lineWidth = 8;
+    ctx.strokeRect(8, 8, canvas.width - 16, canvas.height - 16);
+
+    ctx.fillStyle = "#26211a";
+    ctx.font = "600 84px 'Cormorant Garamond', serif";
+    ctx.textBaseline = "top";
+    ctx.fillText(String(title || "Sala principal"), 74, 56);
+
+    ctx.fillStyle = "#5f5648";
+    ctx.font = "500 40px 'Manrope', sans-serif";
+    ctx.fillText(String(subtitle || "J. Pedrero Studio"), 78, 198);
+
+    ctx.fillStyle = "#7c705f";
+    ctx.font = "500 30px 'Manrope', sans-serif";
+    ctx.fillText(String(helper || "Recorre la sala y toca una placa para ver ficha"), 78, 306);
+
+    var texture = new THREE.CanvasTexture(canvas);
+    texture.encoding = THREE.sRGBEncoding;
+    texture.needsUpdate = true;
+    return texture;
+  }
+
+  function createDecorMaterials() {
+    return {
+      woodDark: new THREE.MeshStandardMaterial({ color: 0x5b4633, roughness: 0.78, metalness: 0.08 }),
+      woodLight: new THREE.MeshStandardMaterial({ color: 0x8f7156, roughness: 0.82, metalness: 0.04 }),
+      stone: new THREE.MeshStandardMaterial({ color: 0xd6d2cb, roughness: 0.9, metalness: 0.02 }),
+      stoneTop: new THREE.MeshStandardMaterial({ color: 0xe8e4db, roughness: 0.87, metalness: 0.03 }),
+      metal: new THREE.MeshStandardMaterial({ color: 0x2f2f31, roughness: 0.36, metalness: 0.7 }),
+      rope: new THREE.MeshStandardMaterial({ color: 0x8b2d2f, roughness: 0.72, metalness: 0.03 }),
+      brass: new THREE.MeshStandardMaterial({ color: 0x9a8962, roughness: 0.42, metalness: 0.82 }),
+      glass: new THREE.MeshStandardMaterial({
+        color: 0xe6edf3,
+        roughness: 0.2,
+        metalness: 0.04,
+        transparent: true,
+        opacity: 0.26
+      }),
+      plantLeaf: new THREE.MeshStandardMaterial({ color: 0x3d5f38, roughness: 0.8, metalness: 0.04 }),
+      plantLeafAlt: new THREE.MeshStandardMaterial({ color: 0x4a7344, roughness: 0.78, metalness: 0.03 }),
+      pot: new THREE.MeshStandardMaterial({ color: 0x6a5f53, roughness: 0.88, metalness: 0.02 }),
+      soil: new THREE.MeshStandardMaterial({ color: 0x3f3429, roughness: 0.97, metalness: 0.01 })
+    };
+  }
+
+  function createBench(materials) {
+    var group = new THREE.Group();
+
+    var seat = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.12, 0.72), materials.woodLight);
+    seat.position.y = 0.52;
+    group.add(seat);
+
+    var leftLeg = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.46, 0.62), materials.woodDark);
+    leftLeg.position.set(-0.9, 0.23, 0);
+    group.add(leftLeg);
+
+    var rightLeg = leftLeg.clone();
+    rightLeg.position.x = 0.9;
+    group.add(rightLeg);
+
+    var beam = new THREE.Mesh(new THREE.BoxGeometry(1.72, 0.08, 0.18), materials.woodDark);
+    beam.position.set(0, 0.18, 0);
+    group.add(beam);
+
+    return group;
+  }
+
+  function createPedestalDisplay(materials, variant) {
+    var group = new THREE.Group();
+
+    var base = new THREE.Mesh(new THREE.BoxGeometry(0.82, 0.9, 0.82), materials.stone);
+    base.position.y = 0.45;
+    group.add(base);
+
+    var cap = new THREE.Mesh(new THREE.BoxGeometry(0.86, 0.08, 0.86), materials.stoneTop);
+    cap.position.y = 0.94;
+    group.add(cap);
+
+    var sculpture;
+    if (variant % 3 === 0) {
+      sculpture = new THREE.Mesh(new THREE.IcosahedronGeometry(0.24, 0), materials.metal);
+    } else if (variant % 3 === 1) {
+      sculpture = new THREE.Mesh(new THREE.DodecahedronGeometry(0.22, 0), materials.brass);
+    } else {
+      sculpture = new THREE.Mesh(new THREE.TorusKnotGeometry(0.14, 0.05, 64, 10), materials.metal);
+      sculpture.rotation.x = Math.PI / 2;
+    }
+
+    sculpture.position.y = 1.2;
+    group.add(sculpture);
+    return group;
+  }
+
+  function createVitrine(materials, variant) {
+    var group = new THREE.Group();
+
+    var base = new THREE.Mesh(new THREE.BoxGeometry(1.06, 0.84, 1.06), materials.stone);
+    base.position.y = 0.42;
+    group.add(base);
+
+    var rim = new THREE.Mesh(new THREE.BoxGeometry(1.08, 0.06, 1.08), materials.metal);
+    rim.position.y = 0.87;
+    group.add(rim);
+
+    var glassCase = new THREE.Mesh(new THREE.BoxGeometry(0.88, 0.82, 0.88), materials.glass);
+    glassCase.position.y = 1.3;
+    group.add(glassCase);
+
+    var objectMesh;
+    if (variant % 2 === 0) {
+      objectMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.19, 0.36, 16), materials.brass);
+    } else {
+      objectMesh = new THREE.Mesh(new THREE.SphereGeometry(0.2, 18, 14), materials.metal);
+    }
+    objectMesh.position.y = 1.04;
+    group.add(objectMesh);
+
+    return group;
+  }
+
+  function createPlant(materials) {
+    var group = new THREE.Group();
+
+    var pot = new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.31, 0.42, 18), materials.pot);
+    pot.position.y = 0.21;
+    group.add(pot);
+
+    var soil = new THREE.Mesh(new THREE.CylinderGeometry(0.23, 0.23, 0.03, 16), materials.soil);
+    soil.position.y = 0.42;
+    group.add(soil);
+
+    var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.06, 1.1, 12), materials.pot);
+    trunk.position.y = 0.95;
+    group.add(trunk);
+
+    var leafGeometry = new THREE.ConeGeometry(0.23, 0.54, 10);
+    for (var i = 0; i < 7; i += 1) {
+      var leafMaterial = i % 2 === 0 ? materials.plantLeaf : materials.plantLeafAlt;
+      var leaf = new THREE.Mesh(leafGeometry, leafMaterial);
+      var angle = (Math.PI * 2 * i) / 7;
+      leaf.position.set(Math.cos(angle) * 0.22, 0.9 + (i % 3) * 0.24, Math.sin(angle) * 0.22);
+      leaf.rotation.x = Math.PI / 2;
+      leaf.rotation.z = angle;
+      group.add(leaf);
+    }
+
+    return group;
+  }
+
+  function createSignTotem(materials) {
+    var group = new THREE.Group();
+
+    var post = new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.5, 0.14), materials.woodDark);
+    post.position.y = 0.75;
+    group.add(post);
+
+    var boardBody = new THREE.Mesh(new THREE.BoxGeometry(1.28, 0.78, 0.08), materials.woodLight);
+    boardBody.position.set(0, 1.58, 0);
+    group.add(boardBody);
+
+    var boardTexture = createSignTexture("Sala principal", "J. Pedrero Studio", "Recorre la sala y toca una placa para ver ficha");
+    var boardFace = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.18, 0.68),
+      new THREE.MeshBasicMaterial({ map: boardTexture })
+    );
+    boardFace.position.set(0, 1.58, 0.042);
+    group.add(boardFace);
+
+    return group;
+  }
+
+  function addStanchionLine(parent, materials, startX, endX, z, count) {
+    var safeCount = Math.max(2, count | 0);
+    var step = (endX - startX) / (safeCount - 1);
+    var instance = new THREE.InstancedMesh(
+      new THREE.CylinderGeometry(0.044, 0.052, 0.92, 12),
+      materials.metal,
+      safeCount
+    );
+
+    var marker = new THREE.Object3D();
+    for (var i = 0; i < safeCount; i += 1) {
+      marker.position.set(startX + step * i, 0.46, z);
+      marker.updateMatrix();
+      instance.setMatrixAt(i, marker.matrix);
+    }
+    instance.instanceMatrix.needsUpdate = true;
+    parent.add(instance);
+
+    for (var s = 0; s < safeCount - 1; s += 1) {
+      var ropeLength = Math.max(0.4, Math.abs(step) - 0.12);
+      var rope = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, ropeLength, 12), materials.rope);
+      rope.position.set(startX + step * s + step / 2, 0.78, z);
+      rope.rotation.z = Math.PI / 2;
+      parent.add(rope);
+    }
+  }
+
+  function addMuseumDecor(scene) {
+    var decor = new THREE.Group();
+    decor.name = "museumDecor";
+    scene.add(decor);
+
+    var materials = createDecorMaterials();
+
+    var benchSpots = [
+      { x: 0, z: -2.8, ry: 0 },
+      { x: 0, z: 4.4, ry: 0 }
+    ];
+    for (var b = 0; b < benchSpots.length; b += 1) {
+      var bench = createBench(materials);
+      bench.position.set(benchSpots[b].x, 0, benchSpots[b].z);
+      bench.rotation.y = benchSpots[b].ry;
+      decor.add(bench);
+    }
+
+    var pedestalSpots = [
+      { x: -5.8, z: -6.2, ry: Math.PI * 0.14 },
+      { x: 5.8, z: -6.2, ry: -Math.PI * 0.14 },
+      { x: -5.8, z: 2.2, ry: Math.PI * 0.08 },
+      { x: 5.8, z: 2.2, ry: -Math.PI * 0.08 }
+    ];
+    for (var p = 0; p < pedestalSpots.length; p += 1) {
+      var pedestal = createPedestalDisplay(materials, p);
+      pedestal.position.set(pedestalSpots[p].x, 0, pedestalSpots[p].z);
+      pedestal.rotation.y = pedestalSpots[p].ry;
+      decor.add(pedestal);
+    }
+
+    var vitrineSpots = [
+      { x: -7.1, z: 8.0, ry: Math.PI / 2 },
+      { x: 7.1, z: 8.0, ry: -Math.PI / 2 }
+    ];
+    for (var v = 0; v < vitrineSpots.length; v += 1) {
+      var vitrine = createVitrine(materials, v);
+      vitrine.position.set(vitrineSpots[v].x, 0, vitrineSpots[v].z);
+      vitrine.rotation.y = vitrineSpots[v].ry;
+      decor.add(vitrine);
+    }
+
+    addStanchionLine(decor, materials, -4.9, 4.9, -9.4, 7);
+
+    var plantSpots = [
+      { x: -8.0, z: 10.6, ry: Math.PI * 0.1 },
+      { x: 8.0, z: 10.6, ry: -Math.PI * 0.1 }
+    ];
+    for (var pl = 0; pl < plantSpots.length; pl += 1) {
+      var plant = createPlant(materials);
+      plant.position.set(plantSpots[pl].x, 0, plantSpots[pl].z);
+      plant.rotation.y = plantSpots[pl].ry;
+      decor.add(plant);
+    }
+
+    var sign = createSignTotem(materials);
+    sign.position.set(-2.6, 0, 10.2);
+    sign.rotation.y = Math.PI;
+    decor.add(sign);
+  }
+
   function applyCameraLook(camera, yaw, pitch) {
     camera.rotation.order = "YXZ";
     camera.rotation.y = yaw;
@@ -685,6 +954,7 @@
     scene.add(wallRake);
 
     createRoom(scene, renderer);
+    addMuseumDecor(scene);
 
     var pickableMeshes = [];
 

@@ -462,7 +462,7 @@ a { color: inherit; text-decoration: none; }
 .shelf-stack {
   position: relative;
   width: 100vw;
-  margin-left: calc(50% - 50vw);
+  margin-left: calc(52% - 50vw);
   height: clamp(450px, 52vw, 680px);
   overflow: visible;
   --card-count: 6;
