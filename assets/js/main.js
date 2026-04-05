@@ -68,7 +68,7 @@
       shelfDetailKicker: "Obra seleccionada",
       shelfCta: "Ver ficha de obra",
       featuredTitle: "Obras destacadas",
-      featuredLead: "Seis piezas clave, presentadas con una composicion limpia y contemporanea.",
+      featuredLead: "Cuatro piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
       aboutTitle: "Sobre el artista",
       aboutLead: "Mi trabajo investiga la tension entre estructura y emocion. Cada pieza se construye con una mirada contemporanea para dialogar con la luz, el espacio y el tiempo.",
@@ -78,7 +78,7 @@
       catalogTitle: "Catalogo privado",
       catalogLead: "Acceso a obras disponibles, medidas y condiciones de entrega.",
       catalogCta: "Solicitar ahora",
-      featuredCards: ["Retrato en carmin", "Barco azul", "Orilla al atardecer", "London Eye", "Caballos", "El Padrino"]
+      featuredCards: ["Barco azul", "Orilla al atardecer", "Caballos", "El Padrino"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
     museum: {
@@ -111,7 +111,7 @@
       shelfDetailKicker: "Selected artwork",
       shelfCta: "Open artwork sheet",
       featuredTitle: "Featured works",
-      featuredLead: "Six key pieces presented with a clean, contemporary composition.",
+      featuredLead: "Four key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
       aboutTitle: "About the artist",
       aboutLead: "My work explores the tension between structure and emotion. Each piece is built with a contemporary gaze to dialogue with light, space and time.",
@@ -121,7 +121,7 @@
       catalogTitle: "Private catalog",
       catalogLead: "Access to available works, dimensions and delivery conditions.",
       catalogCta: "Request now",
-      featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye", "Horses", "The Godfather"]
+      featuredCards: ["Blue Ship", "Shore at Dusk", "Horses", "The Godfather"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
     museum: {
@@ -679,6 +679,13 @@
         modelTexture: "assets/blenders/cuadro6.png"
       }
     ];
+    const hiddenArtworkIds = new Set(["cuadro1", "cuadro4"]);
+    const catalogArtworks = artworks
+      .map((artwork, index) => ({
+        ...artwork,
+        id: artwork.id || `cuadro${index + 1}`
+      }))
+      .filter((artwork) => !hiddenArtworkIds.has(artwork.id));
 
   function initHomeShelf() {
     const shelf = document.getElementById("homeShelfStack");
@@ -686,15 +693,16 @@
     const detailMeta = document.getElementById("homeShelfMeta");
     const detailDescription = document.getElementById("homeShelfDescription");
     const detailLink = document.getElementById("homeShelfLink");
-    if (!shelf || !artworks.length) return;
+    if (!shelf || !catalogArtworks.length) return;
     const hasDetail = Boolean(detailTitle && detailMeta && detailDescription && detailLink);
 
     const homeTexts = i18n[currentLang]?.pages?.home || i18n.es.pages.home;
-    const entries = artworks.map((artwork, index) => ({
+    const entries = catalogArtworks.map((artwork) => ({
       artwork,
-      href: `works/obra.html?id=cuadro${index + 1}`,
+      href: `works/obra.html?id=${encodeURIComponent(artwork.id || "")}`,
       image: artwork.shelfImage || artwork.image
     }));
+    if (!entries.length) return;
 
     shelf.innerHTML = "";
     shelf.style.setProperty("--card-count", String(entries.length));
@@ -785,18 +793,18 @@
   if (
     artBookSpread && artPageLeft && artPageRight && artLeftContent && artRightContent &&
     artPageFlipLayer && artFlipSheet && artFlipFront && artFlipBack &&
-    prevArtworkBtn && nextArtworkBtn && artBookPagination && artworks.length
+    prevArtworkBtn && nextArtworkBtn && artBookPagination && catalogArtworks.length
   ) {
-    const fallbackImage = artworks[0].image;
+    const fallbackImage = catalogArtworks[0].image;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const desktopFlipEnabled = () => window.matchMedia("(min-width: 721px)").matches;
 
-    let currentIndex = artworks.length - 1;
+    let currentIndex = catalogArtworks.length - 1;
     let animationInProgress = false;
     let flipSafetyTimer = null;
 
     function preloadArtworkImages() {
-      artworks.forEach((artwork) => {
+      catalogArtworks.forEach((artwork) => {
         if (!artwork.image) {
           console.warn("[ArtBook] missing image for artwork=", localize(artwork.title));
           return;
@@ -807,7 +815,7 @@
     }
 
     function getArtwork(index) {
-      return artworks[index] || null;
+      return catalogArtworks[index] || null;
     }
 
     function buildLeftPageHTML(artwork) {
@@ -898,11 +906,11 @@
     }
 
     function updateControls() {
-      prevArtworkBtn.disabled = animationInProgress || currentIndex >= artworks.length - 1;
+      prevArtworkBtn.disabled = animationInProgress || currentIndex >= catalogArtworks.length - 1;
       nextArtworkBtn.disabled = animationInProgress || currentIndex <= 0;
       prevArtworkBtn.textContent = tr("common.bookPrev");
       nextArtworkBtn.textContent = tr("common.bookNext");
-      artBookPagination.textContent = `${currentIndex + 1} / ${artworks.length}`;
+      artBookPagination.textContent = `${currentIndex + 1} / ${catalogArtworks.length}`;
     }
 
     function renderCurrentSpread(index) {
@@ -999,7 +1007,7 @@
     }
 
     function goToPrevArtwork() {
-      if (animationInProgress || currentIndex >= artworks.length - 1) return;
+      if (animationInProgress || currentIndex >= catalogArtworks.length - 1) return;
       animateToIndex(currentIndex + 1, "next");
     }
 

@@ -21,18 +21,12 @@
   };
 
   var defaultDescription = "Obra original enmarcada de J. Pedrero Studio.";
+  var hiddenWorkIds = {
+    cuadro1: true,
+    cuadro4: true
+  };
 
   var fallbackWorks = [
-    {
-      id: "cuadro1",
-      title: "Retrato en carmin",
-      year: 2025,
-      technique: "Pastel",
-      size: "50x70 cm",
-      status: "Disponible",
-      description: "Retrato expresivo con contraste calido y fondo atmosferico.",
-      image: "assets/blenders/retrato.jpeg"
-    },
     {
       id: "cuadro2",
       title: "Barco azul",
@@ -52,16 +46,6 @@
       status: "Disponible",
       description: "Paisaje de orilla al atardecer con luz suave y atmosfera serena.",
       image: "assets/blenders/atardecer.jpeg"
-    },
-    {
-      id: "cuadro4",
-      title: "London Eye",
-      year: 2026,
-      technique: "Tecnica mixta",
-      size: "80x60 cm",
-      status: "Disponible",
-      description: "Interpretacion urbana nocturna con acentos luminosos.",
-      image: "assets/blenders/londoeye.jpeg"
     },
     {
       id: "cuadro5",
@@ -86,13 +70,18 @@
   ];
 
   var fallbackRenderById = {
-    cuadro1: "assets/blenders/retrato.jpeg",
     cuadro2: "assets/blenders/barco.jpeg",
     cuadro3: "assets/blenders/atardecer.jpeg",
-    cuadro4: "assets/blenders/londoeye.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
     cuadro6: "assets/blenders/cuadro6.png"
   };
+
+  function filterVisibleWorks(works) {
+    if (!Array.isArray(works)) return [];
+    return works.filter(function (work) {
+      return !hiddenWorkIds[work && work.id];
+    });
+  }
 
   function normalizePath(path) {
     if (!path) return "";
@@ -152,7 +141,7 @@
 
   function loadWorks() {
     if (window.location.protocol === "file:") {
-      return Promise.resolve(fallbackWorks);
+      return Promise.resolve(filterVisibleWorks(fallbackWorks));
     }
 
     return fetch("../data/works.json", { cache: "no-store" })
@@ -161,12 +150,12 @@
         return response.json();
       })
       .then(function (data) {
-        if (Array.isArray(data) && data.length) return data;
-        return fallbackWorks;
+        if (Array.isArray(data) && data.length) return filterVisibleWorks(data);
+        return filterVisibleWorks(fallbackWorks);
       })
       .catch(function (error) {
         console.warn("[Museum] No se pudo cargar works.json, uso fallback local.", error);
-        return fallbackWorks;
+        return filterVisibleWorks(fallbackWorks);
       });
   }
 

@@ -26,7 +26,7 @@
   <main class="page-main">
     <section class="container page-grid">
       <figure class="hero-art" id="workImageBox">
-        <img id="workImage" src="../assets/img/works/Cuadro1.png" alt="Obra" />
+        <img id="workImage" src="../assets/img/works/Cuadro3.png" alt="Obra" />
         <div class="work-model-wrap" id="workModelWrap" hidden>
           <model-viewer
             id="workModel"
@@ -61,21 +61,11 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260331-6"></script>
+  <script src="../assets/js/main.js?v=20260405-1"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
       const fallbackWorks = [
-        {
-          id: 'cuadro1',
-          title: 'Retrato en carmin',
-          year: 2025,
-          technique: 'Pastel',
-          size: '50x70 cm',
-          status: 'Disponible',
-          image: 'assets/img/works/Cuadro1.png',
-          featured: true
-        },
         {
           id: 'cuadro2',
           title: 'Barco azul',
@@ -94,16 +84,6 @@
           size: '70x100 cm',
           status: 'Disponible',
           image: 'assets/img/works/Cuadro2.png',
-          featured: true
-        },
-        {
-          id: 'cuadro4',
-          title: 'London Eye',
-          year: 2026,
-          technique: 'Tecnica mixta',
-          size: '80x60 cm',
-          status: 'Disponible',
-          image: 'assets/img/works/Cuadro4.png',
           featured: true
         },
         {
@@ -127,26 +107,19 @@
           featured: true
         }
       ];
+      const hiddenWorkIds = new Set(['cuadro1', 'cuadro4']);
       const titleMap = {
-        cuadro1: { es: 'Retrato en carmin', en: 'Crimson Portrait' },
         cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
-        cuadro4: { es: 'London Eye', en: 'London Eye' },
         cuadro5: { es: 'Caballos', en: 'Horses' },
         cuadro6: { es: 'El Padrino', en: 'The Godfather' }
       };
       const modelMap = {
-        cuadro1: {
-          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1'
-        },
         cuadro2: {
           model: '../assets/blenders/cuadro_barco_3d.glb?v=1'
         },
         cuadro3: {
           model: '../assets/blenders/cuadro_atardecer_3d.glb?v=1'
-        },
-        cuadro4: {
-          model: '../assets/blenders/cuadro_london_eye_3d.glb?v=1'
         },
         cuadro5: {
           model: '../assets/blenders/cuadro_caballos_3d_front.glb?v=1'
@@ -186,7 +159,7 @@
 
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
-      const works = await loadWorks();
+      const works = (await loadWorks()).filter((w) => !hiddenWorkIds.has(w.id));
       const work = works.find(w => w.id === id) || works[0];
       if (!work) return;
 
