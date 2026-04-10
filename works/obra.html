@@ -48,6 +48,7 @@
         <h2 id="workTitle">Obra</h2>
         <p id="workMeta">Tecnica &middot; Medidas &middot; Estado</p>
         <p class="meta" id="workYear">2026</p>
+        <div class="work-description" id="workDescription"></div>
         <p>Para disponibilidad y precio, solicita informacion por contacto directo.</p>
         <a class="btn" href="../contact/index.html">Solicitar informacion</a>
       </article>
@@ -105,6 +106,18 @@
           status: 'Disponible',
           image: 'assets/img/works/cuadro6.png',
           featured: true
+        },
+        {
+          id: 'cuadro7',
+          title: 'Luz Interna',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: 'Consultar',
+          status: 'Disponible',
+          image: 'assets/img/works/luz_interna.png',
+          renderImage: 'assets/blenders/luz_interna.png',
+          description: 'Figura femenina en movimiento capturada a traves de un lenguaje expresionista y visceral. La obra explora el cuerpo no como forma estatica, sino como vehiculo de energia, donde la luz representada en amarillos y verdes vibrantes irrumpe sobre una base mas contenida, generando contraste y tension visual.\n\nLa pincelada es directa, casi impulsiva, dejando visibles las decisiones del artista y reforzando la sensacion de inmediatez. Las zonas sin resolver conviven con otras mas definidas, creando un equilibrio entre lo figurativo y lo abstracto.\n\nEl fondo neutro actua como contenedor, permitiendo que la figura respire y se proyecte hacia el espectador, mientras la composicion sugiere un instante suspendido entre calma y movimiento.\n\nUna pieza que no busca perfeccion academica, sino transmitir presencia, emocion y caracter.',
+          featured: true
         }
       ];
       const hiddenWorkIds = new Set(['cuadro1', 'cuadro4']);
@@ -112,7 +125,8 @@
         cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
         cuadro5: { es: 'Caballos', en: 'Horses' },
-        cuadro6: { es: 'El Padrino', en: 'The Godfather' }
+        cuadro6: { es: 'El Padrino', en: 'The Godfather' },
+        cuadro7: { es: 'Luz Interna', en: 'Inner Light' }
       };
       const modelMap = {
         cuadro2: {
@@ -170,6 +184,17 @@
       document.getElementById('workTitle').textContent = localizedTitle;
       document.getElementById('workMeta').textContent = `${localizedTechnique} - ${work.size} - ${localizedStatus}`;
       document.getElementById('workYear').textContent = String(work.year);
+      const descriptionWrap = document.getElementById('workDescription');
+      if (descriptionWrap) {
+        const descriptionParts = String(work.description || '')
+          .split(/\n{2,}/)
+          .map((part) => part.trim())
+          .filter(Boolean);
+
+        descriptionWrap.innerHTML = descriptionParts
+          .map((part) => `<p>${part}</p>`)
+          .join('');
+      }
 
       const img = document.getElementById('workImage');
       const modelWrap = document.getElementById('workModelWrap');

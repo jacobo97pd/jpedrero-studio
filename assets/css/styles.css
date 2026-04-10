@@ -938,6 +938,11 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted);
 }
 
+.work-description p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
 .contact-form {
   display: grid;
   gap: 14px;

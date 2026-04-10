@@ -68,7 +68,7 @@
       shelfDetailKicker: "Obra seleccionada",
       shelfCta: "Ver ficha de obra",
       featuredTitle: "Obras destacadas",
-      featuredLead: "Cuatro piezas clave, presentadas con una composicion limpia y contemporanea.",
+      featuredLead: "Cinco piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
       aboutTitle: "Sobre el artista",
       aboutLead: "Mi trabajo investiga la tension entre estructura y emocion. Cada pieza se construye con una mirada contemporanea para dialogar con la luz, el espacio y el tiempo.",
@@ -78,7 +78,7 @@
       catalogTitle: "Catalogo privado",
       catalogLead: "Acceso a obras disponibles, medidas y condiciones de entrega.",
       catalogCta: "Solicitar ahora",
-      featuredCards: ["Barco azul", "Orilla al atardecer", "Caballos", "El Padrino"]
+      featuredCards: ["Barco azul", "Orilla al atardecer", "Caballos", "El Padrino", "Luz Interna"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
     museum: {
@@ -111,7 +111,7 @@
       shelfDetailKicker: "Selected artwork",
       shelfCta: "Open artwork sheet",
       featuredTitle: "Featured works",
-      featuredLead: "Four key pieces presented with a clean, contemporary composition.",
+      featuredLead: "Five key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
       aboutTitle: "About the artist",
       aboutLead: "My work explores the tension between structure and emotion. Each piece is built with a contemporary gaze to dialogue with light, space and time.",
@@ -121,7 +121,7 @@
       catalogTitle: "Private catalog",
       catalogLead: "Access to available works, dimensions and delivery conditions.",
       catalogCta: "Request now",
-      featuredCards: ["Blue Ship", "Shore at Dusk", "Horses", "The Godfather"]
+      featuredCards: ["Blue Ship", "Shore at Dusk", "Horses", "The Godfather", "Inner Light"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
     museum: {
@@ -677,6 +677,23 @@
         shelfImage: "assets/blenders/cuadro6.png",
         model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
         modelTexture: "assets/blenders/cuadro6.png"
+      },
+      {
+        id: "cuadro7",
+        title: { es: "Luz Interna", en: "Inner Light" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Figura femenina en movimiento capturada a traves de un lenguaje expresionista y visceral. La obra explora el cuerpo no como forma estatica, sino como vehiculo de energia, donde la luz representada en amarillos y verdes vibrantes irrumpe sobre una base mas contenida, generando contraste y tension visual.\n\nLa pincelada es directa, casi impulsiva, dejando visibles las decisiones del artista y reforzando la sensacion de inmediatez. Las zonas sin resolver conviven con otras mas definidas, creando un equilibrio entre lo figurativo y lo abstracto.\n\nEl fondo neutro actua como contenedor, permitiendo que la figura respire y se proyecte hacia el espectador, mientras la composicion sugiere un instante suspendido entre calma y movimiento.\n\nUna pieza que no busca perfeccion academica, sino transmitir presencia, emocion y caracter.",
+          en: "A female figure in motion captured through an expressionist, visceral language. The work treats the body not as a static form but as a vehicle of energy, where light in vibrant yellows and greens breaks over a more contained base to generate contrast and visual tension.\n\nThe brushwork is direct, almost impulsive, leaving the artist's decisions visible and reinforcing a sense of immediacy. Unresolved areas coexist with more defined passages, creating a balance between figurative and abstract.\n\nThe neutral background acts as a container, allowing the figure to breathe and project toward the viewer, while the composition suggests a suspended instant between calm and movement.\n\nA piece that does not pursue academic perfection, but presence, emotion and character."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "Consultar",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/luz_interna.png",
+        shelfImage: "assets/blenders/luz_interna.png"
       }
     ];
     const hiddenArtworkIds = new Set(["cuadro1", "cuadro4"]);

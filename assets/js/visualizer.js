@@ -37,14 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadro2: { es: "Barco azul", en: "Blue Ship" },
     cuadro3: { es: "Orilla al atardecer", en: "Shore at Dusk" },
     cuadro5: { es: "Caballos", en: "Horses" },
-    cuadro6: { es: "El Padrino", en: "The Godfather" }
+    cuadro6: { es: "El Padrino", en: "The Godfather" },
+    cuadro7: { es: "Luz Interna", en: "Inner Light" }
   };
 
   const fallbackWorks = [
     { id: "cuadro2", title: "Barco azul", image: "assets/img/works/Cuadro3.png" },
     { id: "cuadro3", title: "Orilla al atardecer", image: "assets/img/works/Cuadro2.png" },
     { id: "cuadro5", title: "Caballos", image: "assets/img/works/cuadro5.png" },
-    { id: "cuadro6", title: "El Padrino", image: "assets/img/works/cuadro6.png" }
+    { id: "cuadro6", title: "El Padrino", image: "assets/img/works/cuadro6.png" },
+    { id: "cuadro7", title: "Luz Interna", image: "assets/img/works/luz_interna.png", renderImage: "assets/blenders/luz_interna.png" }
   ];
 
   // Preferred rendered still images for fallback/export.
@@ -52,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadro2: "assets/blenders/barco.jpeg",
     cuadro3: "assets/blenders/atardecer.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
-    cuadro6: "assets/blenders/cuadro6.png"
+    cuadro6: "assets/blenders/cuadro6.png",
+    cuadro7: "assets/blenders/luz_interna.png"
   };
 
   // Preferred 3D models for the simulator.

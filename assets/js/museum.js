@@ -66,6 +66,16 @@
       status: "Disponible",
       description: "Retrato dramatico de gesto sobrio y paleta contenida.",
       image: "assets/blenders/cuadro6.png"
+    },
+    {
+      id: "cuadro7",
+      title: "Luz Interna",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "Consultar",
+      status: "Disponible",
+      description: "Figura femenina en movimiento capturada a traves de un lenguaje expresionista y visceral. La obra explora el cuerpo no como forma estatica, sino como vehiculo de energia, donde la luz representada en amarillos y verdes vibrantes irrumpe sobre una base mas contenida, generando contraste y tension visual. La pincelada es directa, casi impulsiva, dejando visibles las decisiones del artista y reforzando la sensacion de inmediatez. Las zonas sin resolver conviven con otras mas definidas, creando un equilibrio entre lo figurativo y lo abstracto. El fondo neutro actua como contenedor, permitiendo que la figura respire y se proyecte hacia el espectador, mientras la composicion sugiere un instante suspendido entre calma y movimiento. Una pieza que no busca perfeccion academica, sino transmitir presencia, emocion y caracter.",
+      image: "assets/blenders/luz_interna.png"
     }
   ];
 
@@ -73,7 +83,8 @@
     cuadro2: "assets/blenders/barco.jpeg",
     cuadro3: "assets/blenders/atardecer.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
-    cuadro6: "assets/blenders/cuadro6.png"
+    cuadro6: "assets/blenders/cuadro6.png",
+    cuadro7: "assets/blenders/luz_interna.png"
   };
 
   function filterVisibleWorks(works) {
