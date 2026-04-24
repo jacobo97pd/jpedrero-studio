@@ -76,6 +76,36 @@
       status: "Disponible",
       description: "Figura femenina en movimiento capturada a traves de un lenguaje expresionista y visceral. La obra explora el cuerpo no como forma estatica, sino como vehiculo de energia, donde la luz representada en amarillos y verdes vibrantes irrumpe sobre una base mas contenida, generando contraste y tension visual. La pincelada es directa, casi impulsiva, dejando visibles las decisiones del artista y reforzando la sensacion de inmediatez. Las zonas sin resolver conviven con otras mas definidas, creando un equilibrio entre lo figurativo y lo abstracto. El fondo neutro actua como contenedor, permitiendo que la figura respire y se proyecte hacia el espectador, mientras la composicion sugiere un instante suspendido entre calma y movimiento. Una pieza que no busca perfeccion academica, sino transmitir presencia, emocion y caracter.",
       image: "assets/blenders/luz_interna.png"
+    },
+    {
+      id: "cuadro8",
+      title: "Rayo Verde",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "Consultar",
+      status: "Disponible",
+      description: "Composicion materica dominada por azules profundos y veladuras frias, atravesada por una pequena embarcacion que emerge como punto de tension narrativa. La obra explora la escala entre inmensidad y fragilidad, situando al espectador frente a una escena donde el vacio tambien actua como lenguaje. La superficie presenta una pincelada espesa y decidida, con relieves visibles que capturan la luz de forma irregular y aportan fisicidad al color. Las transiciones tonales entre turquesas, cobaltos y blancos quebrados sugieren agua en movimiento y una atmosfera inestable. El foco central, de trazo mas sintetico, condensa la energia del cuadro y equilibra el campo abstracto que lo rodea. Una pieza de fuerte pulso gestual que combina presencia plastica y lectura simbolica.",
+      image: "assets/blenders/rayo_verde_blender.png"
+    },
+    {
+      id: "cuadro9",
+      title: "Honda CRX",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "Consultar",
+      status: "Disponible",
+      description: "Obra de lenguaje minimalista construida sobre un gran campo cian de materia espesa, donde un pequeno Honda CRX aparece aislado como unico anclaje figurativo. El contraste entre escala monumental del fondo y escala diminuta del motivo central activa una lectura de silencio, distancia y memoria. La textura, aplicada en capas horizontales y bordes cargados, deja visible el gesto y la huella del proceso. Esta materialidad convierte el color en protagonista y desplaza la narrativa hacia una experiencia casi contemplativa. Lejos de una representacion literal, la pieza funciona como sintesis: objeto, espacio y tiempo quedan comprimidos en una imagen de aparente simplicidad, pero de alta carga emocional y conceptual.",
+      image: "assets/blenders/honda_crx_blender.png"
+    },
+    {
+      id: "cuadro10",
+      title: "Travesia Ignea",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "Consultar",
+      status: "Disponible",
+      description: "Pieza de alto contraste cromatico donde una embarcacion oscura atraviesa un entorno de luz incendiada. Amarillos, naranjas y azules se enfrentan en capas superpuestas para construir una escena de tension entre calma aparente y energia latente. La figura del barco, tratada con volumen sobrio y contorno firme, funciona como eje estructural dentro de un fondo vibrante y atmosferico. Los reflejos sobre el agua amplifican el movimiento visual y extienden la intensidad luminica hacia la base de la composicion. La obra propone una narrativa abierta de desplazamiento y resistencia, apoyada en una pincelada expresiva que privilegia emocion, ritmo y presencia pictorica.",
+      image: "assets/blenders/travesia_ignea_blender.png"
     }
   ];
 
@@ -84,7 +114,10 @@
     cuadro3: "assets/blenders/atardecer.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
     cuadro6: "assets/blenders/cuadro6.png",
-    cuadro7: "assets/blenders/luz_interna.png"
+    cuadro7: "assets/blenders/luz_interna.png",
+    cuadro8: "assets/blenders/rayo_verde_blender.png",
+    cuadro9: "assets/blenders/honda_crx_blender.png",
+    cuadro10: "assets/blenders/travesia_ignea_blender.png"
   };
 
   function filterVisibleWorks(works) {

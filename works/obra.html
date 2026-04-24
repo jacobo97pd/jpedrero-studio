@@ -62,7 +62,7 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260405-1"></script>
+  <script src="../assets/js/main.js?v=20260424-2"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
@@ -118,6 +118,42 @@
           renderImage: 'assets/blenders/luz_interna.png',
           description: 'Figura femenina en movimiento capturada a traves de un lenguaje expresionista y visceral. La obra explora el cuerpo no como forma estatica, sino como vehiculo de energia, donde la luz representada en amarillos y verdes vibrantes irrumpe sobre una base mas contenida, generando contraste y tension visual.\n\nLa pincelada es directa, casi impulsiva, dejando visibles las decisiones del artista y reforzando la sensacion de inmediatez. Las zonas sin resolver conviven con otras mas definidas, creando un equilibrio entre lo figurativo y lo abstracto.\n\nEl fondo neutro actua como contenedor, permitiendo que la figura respire y se proyecte hacia el espectador, mientras la composicion sugiere un instante suspendido entre calma y movimiento.\n\nUna pieza que no busca perfeccion academica, sino transmitir presencia, emocion y caracter.',
           featured: true
+        },
+        {
+          id: 'cuadro8',
+          title: 'Rayo Verde',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: 'Consultar',
+          status: 'Disponible',
+          image: 'assets/img/works/rayo_verde.jpeg',
+          renderImage: 'assets/blenders/rayo_verde_blender.png',
+          description: 'Composicion materica dominada por azules profundos y veladuras frias, atravesada por una pequena embarcacion que emerge como punto de tension narrativa. La obra explora la escala entre inmensidad y fragilidad, situando al espectador frente a una escena donde el vacio tambien actua como lenguaje.\n\nLa superficie presenta una pincelada espesa y decidida, con relieves visibles que capturan la luz de forma irregular y aportan fisicidad al color. Las transiciones tonales entre turquesas, cobaltos y blancos quebrados sugieren agua en movimiento y una atmosfera inestable.\n\nEl foco central, de trazo mas sintetico, condensa la energia del cuadro y equilibra el campo abstracto que lo rodea. Una pieza de fuerte pulso gestual que combina presencia plastica y lectura simbolica.',
+          featured: true
+        },
+        {
+          id: 'cuadro9',
+          title: 'Honda CRX',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: 'Consultar',
+          status: 'Disponible',
+          image: 'assets/img/works/honda_crx.jpeg',
+          renderImage: 'assets/blenders/honda_crx_blender.png',
+          description: 'Obra de lenguaje minimalista construida sobre un gran campo cian de materia espesa, donde un pequeno Honda CRX aparece aislado como unico anclaje figurativo. El contraste entre escala monumental del fondo y escala diminuta del motivo central activa una lectura de silencio, distancia y memoria.\n\nLa textura, aplicada en capas horizontales y bordes cargados, deja visible el gesto y la huella del proceso. Esta materialidad convierte el color en protagonista y desplaza la narrativa hacia una experiencia casi contemplativa.\n\nLejos de una representacion literal, la pieza funciona como sintesis: objeto, espacio y tiempo quedan comprimidos en una imagen de aparente simplicidad, pero de alta carga emocional y conceptual.',
+          featured: true
+        },
+        {
+          id: 'cuadro10',
+          title: 'Travesia Ignea',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: 'Consultar',
+          status: 'Disponible',
+          image: 'assets/img/works/travesia_ignea.jpeg',
+          renderImage: 'assets/blenders/travesia_ignea_blender.png',
+          description: 'Pieza de alto contraste cromatico donde una embarcacion oscura atraviesa un entorno de luz incendiada. Amarillos, naranjas y azules se enfrentan en capas superpuestas para construir una escena de tension entre calma aparente y energia latente.\n\nLa figura del barco, tratada con volumen sobrio y contorno firme, funciona como eje estructural dentro de un fondo vibrante y atmosferico. Los reflejos sobre el agua amplifican el movimiento visual y extienden la intensidad luminica hacia la base de la composicion.\n\nLa obra propone una narrativa abierta de desplazamiento y resistencia, apoyada en una pincelada expresiva que privilegia emocion, ritmo y presencia pictorica.',
+          featured: true
         }
       ];
       const hiddenWorkIds = new Set(['cuadro1', 'cuadro4']);
@@ -126,7 +162,10 @@
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
         cuadro5: { es: 'Caballos', en: 'Horses' },
         cuadro6: { es: 'El Padrino', en: 'The Godfather' },
-        cuadro7: { es: 'Luz Interna', en: 'Inner Light' }
+        cuadro7: { es: 'Luz Interna', en: 'Inner Light' },
+        cuadro8: { es: 'Rayo Verde', en: 'Green Ray' },
+        cuadro9: { es: 'Honda CRX', en: 'Honda CRX' },
+        cuadro10: { es: 'Travesia Ignea', en: 'Igneous Crossing' }
       };
       const modelMap = {
         cuadro2: {
@@ -141,6 +180,18 @@
         cuadro6: {
           model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
           texture: '../assets/blenders/cuadro6.png'
+        },
+        cuadro8: {
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
+          texture: '../assets/blenders/rayo_verde_blender.png'
+        },
+        cuadro9: {
+          model: '../assets/blenders/cuadro_london_eye_3d.glb?v=1',
+          texture: '../assets/blenders/honda_crx_blender.png'
+        },
+        cuadro10: {
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
+          texture: '../assets/blenders/travesia_ignea_blender.png'
         }
       };
       const techniqueMap = {

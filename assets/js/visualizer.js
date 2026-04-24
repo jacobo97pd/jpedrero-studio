@@ -38,7 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadro3: { es: "Orilla al atardecer", en: "Shore at Dusk" },
     cuadro5: { es: "Caballos", en: "Horses" },
     cuadro6: { es: "El Padrino", en: "The Godfather" },
-    cuadro7: { es: "Luz Interna", en: "Inner Light" }
+    cuadro7: { es: "Luz Interna", en: "Inner Light" },
+    cuadro8: { es: "Rayo Verde", en: "Green Ray" },
+    cuadro9: { es: "Honda CRX", en: "Honda CRX" },
+    cuadro10: { es: "Travesia Ignea", en: "Igneous Crossing" }
   };
 
   const fallbackWorks = [
@@ -46,7 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "cuadro3", title: "Orilla al atardecer", image: "assets/img/works/Cuadro2.png" },
     { id: "cuadro5", title: "Caballos", image: "assets/img/works/cuadro5.png" },
     { id: "cuadro6", title: "El Padrino", image: "assets/img/works/cuadro6.png" },
-    { id: "cuadro7", title: "Luz Interna", image: "assets/img/works/luz_interna.png", renderImage: "assets/blenders/luz_interna.png" }
+    { id: "cuadro7", title: "Luz Interna", image: "assets/img/works/luz_interna.png", renderImage: "assets/blenders/luz_interna.png" },
+    { id: "cuadro8", title: "Rayo Verde", image: "assets/img/works/rayo_verde.jpeg", renderImage: "assets/blenders/rayo_verde_blender.png" },
+    { id: "cuadro9", title: "Honda CRX", image: "assets/img/works/honda_crx.jpeg", renderImage: "assets/blenders/honda_crx_blender.png" },
+    { id: "cuadro10", title: "Travesia Ignea", image: "assets/img/works/travesia_ignea.jpeg", renderImage: "assets/blenders/travesia_ignea_blender.png" }
   ];
 
   // Preferred rendered still images for fallback/export.
@@ -55,7 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadro3: "assets/blenders/atardecer.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
     cuadro6: "assets/blenders/cuadro6.png",
-    cuadro7: "assets/blenders/luz_interna.png"
+    cuadro7: "assets/blenders/luz_interna.png",
+    cuadro8: "assets/blenders/rayo_verde_blender.png",
+    cuadro9: "assets/blenders/honda_crx_blender.png",
+    cuadro10: "assets/blenders/travesia_ignea_blender.png"
   };
 
   // Preferred 3D models for the simulator.
@@ -67,6 +76,21 @@ document.addEventListener("DOMContentLoaded", () => {
       model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
       poster: "assets/blenders/cuadro6.png",
       texture: "assets/blenders/cuadro6.png"
+    },
+    cuadro8: {
+      model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+      poster: "assets/blenders/rayo_verde_blender.png",
+      texture: "assets/blenders/rayo_verde_blender.png"
+    },
+    cuadro9: {
+      model: "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+      poster: "assets/blenders/honda_crx_blender.png",
+      texture: "assets/blenders/honda_crx_blender.png"
+    },
+    cuadro10: {
+      model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+      poster: "assets/blenders/travesia_ignea_blender.png",
+      texture: "assets/blenders/travesia_ignea_blender.png"
     }
   };
 

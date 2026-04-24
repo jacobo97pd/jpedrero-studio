@@ -68,7 +68,7 @@
       shelfDetailKicker: "Obra seleccionada",
       shelfCta: "Ver ficha de obra",
       featuredTitle: "Obras destacadas",
-      featuredLead: "Cinco piezas clave, presentadas con una composicion limpia y contemporanea.",
+      featuredLead: "Ocho piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
       aboutTitle: "Sobre el artista",
       aboutLead: "Mi trabajo investiga la tension entre estructura y emocion. Cada pieza se construye con una mirada contemporanea para dialogar con la luz, el espacio y el tiempo.",
@@ -78,7 +78,7 @@
       catalogTitle: "Catalogo privado",
       catalogLead: "Acceso a obras disponibles, medidas y condiciones de entrega.",
       catalogCta: "Solicitar ahora",
-      featuredCards: ["Barco azul", "Orilla al atardecer", "Caballos", "El Padrino", "Luz Interna"]
+      featuredCards: ["Barco azul", "Orilla al atardecer", "Caballos", "El Padrino", "Luz Interna", "Rayo Verde", "Honda CRX", "Travesia Ignea"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
     museum: {
@@ -111,7 +111,7 @@
       shelfDetailKicker: "Selected artwork",
       shelfCta: "Open artwork sheet",
       featuredTitle: "Featured works",
-      featuredLead: "Five key pieces presented with a clean, contemporary composition.",
+      featuredLead: "Eight key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
       aboutTitle: "About the artist",
       aboutLead: "My work explores the tension between structure and emotion. Each piece is built with a contemporary gaze to dialogue with light, space and time.",
@@ -121,7 +121,7 @@
       catalogTitle: "Private catalog",
       catalogLead: "Access to available works, dimensions and delivery conditions.",
       catalogCta: "Request now",
-      featuredCards: ["Blue Ship", "Shore at Dusk", "Horses", "The Godfather", "Inner Light"]
+      featuredCards: ["Blue Ship", "Shore at Dusk", "Horses", "The Godfather", "Inner Light", "Green Ray", "Honda CRX", "Igneous Crossing"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
     museum: {
@@ -694,6 +694,63 @@
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/luz_interna.png",
         shelfImage: "assets/blenders/luz_interna.png"
+      },
+      {
+        id: "cuadro8",
+        title: { es: "Rayo Verde", en: "Green Ray" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Composicion materica dominada por azules profundos y veladuras frias, atravesada por una pequena embarcacion que emerge como punto de tension narrativa. La obra explora la escala entre inmensidad y fragilidad, situando al espectador frente a una escena donde el vacio tambien actua como lenguaje.\n\nLa superficie presenta una pincelada espesa y decidida, con relieves visibles que capturan la luz de forma irregular y aportan fisicidad al color. Las transiciones tonales entre turquesas, cobaltos y blancos quebrados sugieren agua en movimiento y una atmosfera inestable.\n\nEl foco central, de trazo mas sintetico, condensa la energia del cuadro y equilibra el campo abstracto que lo rodea. Una pieza de fuerte pulso gestual que combina presencia plastica y lectura simbolica.",
+          en: "Material-driven composition dominated by deep blues and cool glazes, crossed by a small boat that appears as a point of narrative tension. The work explores scale between vastness and fragility, placing the viewer before a scene where emptiness also becomes language.\n\nThe surface uses thick, decisive brushwork with visible relief that catches light irregularly and gives the color a strong physical presence. Tonal transitions between turquoise, cobalt and broken whites suggest moving water and an unstable atmosphere.\n\nThe central focal point, treated with more synthetic drawing, condenses the painting's energy and balances the surrounding abstract field. A work of strong gestural pulse that combines plastic presence and symbolic reading."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "Consultar",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/rayo_verde.jpeg",
+        shelfImage: "assets/blenders/rayo_verde_blender.png",
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/rayo_verde_blender.png"
+      },
+      {
+        id: "cuadro9",
+        title: { es: "Honda CRX", en: "Honda CRX" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Obra de lenguaje minimalista construida sobre un gran campo cian de materia espesa, donde un pequeno Honda CRX aparece aislado como unico anclaje figurativo. El contraste entre escala monumental del fondo y escala diminuta del motivo central activa una lectura de silencio, distancia y memoria.\n\nLa textura, aplicada en capas horizontales y bordes cargados, deja visible el gesto y la huella del proceso. Esta materialidad convierte el color en protagonista y desplaza la narrativa hacia una experiencia casi contemplativa.\n\nLejos de una representacion literal, la pieza funciona como sintesis: objeto, espacio y tiempo quedan comprimidos en una imagen de aparente simplicidad, pero de alta carga emocional y conceptual.",
+          en: "A minimalist-language work built over a large cyan field of thick material, where a small Honda CRX appears isolated as the only figurative anchor. The contrast between the monumental scale of the background and the tiny central motif creates a reading of silence, distance and memory.\n\nTexture, applied in horizontal layers with loaded edges, keeps gesture and process marks visible. This materiality turns color into the main protagonist and shifts the narrative toward an almost contemplative experience.\n\nFar from literal representation, the piece works as synthesis: object, space and time are compressed into an image of apparent simplicity but high emotional and conceptual charge."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "Consultar",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/honda_crx.jpeg",
+        shelfImage: "assets/blenders/honda_crx_blender.png",
+        model: "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+        modelTexture: "assets/blenders/honda_crx_blender.png"
+      },
+      {
+        id: "cuadro10",
+        title: { es: "Travesia Ignea", en: "Igneous Crossing" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Pieza de alto contraste cromatico donde una embarcacion oscura atraviesa un entorno de luz incendiada. Amarillos, naranjas y azules se enfrentan en capas superpuestas para construir una escena de tension entre calma aparente y energia latente.\n\nLa figura del barco, tratada con volumen sobrio y contorno firme, funciona como eje estructural dentro de un fondo vibrante y atmosferico. Los reflejos sobre el agua amplifican el movimiento visual y extienden la intensidad luminica hacia la base de la composicion.\n\nLa obra propone una narrativa abierta de desplazamiento y resistencia, apoyada en una pincelada expresiva que privilegia emocion, ritmo y presencia pictorica.",
+          en: "A high-contrast chromatic piece where a dark boat crosses an environment of burning light. Yellows, oranges and blues confront each other in layered passages to build a scene of tension between apparent calm and latent energy.\n\nThe boat figure, treated with sober volume and firm contour, works as the structural axis inside a vibrant atmospheric field. Reflections on the water amplify visual movement and extend luminous intensity toward the lower area of the composition.\n\nThe work proposes an open narrative of displacement and resistance, supported by expressive brushwork that prioritizes emotion, rhythm and pictorial presence."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "Consultar",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/travesia_ignea.jpeg",
+        shelfImage: "assets/blenders/travesia_ignea_blender.png",
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/travesia_ignea_blender.png"
       }
     ];
     const hiddenArtworkIds = new Set(["cuadro1", "cuadro4"]);
