@@ -21,12 +21,19 @@
   };
 
   var defaultDescription = "Obra original enmarcada de J. Pedrero Studio.";
-  var hiddenWorkIds = {
-    cuadro1: true,
-    cuadro4: true
-  };
+  var hiddenWorkIds = {};
 
   var fallbackWorks = [
+    {
+      id: "cuadro1",
+      title: "Retrato Carmesi",
+      year: 2025,
+      technique: "Tecnica mixta",
+      size: "50x70 cm",
+      status: "Disponible",
+      description: "Retrato contemporaneo de atmosfera calida y gestualidad suelta.",
+      image: "assets/blenders/retrato.jpeg"
+    },
     {
       id: "cuadro2",
       title: "Barco azul",
@@ -46,6 +53,16 @@
       status: "Disponible",
       description: "Paisaje de orilla al atardecer con luz suave y atmosfera serena.",
       image: "assets/blenders/atardecer.jpeg"
+    },
+    {
+      id: "cuadro4",
+      title: "London Eye",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "80x60 cm",
+      status: "Serie limitada",
+      description: "Paisaje urbano nocturno con fuerte presencia cromatica y reflejos estructurados.",
+      image: "assets/blenders/londoeye.jpeg"
     },
     {
       id: "cuadro5",
@@ -110,8 +127,10 @@
   ];
 
   var fallbackRenderById = {
+    cuadro1: "assets/blenders/retrato.jpeg",
     cuadro2: "assets/blenders/barco.jpeg",
     cuadro3: "assets/blenders/atardecer.jpeg",
+    cuadro4: "assets/blenders/londoeye.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
     cuadro6: "assets/blenders/cuadro6.png",
     cuadro7: "assets/blenders/luz_interna.png",

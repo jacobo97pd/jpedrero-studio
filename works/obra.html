@@ -62,11 +62,23 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260424-2"></script>
+  <script src="../assets/js/main.js?v=20260426-3"></script>
   <script>
     (async function () {
       const lang = localStorage.getItem('jps_lang') === 'en' ? 'en' : 'es';
       const fallbackWorks = [
+        {
+          id: 'cuadro1',
+          title: 'Retrato Carmesi',
+          year: 2025,
+          technique: 'Tecnica mixta',
+          size: '50x70 cm',
+          status: 'Disponible',
+          image: 'assets/img/works/Cuadro1.png',
+          renderImage: 'assets/blenders/retrato.jpeg',
+          description: 'Retrato contemporaneo de atmosfera calida y gestualidad suelta. La composicion trabaja veladuras y contrastes suaves para dirigir la mirada al gesto y a la expresion, con una construccion cromatica en capas que aporta profundidad y presencia en interior.',
+          featured: true
+        },
         {
           id: 'cuadro2',
           title: 'Barco azul',
@@ -85,6 +97,18 @@
           size: '70x100 cm',
           status: 'Disponible',
           image: 'assets/img/works/Cuadro2.png',
+          featured: true
+        },
+        {
+          id: 'cuadro4',
+          title: 'London Eye',
+          year: 2026,
+          technique: 'Tecnica mixta',
+          size: '80x60 cm',
+          status: 'Serie limitada',
+          image: 'assets/img/works/Cuadro4.png',
+          renderImage: 'assets/blenders/londoeye.jpeg',
+          description: 'Paisaje urbano nocturno con fuerte presencia cromatica. La rueda y sus reflejos estructuran la tension visual de la pieza, mientras la figura en primer plano introduce narrativa y escala humana. La superficie combina capas opacas y transparencias para reforzar el ambiente de noche.',
           featured: true
         },
         {
@@ -156,10 +180,11 @@
           featured: true
         }
       ];
-      const hiddenWorkIds = new Set(['cuadro1', 'cuadro4']);
       const titleMap = {
+        cuadro1: { es: 'Retrato Carmesi', en: 'Crimson Portrait' },
         cuadro2: { es: 'Barco azul', en: 'Blue Ship' },
         cuadro3: { es: 'Orilla al atardecer', en: 'Shore at Dusk' },
+        cuadro4: { es: 'London Eye', en: 'London Eye' },
         cuadro5: { es: 'Caballos', en: 'Horses' },
         cuadro6: { es: 'El Padrino', en: 'The Godfather' },
         cuadro7: { es: 'Luz Interna', en: 'Inner Light' },
@@ -168,18 +193,33 @@
         cuadro10: { es: 'Travesia Ignea', en: 'Igneous Crossing' }
       };
       const modelMap = {
+        cuadro1: {
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
+          texture: '../assets/blenders/retrato.jpeg'
+        },
         cuadro2: {
-          model: '../assets/blenders/cuadro_barco_3d.glb?v=1'
+          model: '../assets/blenders/cuadro_barco_3d.glb?v=1',
+          texture: '../assets/blenders/barco.jpeg'
         },
         cuadro3: {
-          model: '../assets/blenders/cuadro_atardecer_3d.glb?v=1'
+          model: '../assets/blenders/cuadro_atardecer_3d.glb?v=1',
+          texture: '../assets/blenders/atardecer.jpeg'
+        },
+        cuadro4: {
+          model: '../assets/blenders/cuadro_london_eye_3d.glb?v=1',
+          texture: '../assets/blenders/londoeye.jpeg'
         },
         cuadro5: {
-          model: '../assets/blenders/cuadro_caballos_3d_front.glb?v=1'
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
+          texture: '../assets/blenders/caballo.jpeg'
         },
         cuadro6: {
           model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
           texture: '../assets/blenders/cuadro6.png'
+        },
+        cuadro7: {
+          model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
+          texture: '../assets/blenders/luz_interna.png'
         },
         cuadro8: {
           model: '../assets/blenders/cuadro_retrato_3d.glb?v=1',
@@ -205,6 +245,14 @@
         return (map[key] && map[key][lang]) || key;
       }
 
+      function toWorkPageUrl(path) {
+        const clean = String(path || '').trim().replace(/\\/g, '/');
+        if (!clean) return '';
+        if (/^(blob:|data:|https?:|file:)/i.test(clean)) return clean;
+        if (clean.startsWith('../') || clean.startsWith('./') || clean.startsWith('/')) return clean;
+        return `../${clean}`;
+      }
+
       async function loadWorks() {
         if (window.location.protocol === 'file:') {
           return fallbackWorks;
@@ -224,7 +272,7 @@
 
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
-      const works = (await loadWorks()).filter((w) => !hiddenWorkIds.has(w.id));
+      const works = await loadWorks();
       const work = works.find(w => w.id === id) || works[0];
       if (!work) return;
 
@@ -253,11 +301,13 @@
       img.src = `../${work.image}`;
       img.alt = localizedTitle;
 
-      const modelConfig = modelMap[work.id];
-      if (modelConfig && img) {
+      const modelConfig = modelMap[work.id] || {};
+      const resolvedModel = toWorkPageUrl(work.model || modelConfig.model);
+      const resolvedTexture = toWorkPageUrl(work.modelTexture || modelConfig.texture);
+      if (resolvedModel && img) {
         // Mantiene la imagen visible en la ficha y deja el 3D para la lupa.
-        img.dataset.modelSrc = modelConfig.model;
-        if (modelConfig.texture) img.dataset.modelTexture = modelConfig.texture;
+        img.dataset.modelSrc = resolvedModel;
+        if (resolvedTexture) img.dataset.modelTexture = resolvedTexture;
         img.dataset.modelCameraOrbit = '210deg 82deg 125%';
         img.dataset.modelMinCameraOrbit = 'auto 65deg 80%';
         img.dataset.modelMaxCameraOrbit = 'auto 95deg 220%';

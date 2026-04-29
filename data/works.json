@@ -1,5 +1,19 @@
 [
   {
+    "id": "cuadro1",
+    "title": "Retrato Carmesi",
+    "year": 2025,
+    "technique": "Tecnica mixta",
+    "size": "50x70 cm",
+    "status": "Disponible",
+    "image": "assets/img/works/Cuadro1.png",
+    "renderImage": "assets/blenders/retrato.jpeg",
+    "model": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "modelTexture": "assets/blenders/retrato.jpeg",
+    "description": "Retrato contemporaneo de atmosfera calida y gestualidad suelta. La composicion trabaja veladuras y contrastes suaves para dirigir la mirada al gesto y a la expresion, con una construccion cromatica en capas que aporta profundidad y presencia en interior.",
+    "featured": true
+  },
+  {
     "id": "cuadro2",
     "title": "Barco azul",
     "year": 2024,
@@ -7,6 +21,9 @@
     "size": "60x60 cm",
     "status": "Disponible",
     "image": "assets/img/works/Cuadro3.png",
+    "renderImage": "assets/blenders/barco.jpeg",
+    "model": "assets/blenders/cuadro_barco_3d.glb?v=1",
+    "modelTexture": "assets/blenders/barco.jpeg",
     "featured": true
   },
   {
@@ -17,6 +34,23 @@
     "size": "70x100 cm",
     "status": "Disponible",
     "image": "assets/img/works/Cuadro2.png",
+    "renderImage": "assets/blenders/atardecer.jpeg",
+    "model": "assets/blenders/cuadro_atardecer_3d.glb?v=1",
+    "modelTexture": "assets/blenders/atardecer.jpeg",
+    "featured": true
+  },
+  {
+    "id": "cuadro4",
+    "title": "London Eye",
+    "year": 2026,
+    "technique": "Tecnica mixta",
+    "size": "80x60 cm",
+    "status": "Serie limitada",
+    "image": "assets/img/works/Cuadro4.png",
+    "renderImage": "assets/blenders/londoeye.jpeg",
+    "model": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+    "modelTexture": "assets/blenders/londoeye.jpeg",
+    "description": "Paisaje urbano nocturno con fuerte presencia cromatica. La rueda y sus reflejos estructuran la tension visual de la pieza, mientras la figura en primer plano introduce narrativa y escala humana. La superficie combina capas opacas y transparencias para reforzar el ambiente de noche.",
     "featured": true
   },
   {
@@ -27,6 +61,9 @@
     "size": "60x80 cm",
     "status": "Disponible",
     "image": "assets/img/works/cuadro5.png",
+    "renderImage": "assets/blenders/caballo.jpeg",
+    "model": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "modelTexture": "assets/blenders/caballo.jpeg",
     "featured": true
   },
   {
@@ -37,6 +74,9 @@
     "size": "50x70 cm",
     "status": "Disponible",
     "image": "assets/img/works/cuadro6.png",
+    "renderImage": "assets/blenders/cuadro6.png",
+    "model": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "modelTexture": "assets/blenders/cuadro6.png",
     "featured": true
   },
   {
@@ -48,6 +88,8 @@
     "status": "Disponible",
     "image": "assets/img/works/luz_interna.png",
     "renderImage": "assets/blenders/luz_interna.png",
+    "model": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "modelTexture": "assets/blenders/luz_interna.png",
     "description": "Figura femenina en movimiento capturada a traves de un lenguaje expresionista y visceral. La obra explora el cuerpo no como forma estatica, sino como vehiculo de energia, donde la luz representada en amarillos y verdes vibrantes irrumpe sobre una base mas contenida, generando contraste y tension visual.\n\nLa pincelada es directa, casi impulsiva, dejando visibles las decisiones del artista y reforzando la sensacion de inmediatez. Las zonas sin resolver conviven con otras mas definidas, creando un equilibrio entre lo figurativo y lo abstracto.\n\nEl fondo neutro actua como contenedor, permitiendo que la figura respire y se proyecte hacia el espectador, mientras la composicion sugiere un instante suspendido entre calma y movimiento.\n\nUna pieza que no busca perfeccion academica, sino transmitir presencia, emocion y caracter.",
     "featured": true
   },

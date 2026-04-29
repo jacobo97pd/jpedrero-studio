@@ -32,10 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const currentLang = localStorage.getItem("jps_lang") === "en" ? "en" : "es";
-  const hiddenWorkIds = new Set(["cuadro1", "cuadro4"]);
   const titleMap = {
+    cuadro1: { es: "Retrato Carmesi", en: "Crimson Portrait" },
     cuadro2: { es: "Barco azul", en: "Blue Ship" },
     cuadro3: { es: "Orilla al atardecer", en: "Shore at Dusk" },
+    cuadro4: { es: "London Eye", en: "London Eye" },
     cuadro5: { es: "Caballos", en: "Horses" },
     cuadro6: { es: "El Padrino", en: "The Godfather" },
     cuadro7: { es: "Luz Interna", en: "Inner Light" },
@@ -45,8 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const fallbackWorks = [
+    { id: "cuadro1", title: "Retrato Carmesi", image: "assets/img/works/Cuadro1.png", renderImage: "assets/blenders/retrato.jpeg" },
     { id: "cuadro2", title: "Barco azul", image: "assets/img/works/Cuadro3.png" },
     { id: "cuadro3", title: "Orilla al atardecer", image: "assets/img/works/Cuadro2.png" },
+    { id: "cuadro4", title: "London Eye", image: "assets/img/works/Cuadro4.png", renderImage: "assets/blenders/londoeye.jpeg" },
     { id: "cuadro5", title: "Caballos", image: "assets/img/works/cuadro5.png" },
     { id: "cuadro6", title: "El Padrino", image: "assets/img/works/cuadro6.png" },
     { id: "cuadro7", title: "Luz Interna", image: "assets/img/works/luz_interna.png", renderImage: "assets/blenders/luz_interna.png" },
@@ -57,8 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Preferred rendered still images for fallback/export.
   const renderImageById = {
+    cuadro1: "assets/blenders/retrato.jpeg",
     cuadro2: "assets/blenders/barco.jpeg",
     cuadro3: "assets/blenders/atardecer.jpeg",
+    cuadro4: "assets/blenders/londoeye.jpeg",
     cuadro5: "assets/blenders/caballo.jpeg",
     cuadro6: "assets/blenders/cuadro6.png",
     cuadro7: "assets/blenders/luz_interna.png",
@@ -69,13 +74,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Preferred 3D models for the simulator.
   const modelById = {
+    cuadro1: {
+      model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+      poster: "assets/blenders/retrato.jpeg",
+      texture: "assets/blenders/retrato.jpeg"
+    },
     cuadro2: { model: "assets/blenders/cuadro_barco_3d.glb?v=1", poster: "assets/blenders/barco.jpeg" },
     cuadro3: { model: "assets/blenders/cuadro_atardecer_3d.glb?v=1", poster: "assets/blenders/atardecer.jpeg" },
-    cuadro5: { model: "assets/blenders/cuadro_caballos_3d_front.glb?v=1", poster: "assets/blenders/caballo.jpeg" },
+    cuadro4: {
+      model: "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+      poster: "assets/blenders/londoeye.jpeg",
+      texture: "assets/blenders/londoeye.jpeg"
+    },
+    cuadro5: {
+      model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+      poster: "assets/blenders/caballo.jpeg",
+      texture: "assets/blenders/caballo.jpeg"
+    },
     cuadro6: {
       model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
       poster: "assets/blenders/cuadro6.png",
       texture: "assets/blenders/cuadro6.png"
+    },
+    cuadro7: {
+      model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+      poster: "assets/blenders/luz_interna.png",
+      texture: "assets/blenders/luz_interna.png"
     },
     cuadro8: {
       model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
@@ -413,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadWorks() {
     if (window.location.protocol === "file:") {
-      return fallbackWorks.filter((work) => !hiddenWorkIds.has(work.id));
+      return fallbackWorks;
     }
 
     try {
@@ -421,13 +445,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (Array.isArray(data) && data.length) {
-        return data.filter((work) => !hiddenWorkIds.has(work.id));
+        return data;
       }
     } catch (error) {
       console.warn("[Visualizer] No se pudo cargar works.json, uso fallback local.", error);
     }
 
-    return fallbackWorks.filter((work) => !hiddenWorkIds.has(work.id));
+    return fallbackWorks;
   }
 
   function populateArtworkSelect(works) {

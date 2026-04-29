@@ -68,7 +68,7 @@
       shelfDetailKicker: "Obra seleccionada",
       shelfCta: "Ver ficha de obra",
       featuredTitle: "Obras destacadas",
-      featuredLead: "Ocho piezas clave, presentadas con una composicion limpia y contemporanea.",
+      featuredLead: "Diez piezas clave, presentadas con una composicion limpia y contemporanea.",
       featuredLink: "Ver galeria completa →",
       aboutTitle: "Sobre el artista",
       aboutLead: "Mi trabajo investiga la tension entre estructura y emocion. Cada pieza se construye con una mirada contemporanea para dialogar con la luz, el espacio y el tiempo.",
@@ -78,7 +78,7 @@
       catalogTitle: "Catalogo privado",
       catalogLead: "Acceso a obras disponibles, medidas y condiciones de entrega.",
       catalogCta: "Solicitar ahora",
-      featuredCards: ["Barco azul", "Orilla al atardecer", "Caballos", "El Padrino", "Luz Interna", "Rayo Verde", "Honda CRX", "Travesia Ignea"]
+      featuredCards: ["Retrato Carmesi", "Barco azul", "Orilla al atardecer", "London Eye", "Caballos", "El Padrino", "Luz Interna", "Rayo Verde", "Honda CRX", "Travesia Ignea"]
     },
     works: { kicker: "Galeria", title: "Obras", lead: "Coleccion completa en formato digital con vista limpia y ficha individual de cada pieza." },
     museum: {
@@ -111,7 +111,7 @@
       shelfDetailKicker: "Selected artwork",
       shelfCta: "Open artwork sheet",
       featuredTitle: "Featured works",
-      featuredLead: "Eight key pieces presented with a clean, contemporary composition.",
+      featuredLead: "Ten key pieces presented with a clean, contemporary composition.",
       featuredLink: "View full gallery →",
       aboutTitle: "About the artist",
       aboutLead: "My work explores the tension between structure and emotion. Each piece is built with a contemporary gaze to dialogue with light, space and time.",
@@ -121,7 +121,7 @@
       catalogTitle: "Private catalog",
       catalogLead: "Access to available works, dimensions and delivery conditions.",
       catalogCta: "Request now",
-      featuredCards: ["Blue Ship", "Shore at Dusk", "Horses", "The Godfather", "Inner Light", "Green Ray", "Honda CRX", "Igneous Crossing"]
+      featuredCards: ["Crimson Portrait", "Blue Ship", "Shore at Dusk", "London Eye", "Horses", "The Godfather", "Inner Light", "Green Ray", "Honda CRX", "Igneous Crossing"]
     },
     works: { kicker: "Gallery", title: "Works", lead: "Complete collection in a clean digital format with an individual sheet for each piece." },
     museum: {
@@ -576,7 +576,8 @@
 
     const artworks = [
       {
-        title: { es: "Retrato en carmin", en: "Crimson Portrait" },
+        id: "cuadro1",
+        title: { es: "Retrato Carmesi", en: "Crimson Portrait" },
         subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
         description: {
           es: "Retrato contemporaneo de atmosfera calida y gestualidad suelta. La composicion trabaja veladuras y contrastes suaves para dirigir la mirada al gesto y a la expresion, con una construccion cromatica en capas que aporta profundidad y presencia en interior.",
@@ -590,9 +591,11 @@
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/Cuadro1.png",
         shelfImage: "assets/blenders/retrato.jpeg",
-        model: "assets/blenders/cuadro_retrato_3d.glb?v=1"
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/retrato.jpeg"
       },
       {
+        id: "cuadro2",
         title: { es: "Barco azul", en: "Blue Ship" },
         subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
         description: {
@@ -607,9 +610,11 @@
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/Cuadro3.png",
         shelfImage: "assets/blenders/barco.jpeg",
-        model: "assets/blenders/cuadro_barco_3d.glb?v=1"
+        model: "assets/blenders/cuadro_barco_3d.glb?v=1",
+        modelTexture: "assets/blenders/barco.jpeg"
       },
       {
+        id: "cuadro3",
         title: { es: "Orilla al atardecer", en: "Shore at Dusk" },
         subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
         description: {
@@ -624,9 +629,11 @@
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/Cuadro2.png",
         shelfImage: "assets/blenders/atardecer.jpeg",
-        model: "assets/blenders/cuadro_atardecer_3d.glb?v=1"
+        model: "assets/blenders/cuadro_atardecer_3d.glb?v=1",
+        modelTexture: "assets/blenders/atardecer.jpeg"
       },
       {
+        id: "cuadro4",
         title: { es: "London Eye", en: "London Eye" },
         subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
         description: {
@@ -641,7 +648,8 @@
         status: { es: "Serie limitada", en: "Limited series" },
         image: "assets/img/works/Cuadro4.png",
         shelfImage: "assets/blenders/londoeye.jpeg",
-        model: "assets/blenders/cuadro_london_eye_3d.glb?v=1"
+        model: "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+        modelTexture: "assets/blenders/londoeye.jpeg"
       },
       {
         title: { es: "Caballos", en: "Horses" },
@@ -658,7 +666,8 @@
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/cuadro5.png",
         shelfImage: "assets/blenders/caballo.jpeg",
-        model: "assets/blenders/cuadro_caballos_3d_front.glb?v=1"
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/caballo.jpeg"
       },
       {
         title: { es: "El Padrino", en: "The Godfather" },
@@ -693,7 +702,9 @@
         support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
         status: { es: "Original disponible", en: "Original available" },
         image: "assets/img/works/luz_interna.png",
-        shelfImage: "assets/blenders/luz_interna.png"
+        shelfImage: "assets/blenders/luz_interna.png",
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/luz_interna.png"
       },
       {
         id: "cuadro8",
@@ -753,13 +764,11 @@
         modelTexture: "assets/blenders/travesia_ignea_blender.png"
       }
     ];
-    const hiddenArtworkIds = new Set(["cuadro1", "cuadro4"]);
     const catalogArtworks = artworks
       .map((artwork, index) => ({
         ...artwork,
         id: artwork.id || `cuadro${index + 1}`
-      }))
-      .filter((artwork) => !hiddenArtworkIds.has(artwork.id));
+      }));
 
   function initHomeShelf() {
     const shelf = document.getElementById("homeShelfStack");
@@ -1140,8 +1149,24 @@
     "assets/img/works/Cuadro3.png": "assets/blenders/cuadro_barco_3d.glb?v=1",
     "assets/img/works/Cuadro2.png": "assets/blenders/cuadro_atardecer_3d.glb?v=1",
     "assets/img/works/Cuadro4.png": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
-    "assets/img/works/cuadro5.png": "assets/blenders/cuadro_caballos_3d_front.glb?v=1",
-    "assets/img/works/cuadro6.png": "assets/blenders/cuadro_retrato_3d.glb?v=1"
+    "assets/img/works/cuadro5.png": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "assets/img/works/cuadro6.png": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "assets/img/works/luz_interna.png": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "assets/img/works/rayo_verde.jpeg": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "assets/img/works/honda_crx.jpeg": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+    "assets/img/works/travesia_ignea.jpeg": "assets/blenders/cuadro_retrato_3d.glb?v=1"
+  };
+  const artBookModelTextureByImage = {
+    "assets/img/works/Cuadro1.png": "assets/blenders/retrato.jpeg",
+    "assets/img/works/Cuadro3.png": "assets/blenders/barco.jpeg",
+    "assets/img/works/Cuadro2.png": "assets/blenders/atardecer.jpeg",
+    "assets/img/works/Cuadro4.png": "assets/blenders/londoeye.jpeg",
+    "assets/img/works/cuadro5.png": "assets/blenders/caballo.jpeg",
+    "assets/img/works/cuadro6.png": "assets/blenders/cuadro6.png",
+    "assets/img/works/luz_interna.png": "assets/blenders/luz_interna.png",
+    "assets/img/works/rayo_verde.jpeg": "assets/blenders/rayo_verde_blender.png",
+    "assets/img/works/honda_crx.jpeg": "assets/blenders/honda_crx_blender.png",
+    "assets/img/works/travesia_ignea.jpeg": "assets/blenders/travesia_ignea_blender.png"
   };
   let lightbox = null;
   let lightboxImg = null;
@@ -1150,14 +1175,26 @@
   let lightboxMode = "image";
   let lightboxModelTexture = "";
   let lightboxModelLoadTimer = null;
+  let lightboxRequestedModelSrc = "";
 
   function normalizeAssetPath(path = "") {
     if (!path) return "";
     try {
       const url = new URL(path, window.location.href);
-      return url.pathname.replace(/^\/+/, "");
+      const pathname = url.pathname.replace(/^\/+/, "");
+      const lowerPath = pathname.toLowerCase();
+      const assetsIndex = lowerPath.indexOf("/assets/");
+      if (assetsIndex >= 0) {
+        return pathname.slice(assetsIndex + 1);
+      }
+      if (lowerPath.startsWith("assets/")) return pathname;
+      return pathname;
     } catch (error) {
-      return String(path).replace(/^\/+/, "");
+      const raw = String(path).replace(/^\/+/, "").replace(/\\/g, "/");
+      const lowerRaw = raw.toLowerCase();
+      const assetsIndex = lowerRaw.indexOf("assets/");
+      if (assetsIndex >= 0) return raw.slice(assetsIndex);
+      return raw;
     }
   }
 
@@ -1170,6 +1207,17 @@
     const src = fallbackSrc || img?.getAttribute("src") || img?.currentSrc || "";
     const normalizedSrc = normalizeAssetPath(src);
     return artBookModelByImage[normalizedSrc] || "";
+  }
+
+  function resolveModelTextureForImage(img, fallbackSrc = "", allowMapFallback = false) {
+    const explicitTexture = img?.dataset?.modelTexture || "";
+    if (explicitTexture) return explicitTexture;
+
+    if (!allowMapFallback) return "";
+
+    const src = fallbackSrc || img?.getAttribute("src") || img?.currentSrc || "";
+    const normalizedSrc = normalizeAssetPath(src);
+    return artBookModelTextureByImage[normalizedSrc] || "";
   }
 
   async function applyModelTextureToViewer(viewer, textureSrc) {
@@ -1213,7 +1261,8 @@
     lightboxError = lightbox.querySelector(".image-lightbox-error");
     if (lightboxModel) {
       lightboxModel.addEventListener("load", async () => {
-        if (lightboxMode !== "model") return;
+        if (!lightboxRequestedModelSrc) return;
+        if ((lightboxModel.getAttribute("src") || "") !== lightboxRequestedModelSrc) return;
         if (lightboxModelLoadTimer) {
           window.clearTimeout(lightboxModelLoadTimer);
           lightboxModelLoadTimer = null;
@@ -1221,11 +1270,13 @@
         if (lightboxModelTexture) {
           await applyModelTextureToViewer(lightboxModel, lightboxModelTexture);
         }
+        setLightboxMode("model");
         lightboxModel.hidden = false;
         if (lightboxError) lightboxError.hidden = true;
       });
       lightboxModel.addEventListener("error", () => {
-        if (lightboxMode !== "model") return;
+        if (!lightboxRequestedModelSrc) return;
+        if ((lightboxModel.getAttribute("src") || "") !== lightboxRequestedModelSrc) return;
         if (lightboxModelLoadTimer) {
           window.clearTimeout(lightboxModelLoadTimer);
           lightboxModelLoadTimer = null;
@@ -1299,10 +1350,17 @@
     }
 
     ensureLightbox();
-    setLightboxMode("model");
+    if (posterSrc && lightboxImg) {
+      lightboxImg.src = posterSrc;
+      lightboxImg.alt = alt || "Imagen ampliada";
+      setLightboxMode("image");
+    } else {
+      setLightboxMode("model");
+    }
     lightboxModelTexture = modelTexture || "";
+    lightboxRequestedModelSrc = modelSrc;
     if (lightboxError) lightboxError.hidden = true;
-    if (lightboxModel) lightboxModel.hidden = false;
+    if (lightboxModel) lightboxModel.hidden = true;
     lightboxModel.setAttribute("src", modelSrc);
     lightboxModel.setAttribute("alt", alt ? `${alt} 3D` : "Obra 3D");
     lightboxModel.setAttribute("camera-orbit", cameraOrbit);
@@ -1318,7 +1376,6 @@
       lightboxModelLoadTimer = null;
     }
     lightboxModelLoadTimer = window.setTimeout(() => {
-      if (lightboxMode !== "model") return;
       const poster = lightboxModel.getAttribute("poster") || posterSrc || "";
       if (!poster) return;
       setLightboxMode("image");
@@ -1346,6 +1403,7 @@
       lightboxModelLoadTimer = null;
     }
     lightboxModelTexture = "";
+    lightboxRequestedModelSrc = "";
     if (lightboxError) lightboxError.hidden = true;
     document.body.classList.remove("lightbox-open");
   }
@@ -1386,10 +1444,11 @@
           || Boolean(img.closest(".art-artwork-frame"))
           || img.id === "workImage";
         const modelSrc = resolveModelSrcForImage(img, src, isModelArtwork);
+        const modelTexture = resolveModelTextureForImage(img, src, isModelArtwork);
         if (modelSrc) {
           openModelLightbox({
             modelSrc,
-            modelTexture: img.dataset.modelTexture,
+            modelTexture,
             posterSrc: src,
             alt: img.alt,
             cameraOrbit: img.dataset.modelCameraOrbit,
