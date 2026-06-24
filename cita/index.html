@@ -127,7 +127,7 @@
 
     .btn{
       font-family:inherit;font-weight:600;font-size:16px;
-      border:none;cursor:pointer;border-radius:999px;
+      border:none;cursor:pointer;border-radius:999px;white-space:nowrap;
       padding:16px 30px;transition:transform .18s ease,box-shadow .25s ease,background .25s ease;
     }
     .btn-yes{
@@ -155,6 +155,16 @@
     .btn-no.runaway{
       position:fixed;z-index:50;margin:0;
       box-shadow:0 16px 34px -12px rgba(42,28,74,.4);
+      /* se desliza suavemente por la pagina, no salta */
+      transition:left .35s cubic-bezier(.34,1.4,.5,1),
+                 top .35s cubic-bezier(.34,1.4,.5,1),
+                 transform .35s ease;
+    }
+    /* cuando se rinde: deja de huir y se queda quietecito */
+    .btn-no.surrender{
+      transition:left .5s ease, top .5s ease, transform .4s ease, opacity .4s ease;
+      transform:rotate(0deg) scale(1)!important;
+      opacity:.85;cursor:default;
     }
 
     .hint{
@@ -294,6 +304,21 @@
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var accepted = false;
     var dodges = 0;
+    var gaveUp = false;
+    var MAX_DODGES = 14;   // tras estos intentos visibles, el boton se rinde
+    var COOLDOWN = 300;    // ms minimos entre huidas (evita gastarlas de golpe)
+    var lastDodge = 0;
+    var RADIUS = 160;      // radio max (px) de huida alrededor de su sitio original
+    var anchor = null;     // centro fijo de la zona de huida
+
+    // fija el centro del circulo de huida en la posicion ORIGINAL del boton
+    function setAnchor(){
+      if(btnNo.classList.contains('runaway')) return; // ya movido: no recalcular
+      var r = btnNo.getBoundingClientRect();
+      anchor = { x: r.left + r.width/2, y: r.top + r.height/2 };
+    }
+    window.addEventListener('load', setAnchor);
+    setAnchor();
 
     /* ---- Textos cambiantes del botón ---- */
     var labels = [
@@ -301,6 +326,8 @@
       'Este botón está en prácticas','Acepta, cobarde',
       'La negativa no está en el roadmap','Disponibilidad: agotada'
     ];
+    // mensaje final cuando ya no puede más
+    var SURRENDER_TEXT = 'Después de tantos intentos y resiliencia… me rindo 🏳️';
     var flashes = [
       'Casi.','Buen intento.','Ese botón no está disponible en tu plan.',
       'Error 404: rechazo no encontrado.','La junta directiva recomienda aceptar.',
@@ -318,9 +345,40 @@
       setTimeout(function(){ f.remove(); }, 1200);
     }
 
+    /* ---- El botón se rinde: se coloca junto al "Sí", visible y quieto ---- */
+    function surrender(){
+      if(gaveUp) return;
+      gaveUp = true;
+      btnNo.classList.remove('runaway');
+      btnNo.classList.add('surrender');
+      btnNo.textContent = SURRENDER_TEXT;
+
+      // lo dejamos visible, centrado bajo el botón "Sí"
+      var bw = btnNo.offsetWidth, bh = btnNo.offsetHeight, m = 12;
+      var yesRect = btnYes.getBoundingClientRect();
+      var nx = yesRect.left + yesRect.width/2 - bw/2;
+      var ny = yesRect.bottom + 18;
+      nx = Math.max(m, Math.min(nx, window.innerWidth - bw - m));
+      ny = Math.max(m, Math.min(ny, window.innerHeight - bh - m));
+      btnNo.style.position = 'fixed';
+      btnNo.style.left = nx + 'px';
+      btnNo.style.top  = ny + 'px';
+      spawnFlash(nx + bw/2, ny - 6);
+    }
+
     /* ---- Movimiento del botón "No" ---- */
     function dodge(pointerX, pointerY){
+      if(gaveUp) return;
+
+      // cooldown: cada huida es un salto visible, no una ráfaga instantánea
+      var now = Date.now();
+      if(now - lastDodge < COOLDOWN) return;
+      lastDodge = now;
+
       dodges++;
+
+      // tras suficientes intentos, se rinde y deja de huir
+      if(dodges >= MAX_DODGES){ surrender(); return; }
 
       var bw = btnNo.offsetWidth;
       var bh = btnNo.offsetHeight;
@@ -328,9 +386,16 @@
       var vw = window.innerWidth;
       var vh = window.innerHeight;
 
-      // pasa a posición fija la primera vez
+      // asegura que existe el centro del circulo (su sitio original)
+      if(!anchor) setAnchor();
+
+      // pasa a posición fija la primera vez.
+      // IMPORTANTE: se saca de la tarjeta (que tiene backdrop-filter y por eso
+      // sería el bloque contenedor de un position:fixed) y se cuelga del body,
+      // para que las coordenadas fixed sean relativas al viewport.
       if(!btnNo.classList.contains('runaway')){
         btnNo.classList.add('runaway');
+        document.body.appendChild(btnNo);
       }
 
       // zona prohibida: el botón "Sí" (para no taparlo)
@@ -338,15 +403,23 @@
 
       var nx, ny, tries = 0;
       do{
-        nx = margin + Math.random() * (vw - bw - margin*2);
-        ny = margin + Math.random() * (vh - bh - margin*2);
+        // punto aleatorio dentro de un círculo de radio RADIUS sobre el anchor
+        var ang = Math.random() * Math.PI * 2;
+        var rad = RADIUS * Math.sqrt(Math.random());
+        var cx2 = anchor.x + Math.cos(ang) * rad;
+        var cy2 = anchor.y + Math.sin(ang) * rad;
+        nx = cx2 - bw/2;
+        ny = cy2 - bh/2;
+        // dentro del viewport
+        nx = Math.max(margin, Math.min(nx, vw - bw - margin));
+        ny = Math.max(margin, Math.min(ny, vh - bh - margin));
         tries++;
         var overlapsYes =
-          nx < yesRect.right + 16 && nx + bw > yesRect.left - 16 &&
-          ny < yesRect.bottom + 16 && ny + bh > yesRect.top - 16;
+          nx < yesRect.right + 12 && nx + bw > yesRect.left - 12 &&
+          ny < yesRect.bottom + 12 && ny + bh > yesRect.top - 12;
         // intenta también alejarse del puntero
         var nearPointer = (typeof pointerX === 'number') &&
-          Math.abs((nx+bw/2)-pointerX) < 140 && Math.abs((ny+bh/2)-pointerY) < 140;
+          Math.hypot((nx+bw/2)-pointerX, (ny+bh/2)-pointerY) < 55;
       } while((overlapsYes || nearPointer) && tries < 30);
 
       var rot = (Math.random()*24 - 12).toFixed(1);
@@ -395,6 +468,7 @@
     // por si en algún caso límite logra el clic
     btnNo.addEventListener('click', function(e){
       e.preventDefault();
+      if(gaveUp){ openModal(); return; } // ya rendido: abre el modal simpático
       dodge();
     });
 
