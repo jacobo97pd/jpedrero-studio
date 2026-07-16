@@ -123,6 +123,26 @@
       status: "Disponible",
       description: "Pieza de alto contraste cromatico donde una embarcacion oscura atraviesa un entorno de luz incendiada. Amarillos, naranjas y azules se enfrentan en capas superpuestas para construir una escena de tension entre calma aparente y energia latente. La figura del barco, tratada con volumen sobrio y contorno firme, funciona como eje estructural dentro de un fondo vibrante y atmosferico. Los reflejos sobre el agua amplifican el movimiento visual y extienden la intensidad luminica hacia la base de la composicion. La obra propone una narrativa abierta de desplazamiento y resistencia, apoyada en una pincelada expresiva que privilegia emocion, ritmo y presencia pictorica.",
       image: "assets/blenders/travesia_ignea_blender.png"
+    },
+    {
+      id: "cuadro11",
+      title: "Furia del Mar",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "Consultar",
+      status: "Disponible",
+      description: "Una masa de agua irrumpe entre la arquitectura costera y los acantilados. La ola central concentra el movimiento y enfrenta la fragilidad del pueblo con la energia desbordada del mar.",
+      image: "assets/blenders/furia_del_mar_blender.png"
+    },
+    {
+      id: "cuadro12",
+      title: "Luz en el Escenario",
+      year: 2026,
+      technique: "Tecnica mixta",
+      size: "Consultar",
+      status: "Disponible",
+      description: "La figura de una bailarina queda suspendida entre la oscuridad del teatro y un haz de luz. Una composicion vertical sobre impulso, disciplina y libertad.",
+      image: "assets/blenders/luz_en_el_escenario_blender.png"
     }
   ];
 
@@ -136,7 +156,9 @@
     cuadro7: "assets/blenders/luz_interna.png",
     cuadro8: "assets/blenders/rayo_verde_blender.png",
     cuadro9: "assets/blenders/honda_crx_blender.png",
-    cuadro10: "assets/blenders/travesia_ignea_blender.png"
+    cuadro10: "assets/blenders/travesia_ignea_blender.png",
+    cuadro11: "assets/blenders/furia_del_mar_blender.png",
+    cuadro12: "assets/blenders/luz_en_el_escenario_blender.png"
   };
 
   function filterVisibleWorks(works) {

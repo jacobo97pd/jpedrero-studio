@@ -762,6 +762,44 @@
         shelfImage: "assets/blenders/travesia_ignea_blender.png",
         model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
         modelTexture: "assets/blenders/travesia_ignea_blender.png"
+      },
+      {
+        id: "cuadro11",
+        title: { es: "Furia del Mar", en: "Fury of the Sea" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "Una masa de agua irrumpe entre la arquitectura costera y los acantilados, construida con azules profundos, blancos quebrados y una pincelada de fuerte carga materica. La composicion enfrenta la fragilidad del pueblo con la energia desbordada del mar.\n\nEl recorrido visual avanza desde las casas apiladas de la izquierda hasta la roca iluminada de la derecha, mientras la ola central concentra el movimiento y la tension. Una obra sobre la fuerza de la naturaleza y la resistencia del paisaje habitado.",
+          en: "A mass of water bursts between coastal architecture and cliffs, built with deep blues, broken whites and highly textural brushwork. The composition confronts the fragility of the village with the overflowing energy of the sea.\n\nThe visual journey moves from the stacked houses on the left to the illuminated rock on the right, while the central wave concentrates movement and tension. A work about the force of nature and the resilience of the inhabited landscape."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "Consultar",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/furia_del_mar.jpeg",
+        shelfImage: "assets/blenders/furia_del_mar_blender.png",
+        model: "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+        modelTexture: "assets/blenders/furia_del_mar_blender.png"
+      },
+      {
+        id: "cuadro12",
+        title: { es: "Luz en el Escenario", en: "Stage Light" },
+        subtitle: { es: "J. PEDRERO STUDIO", en: "J. PEDRERO STUDIO" },
+        description: {
+          es: "La figura de una bailarina ocupa el instante previo al movimiento, suspendida entre la oscuridad del teatro y un haz de luz que atraviesa la escena. La paleta de burdeos, negros y tonos piel refuerza el dramatismo y dirige la mirada hacia el gesto ascendente.\n\nEl contraste entre la precision corporal y la atmosfera envolvente del patio de butacas convierte la danza en una imagen de impulso, disciplina y libertad. Una composicion vertical de presencia teatral y tension luminica.",
+          en: "A ballerina inhabits the instant before movement, suspended between the darkness of the theater and a beam of light crossing the stage. The palette of burgundy, black and skin tones heightens the drama and draws the eye toward the upward gesture.\n\nThe contrast between bodily precision and the enveloping atmosphere of the auditorium turns dance into an image of impulse, discipline and freedom. A vertical composition with theatrical presence and luminous tension."
+        },
+        year: "2026",
+        author: { es: "J. Pedrero", en: "J. Pedrero" },
+        size: "Consultar",
+        technique: { es: "Tecnica mixta", en: "Mixed media" },
+        support: { es: "Papel artistico montado", en: "Mounted fine art paper" },
+        status: { es: "Original disponible", en: "Original available" },
+        image: "assets/img/works/luz_en_el_escenario.jpeg",
+        shelfImage: "assets/blenders/luz_en_el_escenario_blender.png",
+        model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+        modelTexture: "assets/blenders/luz_en_el_escenario_blender.png"
       }
     ];
     const catalogArtworks = artworks
@@ -1154,7 +1192,9 @@
     "assets/img/works/luz_interna.png": "assets/blenders/cuadro_retrato_3d.glb?v=1",
     "assets/img/works/rayo_verde.jpeg": "assets/blenders/cuadro_retrato_3d.glb?v=1",
     "assets/img/works/honda_crx.jpeg": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
-    "assets/img/works/travesia_ignea.jpeg": "assets/blenders/cuadro_retrato_3d.glb?v=1"
+    "assets/img/works/travesia_ignea.jpeg": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "assets/img/works/furia_del_mar.jpeg": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+    "assets/img/works/luz_en_el_escenario.jpeg": "assets/blenders/cuadro_retrato_3d.glb?v=1"
   };
   const artBookModelTextureByImage = {
     "assets/img/works/Cuadro1.png": "assets/blenders/retrato.jpeg",
@@ -1166,7 +1206,9 @@
     "assets/img/works/luz_interna.png": "assets/blenders/luz_interna.png",
     "assets/img/works/rayo_verde.jpeg": "assets/blenders/rayo_verde_blender.png",
     "assets/img/works/honda_crx.jpeg": "assets/blenders/honda_crx_blender.png",
-    "assets/img/works/travesia_ignea.jpeg": "assets/blenders/travesia_ignea_blender.png"
+    "assets/img/works/travesia_ignea.jpeg": "assets/blenders/travesia_ignea_blender.png",
+    "assets/img/works/furia_del_mar.jpeg": "assets/blenders/furia_del_mar_blender.png",
+    "assets/img/works/luz_en_el_escenario.jpeg": "assets/blenders/luz_en_el_escenario_blender.png"
   };
   let lightbox = null;
   let lightboxImg = null;

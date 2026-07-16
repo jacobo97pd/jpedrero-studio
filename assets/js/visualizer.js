@@ -42,7 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadro7: { es: "Luz Interna", en: "Inner Light" },
     cuadro8: { es: "Rayo Verde", en: "Green Ray" },
     cuadro9: { es: "Honda CRX", en: "Honda CRX" },
-    cuadro10: { es: "Travesia Ignea", en: "Igneous Crossing" }
+    cuadro10: { es: "Travesia Ignea", en: "Igneous Crossing" },
+    cuadro11: { es: "Furia del Mar", en: "Fury of the Sea" },
+    cuadro12: { es: "Luz en el Escenario", en: "Stage Light" }
   };
 
   const fallbackWorks = [
@@ -55,7 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "cuadro7", title: "Luz Interna", image: "assets/img/works/luz_interna.png", renderImage: "assets/blenders/luz_interna.png" },
     { id: "cuadro8", title: "Rayo Verde", image: "assets/img/works/rayo_verde.jpeg", renderImage: "assets/blenders/rayo_verde_blender.png" },
     { id: "cuadro9", title: "Honda CRX", image: "assets/img/works/honda_crx.jpeg", renderImage: "assets/blenders/honda_crx_blender.png" },
-    { id: "cuadro10", title: "Travesia Ignea", image: "assets/img/works/travesia_ignea.jpeg", renderImage: "assets/blenders/travesia_ignea_blender.png" }
+    { id: "cuadro10", title: "Travesia Ignea", image: "assets/img/works/travesia_ignea.jpeg", renderImage: "assets/blenders/travesia_ignea_blender.png" },
+    { id: "cuadro11", title: "Furia del Mar", image: "assets/img/works/furia_del_mar.jpeg", renderImage: "assets/blenders/furia_del_mar_blender.png" },
+    { id: "cuadro12", title: "Luz en el Escenario", image: "assets/img/works/luz_en_el_escenario.jpeg", renderImage: "assets/blenders/luz_en_el_escenario_blender.png" }
   ];
 
   // Preferred rendered still images for fallback/export.
@@ -69,7 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cuadro7: "assets/blenders/luz_interna.png",
     cuadro8: "assets/blenders/rayo_verde_blender.png",
     cuadro9: "assets/blenders/honda_crx_blender.png",
-    cuadro10: "assets/blenders/travesia_ignea_blender.png"
+    cuadro10: "assets/blenders/travesia_ignea_blender.png",
+    cuadro11: "assets/blenders/furia_del_mar_blender.png",
+    cuadro12: "assets/blenders/luz_en_el_escenario_blender.png"
   };
 
   // Preferred 3D models for the simulator.
@@ -115,6 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
       model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
       poster: "assets/blenders/travesia_ignea_blender.png",
       texture: "assets/blenders/travesia_ignea_blender.png"
+    },
+    cuadro11: {
+      model: "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+      poster: "assets/blenders/furia_del_mar_blender.png",
+      texture: "assets/blenders/furia_del_mar_blender.png"
+    },
+    cuadro12: {
+      model: "assets/blenders/cuadro_retrato_3d.glb?v=1",
+      poster: "assets/blenders/luz_en_el_escenario_blender.png",
+      texture: "assets/blenders/luz_en_el_escenario_blender.png"
     }
   };
 

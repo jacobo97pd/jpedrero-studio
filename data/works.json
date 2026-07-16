@@ -134,5 +134,33 @@
     "modelTexture": "assets/blenders/travesia_ignea_blender.png",
     "description": "Pieza de alto contraste cromatico donde una embarcacion oscura atraviesa un entorno de luz incendiada. Amarillos, naranjas y azules se enfrentan en capas superpuestas para construir una escena de tension entre calma aparente y energia latente.\n\nLa figura del barco, tratada con volumen sobrio y contorno firme, funciona como eje estructural dentro de un fondo vibrante y atmosferico. Los reflejos sobre el agua amplifican el movimiento visual y extienden la intensidad luminica hacia la base de la composicion.\n\nLa obra propone una narrativa abierta de desplazamiento y resistencia, apoyada en una pincelada expresiva que privilegia emocion, ritmo y presencia pictorica.",
     "featured": true
+  },
+  {
+    "id": "cuadro11",
+    "title": "Furia del Mar",
+    "year": 2026,
+    "technique": "Tecnica mixta",
+    "size": "Consultar",
+    "status": "Disponible",
+    "image": "assets/img/works/furia_del_mar.jpeg",
+    "renderImage": "assets/blenders/furia_del_mar_blender.png",
+    "model": "assets/blenders/cuadro_london_eye_3d.glb?v=1",
+    "modelTexture": "assets/blenders/furia_del_mar_blender.png",
+    "description": "Una masa de agua irrumpe entre la arquitectura costera y los acantilados, construida con azules profundos, blancos quebrados y una pincelada de fuerte carga materica. La composicion enfrenta la fragilidad del pueblo con la energia desbordada del mar.\n\nEl recorrido visual avanza desde las casas apiladas de la izquierda hasta la roca iluminada de la derecha, mientras la ola central concentra el movimiento y la tension. Una obra sobre la fuerza de la naturaleza y la resistencia del paisaje habitado.",
+    "featured": true
+  },
+  {
+    "id": "cuadro12",
+    "title": "Luz en el Escenario",
+    "year": 2026,
+    "technique": "Tecnica mixta",
+    "size": "Consultar",
+    "status": "Disponible",
+    "image": "assets/img/works/luz_en_el_escenario.jpeg",
+    "renderImage": "assets/blenders/luz_en_el_escenario_blender.png",
+    "model": "assets/blenders/cuadro_retrato_3d.glb?v=1",
+    "modelTexture": "assets/blenders/luz_en_el_escenario_blender.png",
+    "description": "La figura de una bailarina ocupa el instante previo al movimiento, suspendida entre la oscuridad del teatro y un haz de luz que atraviesa la escena. La paleta de burdeos, negros y tonos piel refuerza el dramatismo y dirige la mirada hacia el gesto ascendente.\n\nEl contraste entre la precision corporal y la atmosfera envolvente del patio de butacas convierte la danza en una imagen de impulso, disciplina y libertad. Una composicion vertical de presencia teatral y tension luminica.",
+    "featured": true
   }
 ]
