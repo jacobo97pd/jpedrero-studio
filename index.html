@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script type="module" src="assets/js/vendor/model-viewer.min.js"></script>
   <link rel="stylesheet" href="assets/css/styles.css?v=20260331-4" />
+  <link rel="stylesheet" href="assets/css/gallery-walk.css?v=20261014-4" />
 </head>
 <body>
   <header class="site-header" id="top">
@@ -38,20 +39,64 @@
   </header>
 
   <main>
-    <section class="section shelf-experiment" id="homeShelfPreview">
-      <div class="container shelf-head">
-        <div>
-          <p class="kicker" id="shelfStackKicker">Coleccion</p>
-          <h1 id="shelfStackTitle">Estanteria de obra</h1>
+    <section class="gallery-walk" id="galleryWalk" aria-label="Recorrido por la galer&iacute;a">
+      <div class="gallery-walk-stage">
+        <div class="gallery-walk-canvas" id="galleryWalkCanvas" aria-hidden="true"></div>
+        <div class="gallery-walk-intro">
+          <p class="kicker">J. Pedrero Studio &middot; Galer&iacute;a personal</p>
+          <h1>Cada obra,<br>un encuentro.</h1>
+          <p>Camina por la galer&iacute;a. Cada giro, una obra.</p>
+          <span class="gallery-walk-invitation">Haz scroll para entrar &darr;</span>
         </div>
+        <div class="gallery-walk-tools">
+          <button id="galleryWalkMode" type="button" aria-pressed="false" hidden>Entrar al recorrido 3D</button>
+          <a class="gallery-walk-skip" href="#homeContact">Ir al contacto &#8599;</a>
+        </div>
+        <div class="gallery-walk-caption" id="galleryWalkCaption" hidden>
+          <span id="galleryWalkCount" class="kicker"></span>
+          <h2 id="galleryWalkTitle"></h2>
+          <a id="galleryWalkLink" class="link" href="works/index.html">Descubrir esta obra &#8599;</a>
+        </div>
+        <nav class="gallery-walk-stops" aria-label="Paradas del recorrido">
+          <button type="button" id="galleryWalkPrevious" aria-label="Obra anterior" disabled>&larr;</button>
+          <select id="galleryWalkSelect" aria-label="Seleccionar una obra del recorrido"></select>
+          <button type="button" id="galleryWalkNext" aria-label="Obra siguiente">&rarr;</button>
+        </nav>
+        <div class="gallery-walk-progress" aria-hidden="true"><span id="galleryWalkProgress"></span></div>
       </div>
+      <div class="gallery-walk-fallback" id="galleryWalkFallback">
+        <a href="works/obra.html?id=cuadro12"><img src="assets/blenders/luz_en_el_escenario_blender.png" alt="Luz en el Escenario" loading="lazy" width="1086" height="1448"><span>Luz en el Escenario</span></a>
+        <a href="works/obra.html?id=cuadro8"><img src="assets/blenders/rayo_verde_blender.png" alt="Rayo Verde" loading="lazy" width="738" height="917"><span>Rayo Verde</span></a>
+        <a href="works/obra.html?id=cuadro6"><img src="assets/blenders/cuadro6.png" alt="El Padrino" loading="lazy" width="898" height="1181"><span>El Padrino</span></a>
+        <a href="works/obra.html?id=cuadro10"><img src="assets/blenders/travesia_ignea_blender.png" alt="Traves&iacute;a &Iacute;gnea" loading="lazy" width="878" height="1119"><span>Traves&iacute;a &Iacute;gnea</span></a>
+        <a href="works/obra.html?id=cuadro7"><img src="assets/blenders/luz_interna.png" alt="Luz Interna" loading="lazy" width="1024" height="1536"><span>Luz Interna</span></a>
+        <a href="works/obra.html?id=cuadro11"><img src="assets/blenders/furia_del_mar_blender.png" alt="Furia del Mar" loading="lazy" width="1616" height="973"><span>Furia del Mar</span></a>
+        <a href="works/obra.html?id=cuadro5"><img src="assets/blenders/caballo.jpeg" alt="Caballos" loading="lazy" width="874" height="1097"><span>Caballos</span></a>
+        <a href="works/obra.html?id=cuadro9"><img src="assets/blenders/honda_crx_blender.png" alt="Honda CRX" loading="lazy" width="1018" height="821"><span>Honda CRX</span></a>
+        <a href="works/obra.html?id=cuadro1"><img src="assets/blenders/retrato.jpeg" alt="Retrato Carmes&iacute;" width="600" height="800"><span>Retrato Carmes&iacute;</span></a>
+        <a href="works/obra.html?id=cuadro2"><img src="assets/blenders/barco.jpeg" alt="Barco azul" loading="lazy" width="600" height="600"><span>Barco azul</span></a>
+        <a href="works/obra.html?id=cuadro4"><img src="assets/blenders/londoeye.jpeg" alt="London Eye" loading="lazy" width="800" height="600"><span>London Eye</span></a>
+        <a href="works/obra.html?id=cuadro3"><img src="assets/blenders/atardecer.jpeg" alt="Orilla al atardecer" loading="lazy" width="800" height="600"><span>Orilla al atardecer</span></a>
+      </div>
+    </section>
 
-      <div class="container shelf-layout">
-        <div class="shelf-stack-wrap">
-          <div class="shelf-stack" id="homeShelfStack" role="listbox" aria-label="Seleccion de obras"></div>
-          <p class="shelf-hint" id="shelfStackHint">Pasa el raton sobre cada obra para desplazarla con suavidad hacia la derecha.</p>
-        </div>
+    <section class="section container home-contact" id="homeContact" aria-labelledby="homeContactTitle">
+      <div>
+        <p class="kicker">Al final del recorrido, una conversaci&oacute;n</p>
+        <h2 id="homeContactTitle">&iquest;Qu&eacute; obra te ha<br>hecho detenerte?</h2>
+        <p>Consulta disponibilidad o cu&eacute;ntame tu idea para un encargo.</p>
+        <a class="link" href="mailto:jpedrero.studio.art@gmail.com">jpedrero.studio.art@gmail.com</a>
       </div>
+      <form class="contact-form" action="https://formsubmit.co/jpedrero.studio.art@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Consulta desde el recorrido de J. Pedrero Studio">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" hidden tabindex="-1" autocomplete="off">
+        <label class="form-field"><span>Nombre</span><input name="nombre" autocomplete="name" required></label>
+        <label class="form-field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+        <label class="form-field"><span>Tu mensaje</span><textarea name="descripcion" rows="5" required></textarea></label>
+        <p class="fineprint">Tus datos se utilizar&aacute;n para responder a tu consulta. <a class="link" href="legal/privacy.html">Pol&iacute;tica de privacidad</a>.</p>
+        <button class="btn" type="submit">Enviar consulta &#8599;</button>
+      </form>
     </section>
 
     <section class="section">
@@ -318,6 +363,8 @@
   </main>
 
   <script src="assets/js/main.js?v=20260716-2"></script>
+  <script src="assets/js/vendor/three.min.js"></script>
+  <script src="assets/js/gallery-walk.js?v=20261014-4"></script>
 </body>
 </html>
 
